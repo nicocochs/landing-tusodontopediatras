@@ -115,7 +115,7 @@ function Hero() {
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-28 text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(255,255,255,0.06)", borderColor: "rgba(255,255,255,0.1)" }}>
+        <div className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(252,185,0,0.1)", borderColor: "rgba(252,185,0,0.25)" }}>
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#fcb900" }} />
           <span className="text-xs font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.7)" }}>
             Especialistas en niños · San Fernando y San Vicente
@@ -125,7 +125,7 @@ function Hero() {
         {/* H1 */}
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight">
           Tu hijo no necesita{" "}
-          <span className="italic font-light" style={{ color: "rgba(255,255,255,0.45)" }}>"aguantar"</span>
+          <span className="italic font-light" style={{ color: "#fcb900" }}>"aguantar"</span>
           <br />al dentista
         </h1>
 
@@ -194,10 +194,13 @@ function QuizWidget() {
       : { title: "¡Bien! Un control preventivo mantiene esa sonrisa sana", desc: "Una evaluación con especialistas previene complicaciones a futuro." };
 
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#F0F5FA" }}>
+    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fef9ee" }}>
       <div className="max-w-2xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
+              Mini diagnóstico
+            </span>
             <h2 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight" style={{ color: "#1e293b" }}>
               ¿Tu hijo necesita un odontopediatra?
             </h2>
@@ -243,7 +246,7 @@ function QuizWidget() {
         )}
 
         {showResult && (
-          <div className="mt-8 p-8 rounded-3xl text-white animate-fade-up" style={{ background: "linear-gradient(135deg, #046bd2 0%, #0693e3 100%)" }}>
+          <div className="mt-8 p-8 rounded-3xl text-white animate-fade-up" style={{ background: "linear-gradient(135deg, #cf2e2e 0%, #e85d75 100%)" }}>
             <h3 className="text-xl font-bold mb-2">{resultMsg.title}</h3>
             <p className="text-white/80 text-sm mb-6 leading-relaxed">{resultMsg.desc}</p>
             <a
@@ -251,7 +254,7 @@ function QuizWidget() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 font-semibold rounded-full px-6 py-3 text-sm transition-all duration-300 hover:shadow-lg"
-              style={{ backgroundColor: "#ffffff", color: "#046bd2" }}
+              style={{ backgroundColor: "#ffffff", color: "#cf2e2e" }}
             >
               <span>Agendar la Primera Visita Sin Miedo</span>
               <ArrowRight />
@@ -267,7 +270,7 @@ function QuizWidget() {
    STEPS
    ──────────────────────────────────────── */
 const steps = [
-  { num: "01", title: "Conocemos a tu hijo", desc: "La doctora te entrevista para saber todo sobre tu hijo: sus miedos, experiencias anteriores y cómo se siente. Sin apuro.", color: "#e8f1fd" },
+  { num: "01", title: "Conocemos a tu hijo", desc: "La doctora te entrevista para saber todo sobre tu hijo: sus miedos, experiencias anteriores y cómo se siente. Sin apuro.", color: "#fce7f3" },
   { num: "02", title: "Ganamos su confianza", desc: "Le mostramos los instrumentos, le explicamos todo con calma, y solo avanzamos cuando está listo.", color: "#fef3c7" },
   { num: "03", title: "Evaluación completa", desc: "Diagnóstico dental integral para conocer su salud bucal y detectar cualquier problema a tiempo.", color: "#dcfce7" },
   { num: "04", title: "Tu plan claro", desc: "Te explicamos el diagnóstico en palabras simples y te entregamos un plan por etapas.", color: "#e8f1fd" },
@@ -281,7 +284,7 @@ function StepsSection() {
           <div className="text-center mb-16">
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
-              style={{ backgroundColor: "#dcfce7", color: "#059669" }}
+              style={{ backgroundColor: "#fce7f3", color: "#be185d" }}
             >
               Nuestro método
             </span>
@@ -328,10 +331,10 @@ function StepsSection() {
    BENEFICIOS
    ──────────────────────────────────────── */
 const benefits = [
-  { title: "Especialistas en niños", desc: "Odontopediatras tituladas. Formación 100% enfocada en atención infantil.", icon: "👩‍⚕️", accent: "#e8f1fd" },
-  { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#dcfce7" },
-  { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#fef3c7" },
-  { title: "Necesidades especiales", desc: "Más de 100 niños con TEA, síndrome de Down y otras condiciones confían en nosotras.", icon: "💙", accent: "#e8f1fd" },
+  { title: "Especialistas en niños", desc: "Odontopediatras tituladas. Formación 100% enfocada en atención infantil.", icon: "👩‍⚕️", accent: "#fce7f3" },
+  { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#fef3c7" },
+  { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#e8f1fd" },
+  { title: "Necesidades especiales", desc: "Más de 100 niños con TEA, síndrome de Down y otras condiciones confían en nosotras.", icon: "💜", accent: "#fce7f3" },
   { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#dcfce7" },
   { title: "Óxido nitroso", desc: "Gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊", accent: "#fef3c7" },
 ];
@@ -379,7 +382,7 @@ function CounterSection() {
   ];
 
   return (
-    <section className="py-16 md:py-20 px-6" style={{ background: "linear-gradient(135deg, #046bd2 0%, #0693e3 100%)" }}>
+    <section className="py-16 md:py-20 px-6" style={{ background: "linear-gradient(135deg, #046bd2 0%, #7c3aed 50%, #be185d 100%)" }}>
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
         {items.map((c, i) => (
           <div key={i}>
@@ -559,10 +562,13 @@ const testimonials = [
 
 function TestimonialsSection() {
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#F0F5FA" }}>
+    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fdf2f8" }}>
       <div className="max-w-5xl mx-auto">
         <Reveal>
           <div className="text-center mb-14">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fce7f3", color: "#be185d" }}>
+              Testimonios
+            </span>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
               Lo que dicen las mamás
             </h2>
@@ -575,7 +581,7 @@ function TestimonialsSection() {
         <div className="grid md:grid-cols-3 gap-4">
           {testimonials.map((t, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="bg-white rounded-2xl p-6 border border-slate-100 flex flex-col h-full hover:shadow-md transition-shadow duration-300">
+              <div className="bg-white rounded-2xl p-6 border flex flex-col h-full hover:shadow-md transition-shadow duration-300" style={{ borderColor: "#fbcfe8" }}>
                 <Stars />
                 <p className="text-sm leading-relaxed flex-1 my-5" style={{ color: "#334155" }}>
                   "{t.text}"
@@ -652,7 +658,7 @@ function AgeSelector() {
         {selected !== null && (
           <div
             className="rounded-2xl border-2 p-7 text-left"
-            style={{ borderColor: "#046bd2", backgroundColor: "#e8f1fd", animation: "fadeUp 0.4s ease" }}
+            style={{ borderColor: ageGroups[selected].accent === "#fce7f3" ? "#ec4899" : ageGroups[selected].accent === "#fef3c7" ? "#f59e0b" : ageGroups[selected].accent === "#dcfce7" ? "#22c55e" : "#046bd2", backgroundColor: ageGroups[selected].accent, animation: "fadeUp 0.4s ease" }}
           >
             <div className="flex items-start gap-4">
               <span className="text-3xl flex-shrink-0 mt-1">{ageGroups[selected].emoji}</span>
@@ -694,10 +700,13 @@ function FAQSection() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#F0F5FA" }}>
+    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fffbeb" }}>
       <div className="max-w-2xl mx-auto">
         <Reveal>
           <div className="text-center mb-12">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
+              FAQ
+            </span>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
               Preguntas frecuentes
             </h2>
@@ -753,7 +762,8 @@ function FinalCTA() {
           <p className="text-base text-white/60 mb-4">
             Agenda hoy su Primera Visita Sin Miedo y deja de postergar su salud dental.
           </p>
-          <p className="text-sm font-medium mb-10" style={{ color: "#fcb900" }}>
+          <p className="text-sm font-semibold mb-10 inline-flex items-center gap-2 justify-center rounded-full px-5 py-2" style={{ backgroundColor: "rgba(252,185,0,0.15)", color: "#fcb900" }}>
+            <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#fcb900" }} />
             Cupos limitados por semana — Agendamos pocas evaluaciones para dedicar el tiempo que cada niño necesita
           </p>
           <CTAButton size="lg">
