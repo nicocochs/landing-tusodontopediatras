@@ -53,7 +53,7 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 ${sizes[size]} ${className}`}
-      style={{ backgroundColor: "#00d084" }}
+      style={{ backgroundColor: "#046bd2" }}
     >
       {children}
     </a>
@@ -272,7 +272,7 @@ function QuizWidget() {
 const steps = [
   { num: "01", title: "Conocemos a tu hijo", desc: "La doctora te entrevista para saber todo sobre tu hijo: sus miedos, experiencias anteriores y cómo se siente. Sin apuro.", color: "#fce7f3" },
   { num: "02", title: "Ganamos su confianza", desc: "Le mostramos los instrumentos, le explicamos todo con calma, y solo avanzamos cuando está listo.", color: "#fef3c7" },
-  { num: "03", title: "Evaluación completa", desc: "Diagnóstico dental integral para conocer su salud bucal y detectar cualquier problema a tiempo.", color: "#dcfce7" },
+  { num: "03", title: "Evaluación completa", desc: "Diagnóstico dental integral para conocer su salud bucal y detectar cualquier problema a tiempo.", color: "#e8f1fd" },
   { num: "04", title: "Tu plan claro", desc: "Te explicamos el diagnóstico en palabras simples y te entregamos un plan por etapas.", color: "#e8f1fd" },
 ];
 
@@ -335,7 +335,7 @@ const benefits = [
   { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#fef3c7" },
   { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#e8f1fd" },
   { title: "Necesidades especiales", desc: "Más de 100 niños con TEA, síndrome de Down y otras condiciones confían en nosotras.", icon: "💜", accent: "#fce7f3" },
-  { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#dcfce7" },
+  { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#e8f1fd" },
   { title: "Óxido nitroso", desc: "Gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊", accent: "#fef3c7" },
 ];
 
@@ -615,7 +615,7 @@ const ageGroups = [
   { range: "0–2 años", label: "Bebé", emoji: "👶", accent: "#fce7f3", text: "¿Le salió su primer diente? Es momento del primer control. Evaluamos hábitos, detectamos problemas tempranos y te enseñamos cómo cuidar su boquita desde casa." },
   { range: "3–5 años", label: "Preescolar", emoji: "🧒", accent: "#e8f1fd", text: "Es la edad donde se forman los hábitos. Si tiene miedo o ya tuvo una mala experiencia, nuestra Primera Visita Sin Miedo es ideal." },
   { range: "6–9 años", label: "Escolar", emoji: "👦", accent: "#fef3c7", text: "Cambio de dientes, posibles caries, hábitos que corregir. Evaluamos todo y te damos un plan claro." },
-  { range: "10–17 años", label: "Adolescente", emoji: "🧑", accent: "#dcfce7", text: "Autoestima, muelas del juicio, cuidado integral. Atendemos hasta los 18 años con un enfoque respetuoso." },
+  { range: "10–17 años", label: "Adolescente", emoji: "🧑", accent: "#e8f1fd", text: "Autoestima, muelas del juicio, cuidado integral. Atendemos hasta los 18 años con un enfoque respetuoso." },
 ];
 
 function AgeSelector() {
@@ -658,7 +658,7 @@ function AgeSelector() {
         {selected !== null && (
           <div
             className="rounded-2xl border-2 p-7 text-left"
-            style={{ borderColor: ageGroups[selected].accent === "#fce7f3" ? "#ec4899" : ageGroups[selected].accent === "#fef3c7" ? "#f59e0b" : ageGroups[selected].accent === "#dcfce7" ? "#22c55e" : "#046bd2", backgroundColor: ageGroups[selected].accent, animation: "fadeUp 0.4s ease" }}
+            style={{ borderColor: ageGroups[selected].accent === "#fce7f3" ? "#ec4899" : ageGroups[selected].accent === "#fef3c7" ? "#f59e0b" : ageGroups[selected].accent === "#e8f1fd" ? "#046bd2" : "#046bd2", backgroundColor: ageGroups[selected].accent, animation: "fadeUp 0.4s ease" }}
           >
             <div className="flex items-start gap-4">
               <span className="text-3xl flex-shrink-0 mt-1">{ageGroups[selected].emoji}</span>
@@ -818,7 +818,7 @@ function MapSection() {
                 onClick={() => setActiveSede(i)}
                 className="px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300"
                 style={{
-                  backgroundColor: activeSede === i ? "#00d084" : "#f1f5f9",
+                  backgroundColor: activeSede === i ? "#046bd2" : "#f1f5f9",
                   color: activeSede === i ? "#ffffff" : "#334155",
                 }}
               >
@@ -917,7 +917,7 @@ function StickyBottomBar() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3 text-sm transition-all shadow-lg hover:shadow-xl"
-            style={{ backgroundColor: "#00d084" }}
+            style={{ backgroundColor: "#046bd2" }}
           >
             <span>Agendar Primera Visita Sin Miedo</span>
             <ArrowRight />
