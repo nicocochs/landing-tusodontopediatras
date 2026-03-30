@@ -53,7 +53,7 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 ${sizes[size]} ${className}`}
-      style={{ backgroundColor: "#046bd2" }}
+      style={{ backgroundColor: "#00d084" }}
     >
       {children}
     </a>
@@ -116,7 +116,7 @@ function Hero() {
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-28 text-center">
         {/* Badge */}
         <div className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(255,255,255,0.06)", borderColor: "rgba(255,255,255,0.1)" }}>
-          <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#00d084" }} />
+          <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#fcb900" }} />
           <span className="text-xs font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.7)" }}>
             Especialistas en niños · San Fernando y San Vicente
           </span>
@@ -243,7 +243,7 @@ function QuizWidget() {
         )}
 
         {showResult && (
-          <div className="mt-8 p-8 rounded-3xl text-white animate-fade-up" style={{ backgroundColor: "#046bd2" }}>
+          <div className="mt-8 p-8 rounded-3xl text-white animate-fade-up" style={{ background: "linear-gradient(135deg, #046bd2 0%, #0693e3 100%)" }}>
             <h3 className="text-xl font-bold mb-2">{resultMsg.title}</h3>
             <p className="text-white/80 text-sm mb-6 leading-relaxed">{resultMsg.desc}</p>
             <a
@@ -281,7 +281,7 @@ function StepsSection() {
           <div className="text-center mb-16">
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
-              style={{ backgroundColor: "#e8f1fd", color: "#046bd2" }}
+              style={{ backgroundColor: "#dcfce7", color: "#059669" }}
             >
               Nuestro método
             </span>
@@ -379,7 +379,7 @@ function CounterSection() {
   ];
 
   return (
-    <section className="py-16 md:py-20 px-6" style={{ backgroundColor: "#046bd2" }}>
+    <section className="py-16 md:py-20 px-6" style={{ background: "linear-gradient(135deg, #046bd2 0%, #0693e3 100%)" }}>
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
         {items.map((c, i) => (
           <div key={i}>
@@ -391,7 +391,7 @@ function CounterSection() {
         ))}
         <div>
           <div className="text-4xl md:text-5xl font-extrabold mb-2 flex items-center justify-center gap-2 tracking-tight">
-            <svg className="w-8 h-8" fill="#fcb900" viewBox="0 0 20 20">
+            <svg className="w-8 h-8" fill="#fcb900" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
             4.9
@@ -756,7 +756,7 @@ function FinalCTA() {
           <p className="text-sm font-medium mb-10" style={{ color: "#fcb900" }}>
             Cupos limitados por semana — Agendamos pocas evaluaciones para dedicar el tiempo que cada niño necesita
           </p>
-          <CTAButton size="lg" className="!bg-white hover:!bg-slate-50" style={{ color: "#046bd2" }}>
+          <CTAButton size="lg">
             <span>Agendar la Primera Visita Sin Miedo</span>
             <ArrowRight />
           </CTAButton>
@@ -808,7 +808,7 @@ function MapSection() {
                 onClick={() => setActiveSede(i)}
                 className="px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300"
                 style={{
-                  backgroundColor: activeSede === i ? "#046bd2" : "#f1f5f9",
+                  backgroundColor: activeSede === i ? "#00d084" : "#f1f5f9",
                   color: activeSede === i ? "#ffffff" : "#334155",
                 }}
               >
@@ -907,7 +907,7 @@ function StickyBottomBar() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3 text-sm transition-all shadow-lg hover:shadow-xl"
-            style={{ backgroundColor: "#046bd2" }}
+            style={{ backgroundColor: "#00d084" }}
           >
             <span>Agendar Primera Visita Sin Miedo</span>
             <ArrowRight />
