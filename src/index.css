@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Inter', 'Source Sans 3', system-ui, sans-serif;
+  font-family: 'Outfit', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,6 +17,6 @@ body {
   max-width: 100%;
 }
 
-h1, h2, h3 {
-  font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', system-ui, sans-serif;
 }
