@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
-/* âââââââââââââââââââââââââââââââââââââââââââââ
-   LANDING PAGE â ODONTOPEDIATRÃA
-   Tus Odontopediatras Â· San Fernando & San Vicente TT
-   âââââââââââââââââââââââââââââââââââââââââââââ */
+/* ─────────────────────────────────────────
+   LANDING PAGE — ODONTOPEDIATRÍA
+   Tus Odontopediatras · San Fernando & San Vicente TT
+   ───────────────────────────────────────── */
 
 const BOOKING_URL = "https://t.dentalsoft.cl/reserva-web/i/e262c202-0ea3-4100-89e9-26b5b2975e25";
 
-/* ââ Palette (solo colores de marca) ââ */
+/* ── Palette (solo colores de marca) ── */
 const C = {
   rose: "#E81A7C",
   roseHover: "#c91568",
@@ -22,7 +22,7 @@ const C = {
   textLight: "#64748b",
 };
 
-/* ââ Shared CTA button ââ */
+/* ── Shared CTA button ── */
 const CTAButton = ({ children, href = BOOKING_URL, secondary = false, className = "" }) => (
   <a
     href={href}
@@ -43,7 +43,7 @@ const CTAButton = ({ children, href = BOOKING_URL, secondary = false, className 
   </a>
 );
 
-/* ââ Intersection Observer hook ââ */
+/* ── Intersection Observer hook ── */
 function useOnScreen(ref, threshold = 0.3) {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -57,7 +57,7 @@ function useOnScreen(ref, threshold = 0.3) {
   return visible;
 }
 
-/* ââ Animated Counter ââ */
+/* ── Animated Counter ── */
 function AnimatedCounter({ end, suffix = "", duration = 2000 }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -76,9 +76,9 @@ function AnimatedCounter({ end, suffix = "", duration = 2000 }) {
   return <span ref={ref}>{count.toLocaleString("es-CL")}{suffix}</span>;
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 1 â HERO
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 1 — HERO
+   ──────────────────────────────────────── */
 function Hero() {
   return (
     <section
@@ -99,7 +99,7 @@ function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2 mb-8 border border-white/20">
           <span className="text-xs font-medium text-white/90 uppercase tracking-wider">
-            Especialistas en NiÃ±os Â· San Fernando y San Vicente
+            Especialistas en Niños · San Fernando y San Vicente
           </span>
         </div>
 
@@ -113,13 +113,13 @@ function Hero() {
 
         {/* Subtitle */}
         <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Somos especialistas en niÃ±os. Primero ganamos su confianza, despuÃ©s tratamos.
+          Somos especialistas en niños. Primero ganamos su confianza, después tratamos.
           Sin forzar. Sin retos. Sin trauma.
         </p>
 
         {/* CTA */}
         <div className="flex flex-col items-center gap-4 mb-8">
-          <CTAButton>Agendar la Primera Visita Sin Miedo â</CTAButton>
+          <CTAButton>Agendar la Primera Visita Sin Miedo →</CTAButton>
         </div>
 
         {/* Trust badges */}
@@ -130,9 +130,9 @@ function Hero() {
             </svg>
             4.9 en Google
           </span>
-          <span className="text-white/30">Â·</span>
-          <span>+100 niÃ±os con necesidades especiales</span>
-          <span className="text-white/30">Â·</span>
+          <span className="text-white/30">·</span>
+          <span>+100 niños con necesidades especiales</span>
+          <span className="text-white/30">·</span>
           <span>2 sedes en O'Higgins</span>
         </div>
       </div>
@@ -140,15 +140,15 @@ function Hero() {
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 2 â QUIZ WIDGET
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 2 — QUIZ WIDGET
+   ──────────────────────────────────────── */
 const quizQuestions = [
-  { q: "Â¿Tu hijo llora o se niega cuando toca ir al dentista?", icon: "ð¢" },
-  { q: "Â¿Ha tenido una mala experiencia dental antes?", icon: "ð°" },
-  { q: "Â¿Tiene caries sin tratar o dolor de muelas?", icon: "ð¦·" },
-  { q: "Â¿Le cuesta abrir la boca incluso para que tÃº le revises?", icon: "ð¬" },
-  { q: "Â¿Sales de la consulta con mÃ¡s dudas que respuestas?", icon: "â" },
+  { q: "¿Tu hijo llora o se niega cuando toca ir al dentista?", icon: "😢" },
+  { q: "¿Ha tenido una mala experiencia dental antes?", icon: "😰" },
+  { q: "¿Tiene caries sin tratar o dolor de muelas?", icon: "🦷" },
+  { q: "¿Le cuesta abrir la boca incluso para que tú le revises?", icon: "😬" },
+  { q: "¿Sales de la consulta con más dudas que respuestas?", icon: "❓" },
 ];
 
 function QuizWidget() {
@@ -171,19 +171,19 @@ function QuizWidget() {
 
   const resultMsg =
     yesCount >= 3
-      ? { title: "Tu hijo necesita una Primera Visita Sin Miedo", desc: "Nuestro sistema de adaptaciÃ³n progresiva estÃ¡ diseÃ±ado exactamente para esta situaciÃ³n. Primero ganamos su confianza, despuÃ©s tratamos." }
+      ? { title: "Tu hijo necesita una Primera Visita Sin Miedo", desc: "Nuestro sistema de adaptación progresiva está diseñado exactamente para esta situación. Primero ganamos su confianza, después tratamos." }
       : yesCount >= 1
-      ? { title: "Tu hijo podrÃ­a beneficiarse de una evaluaciÃ³n especializada", desc: "Un enfoque respetuoso y sin apuro puede marcar la diferencia en su relaciÃ³n con el dentista." }
-      : { title: "Â¡Bien! Un control preventivo mantiene esa sonrisa sana", desc: "Aun sin problemas, una evaluaciÃ³n con especialistas previene complicaciones a futuro." };
+      ? { title: "Tu hijo podría beneficiarse de una evaluación especializada", desc: "Un enfoque respetuoso y sin apuro puede marcar la diferencia en su relación con el dentista." }
+      : { title: "¡Bien! Un control preventivo mantiene esa sonrisa sana", desc: "Aun sin problemas, una evaluación con especialistas previene complicaciones a futuro." };
 
   return (
     <section className="py-20 px-6" style={{ backgroundColor: C.cream }}>
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: C.dark }}>
-          Â¿Tu hijo necesita un odontopediatra?
+          ¿Tu hijo necesita un odontopediatra?
         </h2>
         <p className="text-base mb-10" style={{ color: C.textLight }}>
-          Responde estas preguntas y descÃºbrelo en segundos.
+          Responde estas preguntas y descúbrelo en segundos.
         </p>
 
         <div className="space-y-4 mb-8">
@@ -206,14 +206,14 @@ function QuizWidget() {
                   : answers[i] === false ? "bg-gray-100 border-gray-300 text-gray-400"
                   : "border-gray-300"
               }`}>
-                {answers[i] ? "â" : answers[i] === false ? "â" : ""}
+                {answers[i] ? "✓" : answers[i] === false ? "✗" : ""}
               </span>
             </button>
           ))}
         </div>
 
         {!allAnswered && (
-          <p className="text-sm text-gray-400">Haz clic en cada pregunta para marcar SÃ, y de nuevo para NO</p>
+          <p className="text-sm text-gray-400">Haz clic en cada pregunta para marcar Sí, y de nuevo para NO</p>
         )}
 
         {showResult && (
@@ -221,7 +221,7 @@ function QuizWidget() {
             <h3 className="text-2xl font-bold mb-3">{resultMsg.title}</h3>
             <p className="text-white/90 mb-6">{resultMsg.desc}</p>
             <CTAButton className="!bg-white hover:!bg-gray-100" style={{ color: C.teal }}>
-              Agendar la Primera Visita Sin Miedo â
+              Agendar la Primera Visita Sin Miedo →
             </CTAButton>
           </div>
         )}
@@ -235,14 +235,14 @@ function QuizWidget() {
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 3 â PRIMERA VISITA SIN MIEDO (Steps)
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 3 — PRIMERA VISITA SIN MIEDO (Steps)
+   ──────────────────────────────────────── */
 const steps = [
-  { num: "01", title: "Conocemos a tu hijo", desc: "La doctora te entrevista para saber todo sobre tu hijo: sus miedos, experiencias anteriores, monitos favoritos y cÃ³mo se siente. Sin apuro.", icon: "ð" },
-  { num: "02", title: "Ganamos su confianza", desc: "Creamos una relaciÃ³n de cariÃ±o. Le mostramos los instrumentos, le explicamos todo con calma, y solo avanzamos cuando estÃ¡ listo.", icon: "â­" },
-  { num: "03", title: "EvaluaciÃ³n completa", desc: "Realizamos un diagnÃ³stico dental integral para conocer su salud bucal y detectar cualquier problema a tiempo.", icon: "ð" },
-  { num: "04", title: "Tu plan claro", desc: "Te explicamos el diagnÃ³stico en palabras simples y te entregamos un plan de tratamiento por etapas. Sin retos. Sin juicio.", icon: "ð" },
+  { num: "01", title: "Conocemos a tu hijo", desc: "La doctora te entrevista para saber todo sobre tu hijo: sus miedos, experiencias anteriores, monitos favoritos y cómo se siente. Sin apuro.", icon: "👋" },
+  { num: "02", title: "Ganamos su confianza", desc: "Creamos una relación de cariño. Le mostramos los instrumentos, le explicamos todo con calma, y solo avanzamos cuando está listo.", icon: "⭐" },
+  { num: "03", title: "Evaluación completa", desc: "Realizamos un diagnóstico dental integral para conocer su salud bucal y detectar cualquier problema a tiempo.", icon: "🔍" },
+  { num: "04", title: "Tu plan claro", desc: "Te explicamos el diagnóstico en palabras simples y te entregamos un plan de tratamiento por etapas. Sin retos. Sin juicio.", icon: "📋" },
 ];
 
 function StepsSection() {
@@ -257,10 +257,10 @@ function StepsSection() {
             className="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
             style={{ backgroundColor: C.tealLight, color: C.teal }}
           >
-            Nuestro mÃ©todo
+            Nuestro método
           </span>
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: C.dark }}>
-            AsÃ­ funciona la Primera Visita Sin Miedo
+            Así funciona la Primera Visita Sin Miedo
           </h2>
         </div>
 
@@ -302,23 +302,23 @@ function StepsSection() {
           <p className="text-sm mb-6" style={{ color: C.textLight }}>
             Todo esto en una sola visita. Con seguimiento posterior.
           </p>
-          <CTAButton>Agendar la Primera Visita Sin Miedo â</CTAButton>
+          <CTAButton>Agendar la Primera Visita Sin Miedo →</CTAButton>
         </div>
       </div>
     </section>
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 4 â BENEFICIOS
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 4 — BENEFICIOS
+   ──────────────────────────────────────── */
 const benefits = [
-  { title: "Especialistas en niÃ±os, no dentistas generales", desc: "Somos odontopediatras tituladas. Nuestra formaciÃ³n es 100% enfocada en atenciÃ³n infantil.", icon: "ð©ââï¸" },
-  { title: "AdaptaciÃ³n progresiva, no fuerza", desc: "Primero vÃ­nculo, despuÃ©s confianza, y reciÃ©n ahÃ­ tratamos. El niÃ±o coopera porque quiere.", icon: "ð¤" },
-  { title: "DiagnÃ³stico explicado en simple", desc: "Te vas con un plan claro, por etapas, con prioridades. Sin jerga mÃ©dica.", icon: "ð" },
-  { title: "Necesidades especiales", desc: "MÃ¡s de 100 niÃ±os con TEA, sÃ­ndrome de Down y otras condiciones ya confÃ­an en nosotras.", icon: "ð" },
-  { title: "PabellÃ³n dental con anestesia general", desc: "Para casos que lo requieran, contamos con pabellÃ³n propio y anestesistas certificados.", icon: "ð¥" },
-  { title: "Ãxido nitroso (gas de la risa)", desc: "Un gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "ð" },
+  { title: "Especialistas en niños, no dentistas generales", desc: "Somos odontopediatras tituladas. Nuestra formación es 100% enfocada en atención infantil.", icon: "👩‍⚕️" },
+  { title: "Adaptación progresiva, no fuerza", desc: "Primero vínculo, después confianza, y recién ahí tratamos. El niño coopera porque quiere.", icon: "🤝" },
+  { title: "Diagnóstico explicado en simple", desc: "Te vas con un plan claro, por etapas, con prioridades. Sin jerga médica.", icon: "📝" },
+  { title: "Necesidades especiales", desc: "Más de 100 niños con TEA, síndrome de Down y otras condiciones ya confían en nosotras.", icon: "💙" },
+  { title: "Pabellón dental con anestesia general", desc: "Para casos que lo requieran, contamos con pabellón propio y anestesistas certificados.", icon: "🏥" },
+  { title: "Óxido nitroso (gas de la risa)", desc: "Un gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊" },
 ];
 
 function BenefitsSection() {
@@ -330,10 +330,10 @@ function BenefitsSection() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: C.dark }}>
-            Â¿Por quÃ© elegirnos?
+            ¿Por qué elegirnos?
           </h2>
           <p className="mt-3" style={{ color: C.textLight }}>
-            No somos un dentista mÃ¡s. Somos el dentista que tu hijo necesita.
+            No somos un dentista más. Somos el dentista que tu hijo necesita.
           </p>
         </div>
 
@@ -359,13 +359,13 @@ function BenefitsSection() {
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 5 â ANIMATED COUNTER
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 5 — ANIMATED COUNTER
+   ──────────────────────────────────────── */
 function CounterSection() {
   const counters = [
-    { end: 100, suffix: "+", label: "NiÃ±os con necesidades especiales atendidos" },
-    { end: 2, suffix: "", label: "Sedes en la RegiÃ³n de O'Higgins" },
+    { end: 100, suffix: "+", label: "Niños con necesidades especiales atendidos" },
+    { end: 2, suffix: "", label: "Sedes en la Región de O'Higgins" },
   ];
 
   return (
@@ -386,40 +386,40 @@ function CounterSection() {
             </svg>
             4.9
           </div>
-          <p className="text-white/80 text-sm">CalificaciÃ³n en Google</p>
+          <p className="text-white/80 text-sm">Calificación en Google</p>
         </div>
       </div>
     </section>
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 6 â EQUIPO / CARRUSEL DE PROFESIONALES
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 6 — EQUIPO / CARRUSEL DE PROFESIONALES
+   ──────────────────────────────────────── */
 const professionals = [
   {
     name: "Dra. Daniela Paredes",
     role: "Odontopediatra",
-    quote: "Creo que ningÃºn niÃ±o deberÃ­a tener miedo al dentista. Por eso creamos un sistema donde primero ganamos su confianza.",
-    badges: ["Especialista en OdontopediatrÃ­a", "Directora ClÃ­nica"],
+    quote: "Creo que ningún niño debería tener miedo al dentista. Por eso creamos un sistema donde primero ganamos su confianza.",
+    badges: ["Especialista en Odontopediatría", "Directora Clínica"],
   },
   {
     name: "Profesional 2",
     role: "Odontopediatra",
-    quote: "INSERTAR FRASE â Placeholder para segunda profesional del equipo.",
-    badges: ["Especialista en OdontopediatrÃ­a", "Placeholder"],
+    quote: "INSERTAR FRASE — Placeholder para segunda profesional del equipo.",
+    badges: ["Especialista en Odontopediatría", "Placeholder"],
   },
   {
     name: "Profesional 3",
     role: "Odontopediatra",
-    quote: "INSERTAR FRASE â Placeholder para tercera profesional del equipo.",
-    badges: ["Especialista en OdontopediatrÃ­a", "Placeholder"],
+    quote: "INSERTAR FRASE — Placeholder para tercera profesional del equipo.",
+    badges: ["Especialista en Odontopediatría", "Placeholder"],
   },
   {
     name: "Profesional 4",
     role: "Odontopediatra",
-    quote: "INSERTAR FRASE â Placeholder para cuarta profesional del equipo.",
-    badges: ["Especialista en OdontopediatrÃ­a", "Placeholder"],
+    quote: "INSERTAR FRASE — Placeholder para cuarta profesional del equipo.",
+    badges: ["Especialista en Odontopediatría", "Placeholder"],
   },
 ];
 
@@ -529,26 +529,26 @@ function TeamCarousel() {
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 7 â TESTIMONIOS
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 7 — TESTIMONIOS
+   ──────────────────────────────────────── */
 const testimonials = [
   {
-    text: "Mi hijo lloraba solo de ver la puerta del dentista. En Tus Odontopediatras lo recibieron con calma, le mostraron todo, y al final abriÃ³ la boca solo. No lo podÃ­a creer.",
-    name: "MarÃ­a C.",
-    detail: "MamÃ¡ de TomÃ¡s, 5 aÃ±os",
+    text: "Mi hijo lloraba solo de ver la puerta del dentista. En Tus Odontopediatras lo recibieron con calma, le mostraron todo, y al final abrió la boca solo. No lo podía creer.",
+    name: "María C.",
+    detail: "Mamá de Tomás, 5 años",
     stars: 5,
   },
   {
-    text: "SentÃ­a culpa terrible por las caries. AcÃ¡ nadie me juzgÃ³. Me explicaron todo claro y me dieron un plan paso a paso. Fue un alivio enorme.",
+    text: "Sentía culpa terrible por las caries. Acá nadie me juzgó. Me explicaron todo claro y me dieron un plan paso a paso. Fue un alivio enorme.",
     name: "Carolina P.",
-    detail: "MamÃ¡ de SofÃ­a, 7 aÃ±os",
+    detail: "Mamá de Sofía, 7 años",
     stars: 5,
   },
   {
-    text: "Mi hijo tiene TEA y ningÃºn dentista podÃ­a atenderlo. AcÃ¡ se tomaron el tiempo, se adaptaron a Ã©l, y por primera vez salimos los dos tranquilos.",
+    text: "Mi hijo tiene TEA y ningún dentista podía atenderlo. Acá se tomaron el tiempo, se adaptaron a él, y por primera vez salimos los dos tranquilos.",
     name: "Andrea M.",
-    detail: "MamÃ¡ de MatÃ­as, 9 aÃ±os",
+    detail: "Mamá de Matías, 9 años",
     stars: 5,
   },
 ];
@@ -559,10 +559,10 @@ function TestimonialsSection() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: C.dark }}>
-            Lo que dicen las mamÃ¡s
+            Lo que dicen las mamás
           </h2>
           <p className="mt-2 text-sm" style={{ color: C.textLight }}>
-            Placeholder â Reemplazar con testimonios reales
+            Placeholder — Reemplazar con testimonios reales
           </p>
         </div>
 
@@ -588,21 +588,21 @@ function TestimonialsSection() {
         </div>
 
         <div className="text-center mt-12">
-          <CTAButton>Ãnete a las mamÃ¡s que ya confÃ­an en nosotras â</CTAButton>
+          <CTAButton>Únete a las mamás que ya confían en nosotras →</CTAButton>
         </div>
       </div>
     </section>
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 8 â AGE SELECTOR WIDGET
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 8 — AGE SELECTOR WIDGET
+   ──────────────────────────────────────── */
 const ageGroups = [
-  { range: "0-2 aÃ±os", label: "BebÃ©", emoji: "ð¶", color: "#fce7f3", text: "Â¿Le saliÃ³ su primer diente? Es momento del primer control. Evaluamos hÃ¡bitos, detectamos problemas tempranos y te enseÃ±amos cÃ³mo cuidar su boquita desde casa." },
-  { range: "3-5 aÃ±os", label: "Preescolar", emoji: "ð§", color: C.tealLight, text: "Es la edad donde se forman los hÃ¡bitos. Si tiene miedo o ya tuvo una mala experiencia, nuestra Primera Visita Sin Miedo es ideal para reconectar con el dentista." },
-  { range: "6-9 aÃ±os", label: "Escolar", emoji: "ð¦", color: "#fef9c3", text: "Cambio de dientes, posibles caries, hÃ¡bitos que corregir. Evaluamos todo y te damos un plan claro para que no se acumulen los problemas." },
-  { range: "10-17 aÃ±os", label: "Adolescente", emoji: "ð§", color: "#fce7f3", text: "Autoestima, muelas del juicio, cuidado integral. Atendemos hasta los 18 aÃ±os con un enfoque respetuoso y sin infantilizar." },
+  { range: "0-2 años", label: "Bebé", emoji: "👶", color: "#fce7f3", text: "¿Le salió su primer diente? Es momento del primer control. Evaluamos hábitos, detectamos problemas tempranos y te enseñamos cómo cuidar su boquita desde casa." },
+  { range: "3-5 años", label: "Preescolar", emoji: "🧒", color: C.tealLight, text: "Es la edad donde se forman los hábitos. Si tiene miedo o ya tuvo una mala experiencia, nuestra Primera Visita Sin Miedo es ideal para reconectar con el dentista." },
+  { range: "6-9 años", label: "Escolar", emoji: "👦", color: "#fef9c3", text: "Cambio de dientes, posibles caries, hábitos que corregir. Evaluamos todo y te damos un plan claro para que no se acumulen los problemas." },
+  { range: "10-17 años", label: "Adolescente", emoji: "🧑", color: "#fce7f3", text: "Autoestima, muelas del juicio, cuidado integral. Atendemos hasta los 18 años con un enfoque respetuoso y sin infantilizar." },
 ];
 
 function AgeSelector() {
@@ -612,10 +612,10 @@ function AgeSelector() {
     <section className="py-20 px-6 bg-white">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: C.dark }}>
-          Â¿QuÃ© edad tiene tu hijo?
+          ¿Qué edad tiene tu hijo?
         </h2>
         <p className="mb-10" style={{ color: C.textLight }}>
-          Selecciona su rango de edad y descubre cÃ³mo podemos ayudarte.
+          Selecciona su rango de edad y descubre cómo podemos ayudarte.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -649,7 +649,7 @@ function AgeSelector() {
                 <p className="text-sm leading-relaxed mb-5" style={{ color: C.text }}>
                   {ageGroups[selected].text}
                 </p>
-                <CTAButton>Agendar evaluaciÃ³n para mi hijo/a â</CTAButton>
+                <CTAButton>Agendar evaluación para mi hijo/a →</CTAButton>
               </div>
             </div>
           </div>
@@ -664,18 +664,18 @@ function AgeSelector() {
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 9 â FAQ ACCORDION
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 9 — FAQ ACCORDION
+   ──────────────────────────────────────── */
 const faqs = [
-  { q: "Â¿QuÃ© pasa si mi hijo llora o no coopera?", a: "Es exactamente para eso que existimos. Usamos adaptaciÃ³n progresiva: primero ganamos su confianza, le mostramos todo con calma, y solo avanzamos cuando estÃ¡ listo. Sin forzar. Sin retos." },
-  { q: "Â¿A partir de quÃ© edad puedo llevar a mi hijo?", a: "Desde que sale su primer diente. Atendemos bebÃ©s, niÃ±os y adolescentes hasta los 18 aÃ±os." },
-  { q: "Â¿Atienden niÃ±os con necesidades especiales?", a: "SÃ­. Hemos atendido a mÃ¡s de 100 niÃ±os con TEA, sÃ­ndrome de Down y otras condiciones. Contamos con pabellÃ³n dental y anestesia general para los casos que lo requieran." },
-  { q: "Â¿QuÃ© es el Ã³xido nitroso?", a: "TambiÃ©n conocido como gas de la risa. Es un gas seguro que se inhala para relajar al paciente durante el procedimiento. Permite una atenciÃ³n mÃ¡s cÃ³moda sin los riesgos de la anestesia general." },
-  { q: "Â¿Puedo cancelar o reprogramar?", a: "SÃ­. CancelaciÃ³n gratuita. Puedes reprogramar sin costo a travÃ©s del mismo sistema de agendamiento." },
-  { q: "Â¿En cuÃ¡nto tiempo podemos empezar el tratamiento?", a: "En la primera visita ya te entregamos el diagnÃ³stico y el plan. Si decides avanzar, podemos empezar a planificar de inmediato." },
-  { q: "Â¿DÃ³nde estÃ¡n ubicadas?", a: "Tenemos dos sedes: San Fernando (CuralÃ­ 930) y San Vicente TT (Salvador Correa 337). Ambas en la RegiÃ³n de O'Higgins." },
-  { q: "Â¿QuÃ© incluye la primera visita?", a: "Entrevista personalizada contigo, adaptaciÃ³n y vÃ­nculo con tu hijo, diagnÃ³stico dental integral completo, plan de tratamiento explicado en simple, y seguimiento posterior." },
+  { q: "¿Qué pasa si mi hijo llora o no coopera?", a: "Es exactamente para eso que existimos. Usamos adaptación progresiva: primero ganamos su confianza, le mostramos todo con calma, y solo avanzamos cuando está listo. Sin forzar. Sin retos." },
+  { q: "¿A partir de qué edad puedo llevar a mi hijo?", a: "Desde que sale su primer diente. Atendemos bebés, niños y adolescentes hasta los 18 años." },
+  { q: "¿Atienden niños con necesidades especiales?", a: "Sí. Hemos atendido a más de 100 niños con TEA, síndrome de Down y otras condiciones. Contamos con pabellón dental y anestesia general para los casos que lo requieran." },
+  { q: "¿Qué es el óxido nitroso?", a: "También conocido como gas de la risa. Es un gas seguro que se inhala para relajar al paciente durante el procedimiento. Permite una atención más cómoda sin los riesgos de la anestesia general." },
+  { q: "¿Puedo cancelar o reprogramar?", a: "Sí. Cancelación gratuita. Puedes reprogramar sin costo a través del mismo sistema de agendamiento." },
+  { q: "¿En cuánto tiempo podemos empezar el tratamiento?", a: "En la primera visita ya te entregamos el diagnóstico y el plan. Si decides avanzar, podemos empezar a planificar de inmediato." },
+  { q: "¿Dónde están ubicadas?", a: "Tenemos dos sedes: San Fernando (Curalí 930) y San Vicente TT (Salvador Correa 337). Ambas en la Región de O'Higgins." },
+  { q: "¿Qué incluye la primera visita?", a: "Entrevista personalizada contigo, adaptación y vínculo con tu hijo, diagnóstico dental integral completo, plan de tratamiento explicado en simple, y seguimiento posterior." },
 ];
 
 function FAQSection() {
@@ -720,9 +720,9 @@ function FAQSection() {
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 10 â CTA FINAL + URGENCIA
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 10 — CTA FINAL + URGENCIA
+   ──────────────────────────────────────── */
 function FinalCTA() {
   return (
     <section
@@ -737,26 +737,26 @@ function FinalCTA() {
           Agenda hoy su Primera Visita Sin Miedo y deja de postergar su salud dental.
         </p>
         <p className="text-sm font-medium mb-8" style={{ color: C.yellow }}>
-          Cupos limitados por semana â Agendamos pocas evaluaciones nuevas para dedicar el tiempo que cada niÃ±o necesita
+          Cupos limitados por semana — Agendamos pocas evaluaciones nuevas para dedicar el tiempo que cada niño necesita
         </p>
         <CTAButton className="!text-xl !px-10 !py-5">
-          Agendar la Primera Visita Sin Miedo â
+          Agendar la Primera Visita Sin Miedo →
         </CTAButton>
       </div>
     </section>
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 11 â MAPA INTERACTIVO (Widget 4)
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 11 — MAPA INTERACTIVO (Widget 4)
+   ──────────────────────────────────────── */
 function MapSection() {
   const [activeSede, setActiveSede] = useState(0);
 
   const sedes = [
     {
       name: "San Fernando",
-      address: "CuralÃ­ 930, San Fernando, O'Higgins",
+      address: "Curalí 930, San Fernando, O'Higgins",
       phone: "+56 9 5853 7784",
       mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.5430632701405!2d-70.98834452452537!3d-34.59042675679591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96649177e784488f%3A0xba861fbb8dcf179!2sTus%20Odontopediatras%20San%20Fernando!5e0!3m2!1ses!2sbr!4v1774806605280!5m2!1ses!2sbr",
     },
@@ -773,9 +773,9 @@ function MapSection() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: C.dark }}>
-            EncuÃ©ntranos
+            Encuéntranos
           </h2>
-          <p className="mt-2" style={{ color: C.textLight }}>2 sedes en la RegiÃ³n de O'Higgins</p>
+          <p className="mt-2" style={{ color: C.textLight }}>2 sedes en la Región de O'Higgins</p>
         </div>
 
         {/* Sede tabs */}
@@ -789,7 +789,7 @@ function MapSection() {
               }`}
               style={activeSede === i ? { backgroundColor: C.teal } : {}}
             >
-              ð {s.name}
+              📍 {s.name}
             </button>
           ))}
         </div>
@@ -812,7 +812,7 @@ function MapSection() {
           {/* Info */}
           <div className="flex flex-col justify-center p-8 rounded-2xl" style={{ backgroundColor: C.cream }}>
             <h3 className="text-2xl font-bold mb-6" style={{ color: C.dark }}>
-              ð Sede {sedes[activeSede].name}
+              📍 Sede {sedes[activeSede].name}
             </h3>
             <div className="space-y-4 mb-8">
               <div className="flex items-start gap-3">
@@ -835,7 +835,7 @@ function MapSection() {
               </div>
             </div>
 
-            <CTAButton>Agendar en esta sede â</CTAButton>
+            <CTAButton>Agendar en esta sede →</CTAButton>
           </div>
         </div>
       </div>
@@ -843,30 +843,30 @@ function MapSection() {
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   SECTION 12 â FOOTER
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   SECTION 12 — FOOTER
+   ──────────────────────────────────────── */
 function Footer() {
   return (
     <footer className="py-10 px-6 text-center" style={{ backgroundColor: C.dark, color: "rgba(255,255,255,.5)" }}>
       <div className="max-w-4xl mx-auto">
         <p className="text-white text-lg font-bold mb-2">Tus Odontopediatras</p>
         <p className="text-sm mb-1">tusodontopediatras@gmail.com</p>
-        <p className="text-sm mb-4">San Fernando: +56 9 5853 7784 Â· San Vicente: +56 9 7270 8423</p>
+        <p className="text-sm mb-4">San Fernando: +56 9 5853 7784 · San Vicente: +56 9 7270 8423</p>
         <div className="flex justify-center gap-4 text-xs">
-          <a href="#" className="hover:text-white transition">PolÃ­tica de privacidad</a>
+          <a href="#" className="hover:text-white transition">Política de privacidad</a>
           <span>|</span>
-          <a href="#" className="hover:text-white transition">TÃ©rminos y condiciones</a>
+          <a href="#" className="hover:text-white transition">Términos y condiciones</a>
         </div>
-        <p className="text-xs mt-6 opacity-50">Â© 2026 Tus Odontopediatras. Todos los derechos reservados.</p>
+        <p className="text-xs mt-6 opacity-50">© 2026 Tus Odontopediatras. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
-   STICKY BOTTOM BAR (Widget 5 â Mobile)
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+/* ────────────────────────────────────────
+   STICKY BOTTOM BAR (Widget 5 — Mobile)
+   ──────────────────────────────────────── */
 function StickyBottomBar() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -891,7 +891,7 @@ function StickyBottomBar() {
             className="block w-full text-center font-bold text-white rounded-full py-3.5 text-sm transition-all shadow-lg hover:shadow-xl"
             style={{ backgroundColor: C.rose }}
           >
-            Agendar Primera Visita Sin Miedo â
+            Agendar Primera Visita Sin Miedo →
           </a>
         </div>
       </div>
@@ -899,9 +899,9 @@ function StickyBottomBar() {
   );
 }
 
-/* ââââââââââââââââââââââââââââââââââââââââââââ
+/* ────────────────────────────────────────
    MAIN APP
-   ââââââââââââââââââââââââââââââââââââââââââââ */
+   ──────────────────────────────────────── */
 export default function LandingOdontopediatria() {
   return (
     <div className="font-sans antialiased" style={{ color: C.text }}>
