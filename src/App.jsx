@@ -29,7 +29,7 @@ function Reveal({ children, className = "", delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`reveal-wrapper ${className}`}
+      className={`reveal-wrapper w-full ${className}`}
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(16px)",
@@ -196,7 +196,7 @@ function QuizWidget() {
 
   return (
     <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fef9ee" }}>
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
@@ -280,7 +280,7 @@ const steps = [
 function StepsSection() {
   return (
     <section className="py-20 md:py-28 px-6 bg-white">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="text-center mb-16">
             <span
@@ -343,7 +343,7 @@ const benefits = [
 function BenefitsSection() {
   return (
     <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#F0F5FA" }}>
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="text-center mb-14">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
@@ -384,7 +384,7 @@ function CounterSection() {
 
   return (
     <section className="py-16 md:py-20 px-6" style={{ background: "linear-gradient(135deg, #046bd2 0%, #7c3aed 50%, #be185d 100%)" }}>
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
         {items.map((c, i) => (
           <div key={i}>
             <div className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight">
@@ -455,7 +455,7 @@ function TeamCarousel() {
 
   return (
     <section className="py-20 md:py-28 px-6 bg-white">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <Reveal>
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
@@ -564,7 +564,7 @@ const testimonials = [
 function TestimonialsSection() {
   return (
     <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fdf2f8" }}>
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="text-center mb-14">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fce7f3", color: "#be185d" }}>
@@ -624,7 +624,7 @@ function AgeSelector() {
 
   return (
     <section className="py-20 md:py-28 px-6 bg-white">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3" style={{ color: "#1e293b" }}>
@@ -702,7 +702,7 @@ function FAQSection() {
 
   return (
     <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fffbeb" }}>
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-center mb-12">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
@@ -799,7 +799,7 @@ function MapSection() {
 
   return (
     <section className="py-20 md:py-28 px-6 bg-white">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
