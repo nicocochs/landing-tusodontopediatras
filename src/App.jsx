@@ -726,10 +726,10 @@ function FAQSection() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-28 md:py-40 px-6 md:px-12" style={{ backgroundColor: "#fffbeb" }}>
+    <section className="py-28 md:py-40 px-6 md:px-12 bg-white">
       <div className="max-w-2xl mx-auto">
         <Reveal>
-          <div className="text-center mb-16 md:mb-20">
+          <div className="text-center mb-14">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
               Preguntas frecuentes
             </span>
@@ -740,14 +740,15 @@ function FAQSection() {
         </Reveal>
 
         <Reveal>
-          <div className="space-y-4 stagger-grid">
+          <div className="rounded-3xl border-2 overflow-hidden" style={{ borderColor: "#fde68a" }}>
             {faqs.map((faq, i) => (
-              <div key={i} className="bg-white rounded-2xl border overflow-hidden stagger-item" style={{ borderColor: "#fde68a", "--i": i }}>
+              <div key={i} className={i > 0 ? "border-t" : ""} style={{ borderColor: "#fef3c7" }}>
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between px-7 py-6 text-left faq-trigger"
+                  className="w-full flex items-center justify-between px-8 py-6 text-left faq-trigger"
+                  style={{ backgroundColor: open === i ? "#fffbeb" : "transparent" }}
                 >
-                  <span className="font-semibold text-base pr-6 leading-snug" style={{ color: "#1e293b" }}>{faq.q}</span>
+                  <span className="font-semibold text-base md:text-lg pr-6 leading-snug" style={{ color: "#1e293b" }}>{faq.q}</span>
                   <svg
                     className="w-5 h-5 flex-shrink-0 faq-chevron"
                     style={{ color: "#b45309", transform: open === i ? "rotate(180deg)" : "rotate(0)" }}
@@ -756,9 +757,9 @@ function FAQSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div className={`faq-body ${open === i ? "faq-open" : "faq-closed"}`} style={{ gridTemplateRows: open === i ? "1fr" : "0fr" }}>
+                <div className={`faq-body ${open === i ? "faq-open" : "faq-closed"}`} style={{ gridTemplateRows: open === i ? "1fr" : "0fr", backgroundColor: "#fffbeb" }}>
                   <div className="overflow-hidden">
-                    <p className="px-7 pb-7 text-base leading-relaxed" style={{ color: "#64748b" }}>{faq.a}</p>
+                    <p className="px-8 pb-7 pt-1 text-base leading-relaxed" style={{ color: "#78716c" }}>{faq.a}</p>
                   </div>
                 </div>
               </div>
