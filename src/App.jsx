@@ -91,11 +91,12 @@ function AnimatedCounter({ end, suffix = "", duration = 2000 }) {
 }
 
 /* ── Stars ── */
-function Stars({ count = 5 }) {
+function Stars({ count = 5, size = "sm" }) {
+  const cls = size === "lg" ? "w-5 h-5" : "w-4 h-4";
   return (
-    <div className="flex gap-0.5">
+    <div className="flex gap-1">
       {Array(count).fill(0).map((_, j) => (
-        <svg key={j} className="w-4 h-4" fill="#fcb900" viewBox="0 0 20 20">
+        <svg key={j} className={cls} fill="#fcb900" viewBox="0 0 20 20">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
         </svg>
       ))}
@@ -584,33 +585,36 @@ const testimonials = [
 
 function TestimonialsSection() {
   return (
-    <section className="py-24 md:py-36 px-8 md:px-12" style={{ backgroundColor: "#fdf2f8" }}>
+    <section className="py-28 md:py-40 px-6 md:px-12" style={{ backgroundColor: "#fdf2f8" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div className="text-center mb-14">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fce7f3", color: "#be185d" }}>
+          <div className="text-center mb-16 md:mb-20">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#fce7f3", color: "#be185d" }}>
               Testimonios
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
               Lo que dicen las mamás
             </h2>
-            <p className="mt-2 text-xs" style={{ color: "#94a3b8" }}>
+            <p className="mt-3 text-sm" style={{ color: "#94a3b8" }}>
               Placeholder — Reemplazar con testimonios reales
             </p>
           </div>
         </Reveal>
 
         <Reveal>
-          <div className="grid md:grid-cols-3 gap-6 stagger-grid">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 stagger-grid">
             {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card bg-white rounded-2xl p-7 border flex flex-col h-full stagger-item" style={{ borderColor: "#fbcfe8", "--i": i }}>
-                <Stars />
-                <p className="text-sm leading-relaxed flex-1 my-5" style={{ color: "#334155" }}>
-                  "{t.text}"
-                </p>
-                <div className="pt-4 border-t border-slate-100">
-                  <p className="font-bold text-sm" style={{ color: "#1e293b" }}>{t.name}</p>
-                  <p className="text-xs" style={{ color: "#94a3b8" }}>{t.detail}</p>
+              <div key={i} className="testimonial-card bg-white rounded-3xl p-8 md:p-10 border flex flex-col h-full stagger-item" style={{ borderColor: "#fbcfe8", "--i": i }}>
+                <Stars size="lg" />
+                <div className="flex-1 my-7">
+                  <span className="block text-5xl leading-none font-serif mb-2" style={{ color: "#fbcfe8" }}>"</span>
+                  <p className="text-base md:text-lg leading-relaxed" style={{ color: "#334155" }}>
+                    {t.text}
+                  </p>
+                </div>
+                <div className="pt-5 border-t" style={{ borderColor: "#fce7f3" }}>
+                  <p className="font-bold text-base" style={{ color: "#1e293b" }}>{t.name}</p>
+                  <p className="text-sm mt-0.5" style={{ color: "#94a3b8" }}>{t.detail}</p>
                 </div>
               </div>
             ))}
@@ -618,7 +622,7 @@ function TestimonialsSection() {
         </Reveal>
 
         <Reveal delay={350}>
-          <div className="text-center mt-12">
+          <div className="text-center mt-14">
             <CTAButton>
               <span>Únete a las mamás que ya confían en nosotras</span>
               <ArrowRight />
@@ -722,31 +726,31 @@ function FAQSection() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-24 md:py-36 px-8 md:px-12" style={{ backgroundColor: "#fffbeb" }}>
-      <div className="max-w-3xl mx-auto">
+    <section className="py-28 md:py-40 px-6 md:px-12" style={{ backgroundColor: "#fffbeb" }}>
+      <div className="max-w-2xl mx-auto">
         <Reveal>
-          <div className="text-center mb-12">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
-              FAQ
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
+          <div className="text-center mb-16 md:mb-20">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
               Preguntas frecuentes
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
+              Todo lo que necesitas saber
             </h2>
           </div>
         </Reveal>
 
         <Reveal>
-          <div className="space-y-3 stagger-grid">
+          <div className="space-y-4 stagger-grid">
             {faqs.map((faq, i) => (
-              <div key={i} className="bg-white rounded-xl border border-slate-100 overflow-hidden stagger-item" style={{ "--i": i }}>
+              <div key={i} className="bg-white rounded-2xl border overflow-hidden stagger-item" style={{ borderColor: "#fde68a", "--i": i }}>
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-left faq-trigger"
+                  className="w-full flex items-center justify-between px-7 py-6 text-left faq-trigger"
                 >
-                  <span className="font-medium text-sm pr-4" style={{ color: "#1e293b" }}>{faq.q}</span>
+                  <span className="font-semibold text-base pr-6 leading-snug" style={{ color: "#1e293b" }}>{faq.q}</span>
                   <svg
-                    className="w-4 h-4 flex-shrink-0 faq-chevron"
-                    style={{ color: "#046bd2", transform: open === i ? "rotate(180deg)" : "rotate(0)" }}
+                    className="w-5 h-5 flex-shrink-0 faq-chevron"
+                    style={{ color: "#b45309", transform: open === i ? "rotate(180deg)" : "rotate(0)" }}
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -754,7 +758,7 @@ function FAQSection() {
                 </button>
                 <div className={`faq-body ${open === i ? "faq-open" : "faq-closed"}`} style={{ gridTemplateRows: open === i ? "1fr" : "0fr" }}>
                   <div className="overflow-hidden">
-                    <p className="px-5 pb-5 text-sm leading-relaxed" style={{ color: "#64748b" }}>{faq.a}</p>
+                    <p className="px-7 pb-7 text-base leading-relaxed" style={{ color: "#64748b" }}>{faq.a}</p>
                   </div>
                 </div>
               </div>
