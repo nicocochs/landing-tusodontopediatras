@@ -25,14 +25,15 @@ function useOnScreen(ref, threshold = 0.15) {
 function Reveal({ children, className = "", delay = 0 }) {
   const ref = useRef(null);
   const visible = useOnScreen(ref, 0.1);
+  const cappedDelay = Math.min(delay, 300);
   return (
     <div
       ref={ref}
-      className={className}
+      className={`reveal-wrapper ${className}`}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(20px)",
-        transition: `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+        transition: `opacity 0.45s cubic-bezier(0.16,1,0.3,1) ${cappedDelay}ms, transform 0.45s cubic-bezier(0.16,1,0.3,1) ${cappedDelay}ms`,
       }}
     >
       {children}
@@ -52,7 +53,7 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 whitespace-nowrap ${sizes[size]} ${className}`}
+      className={`cta-btn inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center shadow-md whitespace-nowrap ${sizes[size]} ${className}`}
       style={{ backgroundColor: "#046bd2" }}
     >
       {children}
@@ -215,7 +216,7 @@ function QuizWidget() {
             <Reveal key={i} delay={i * 60}>
               <button
                 onClick={() => toggle(i)}
-                className="w-full flex items-center gap-4 p-4 md:p-5 rounded-2xl border-2 transition-all duration-300 text-left"
+                className="w-full flex items-center gap-4 p-4 md:p-5 rounded-2xl border-2 text-left pressable"
                 style={{
                   backgroundColor: answers[i] ? "#e8f1fd" : "#ffffff",
                   borderColor: answers[i] ? "#046bd2" : answers[i] === false ? "#e2e8f0" : "#e2e8f0",
@@ -246,14 +247,14 @@ function QuizWidget() {
         )}
 
         {showResult && (
-          <div className="mt-8 p-8 rounded-3xl text-white animate-fade-up" style={{ background: "linear-gradient(135deg, #cf2e2e 0%, #e85d75 100%)" }}>
+          <div className="mt-8 p-8 rounded-3xl text-white quiz-result" style={{ background: "linear-gradient(135deg, #cf2e2e 0%, #e85d75 100%)" }}>
             <h3 className="text-xl font-bold mb-2">{resultMsg.title}</h3>
             <p className="text-white/80 text-sm mb-6 leading-relaxed">{resultMsg.desc}</p>
             <a
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 font-semibold rounded-full px-8 py-4 text-sm transition-all duration-300 hover:shadow-lg whitespace-nowrap"
+              className="cta-btn inline-flex items-center justify-center gap-2 font-semibold rounded-full px-8 py-4 text-sm shadow-md whitespace-nowrap"
               style={{ backgroundColor: "#ffffff", color: "#cf2e2e" }}
             >
               <span>Agendar la Primera Visita Sin Miedo</span>
@@ -357,7 +358,7 @@ function BenefitsSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {benefits.map((b, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className="bg-white rounded-2xl p-6 border border-slate-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group">
+              <div className="benefit-card bg-white rounded-2xl p-6 border border-slate-100 group">
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4" style={{ backgroundColor: b.accent }}>
                   {b.icon}
                 </div>
@@ -445,7 +446,7 @@ function TeamCarousel() {
   const NavBtn = ({ onClick, children }) => (
     <button
       onClick={onClick}
-      className="w-10 h-10 rounded-full bg-white shadow-md border border-slate-200 flex items-center justify-center hover:shadow-lg transition"
+      className="w-10 h-10 rounded-full bg-white shadow-md border border-slate-200 flex items-center justify-center nav-btn"
       style={{ color: "#334155" }}
     >
       {children}
@@ -470,7 +471,7 @@ function TeamCarousel() {
           <div className="relative px-6 md:px-12">
             <div className="overflow-hidden rounded-3xl">
               <div
-                className="flex transition-transform duration-500 ease-in-out"
+                className="flex carousel-track"
                 style={{ transform: `translateX(-${current * 100}%)` }}
               >
                 {professionals.map((doc, i) => (
@@ -524,7 +525,7 @@ function TeamCarousel() {
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className="w-2 h-2 rounded-full transition-all duration-300"
+                  className="w-2 h-2 rounded-full carousel-dot"
                   style={{
                     backgroundColor: i === current ? "#046bd2" : "#d1d5db",
                     transform: i === current ? "scale(1.5)" : "scale(1)",
@@ -581,7 +582,7 @@ function TestimonialsSection() {
         <div className="grid md:grid-cols-3 gap-4">
           {testimonials.map((t, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="bg-white rounded-2xl p-6 border flex flex-col h-full hover:shadow-md transition-shadow duration-300" style={{ borderColor: "#fbcfe8" }}>
+              <div className="testimonial-card bg-white rounded-2xl p-6 border flex flex-col h-full" style={{ borderColor: "#fbcfe8" }}>
                 <Stars />
                 <p className="text-sm leading-relaxed flex-1 my-5" style={{ color: "#334155" }}>
                   "{t.text}"
@@ -641,7 +642,7 @@ function AgeSelector() {
               <button
                 key={i}
                 onClick={() => setSelected(selected === i ? null : i)}
-                className="p-5 rounded-2xl border-2 transition-all duration-300 hover:shadow-md"
+                className="p-5 rounded-2xl border-2 pressable"
                 style={{
                   backgroundColor: selected === i ? ag.accent : "#ffffff",
                   borderColor: selected === i ? "#046bd2" : "#e2e8f0",
@@ -658,7 +659,7 @@ function AgeSelector() {
         {selected !== null && (
           <div
             className="rounded-2xl border-2 p-7 text-left"
-            style={{ borderColor: ageGroups[selected].accent === "#fce7f3" ? "#ec4899" : ageGroups[selected].accent === "#fef3c7" ? "#f59e0b" : ageGroups[selected].accent === "#e8f1fd" ? "#046bd2" : "#046bd2", backgroundColor: ageGroups[selected].accent, animation: "fadeUp 0.4s ease" }}
+            style={{ borderColor: ageGroups[selected].accent === "#fce7f3" ? "#ec4899" : ageGroups[selected].accent === "#fef3c7" ? "#f59e0b" : "#046bd2", backgroundColor: ageGroups[selected].accent }}
           >
             <div className="flex items-start gap-4">
               <span className="text-3xl flex-shrink-0 mt-1">{ageGroups[selected].emoji}</span>
@@ -719,22 +720,21 @@ function FAQSection() {
               <div className="bg-white rounded-xl border border-slate-100 overflow-hidden">
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-left transition hover:bg-slate-50/50"
+                  className="w-full flex items-center justify-between p-5 text-left faq-trigger"
                 >
                   <span className="font-medium text-sm pr-4" style={{ color: "#1e293b" }}>{faq.q}</span>
                   <svg
-                    className="w-4 h-4 flex-shrink-0 transition-transform duration-300"
+                    className="w-4 h-4 flex-shrink-0 faq-chevron"
                     style={{ color: "#046bd2", transform: open === i ? "rotate(180deg)" : "rotate(0)" }}
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div
-                  className="overflow-hidden transition-all duration-300"
-                  style={{ maxHeight: open === i ? "200px" : "0" }}
-                >
-                  <p className="px-5 pb-5 text-sm leading-relaxed" style={{ color: "#64748b" }}>{faq.a}</p>
+                <div className="faq-body" style={{ gridTemplateRows: open === i ? "1fr" : "0fr" }}>
+                  <div className="overflow-hidden">
+                    <p className="px-5 pb-5 text-sm leading-relaxed" style={{ color: "#64748b" }}>{faq.a}</p>
+                  </div>
                 </div>
               </div>
             </Reveal>
@@ -916,7 +916,7 @@ function StickyBottomBar() {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3.5 px-6 text-sm transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
+            className="cta-btn flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3.5 px-6 text-sm shadow-md whitespace-nowrap"
             style={{ backgroundColor: "#046bd2" }}
           >
             <span>Agendar Primera Visita Sin Miedo</span>
@@ -949,8 +949,137 @@ export default function LandingOdontopediatria() {
       <StickyBottomBar />
 
       <style>{`
-        @keyframes fadeUp { from { opacity:0; transform:translateY(16px) } to { opacity:1; transform:translateY(0) } }
-        .animate-fade-up { animation: fadeUp 0.5s ease; }
+        /* ── Custom easing tokens ── */
+        :root {
+          --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+          --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* ── CTA Buttons: specific transitions + active feedback ── */
+        .cta-btn {
+          transition: transform 200ms var(--ease-out), box-shadow 200ms ease;
+        }
+        .cta-btn:active {
+          transform: scale(0.97);
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .cta-btn:hover {
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+          }
+          .cta-btn:hover:active {
+            transform: scale(0.97);
+          }
+        }
+
+        /* ── Generic pressable elements ── */
+        .pressable {
+          transition: transform 160ms var(--ease-out), background-color 200ms ease, border-color 200ms ease, opacity 200ms ease;
+        }
+        .pressable:active {
+          transform: scale(0.98);
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .pressable:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          }
+        }
+
+        /* ── Benefit cards: gated hover lift ── */
+        .benefit-card {
+          transition: transform 200ms var(--ease-out), box-shadow 200ms ease;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1);
+          }
+        }
+
+        /* ── Testimonial cards ── */
+        .testimonial-card {
+          transition: box-shadow 200ms ease;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .testimonial-card:hover {
+            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.1);
+          }
+        }
+
+        /* ── Carousel ── */
+        .carousel-track {
+          transition: transform 300ms var(--ease-out);
+        }
+        .carousel-dot {
+          transition: transform 200ms var(--ease-out), background-color 200ms ease;
+        }
+        .nav-btn {
+          transition: transform 160ms var(--ease-out), box-shadow 200ms ease;
+        }
+        .nav-btn:active {
+          transform: scale(0.9);
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .nav-btn:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+          }
+        }
+
+        /* ── FAQ accordion: grid-row animation ── */
+        .faq-trigger {
+          transition: background-color 150ms ease;
+        }
+        .faq-trigger:active {
+          background-color: rgba(241,245,249,0.5);
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .faq-trigger:hover {
+            background-color: rgba(241,245,249,0.5);
+          }
+        }
+        .faq-chevron {
+          transition: transform 250ms var(--ease-out);
+        }
+        .faq-body {
+          display: grid;
+          transition: grid-template-rows 300ms var(--ease-out);
+        }
+
+        /* ── Quiz result: transition-based enter ── */
+        .quiz-result {
+          animation: quizReveal 0.4s var(--ease-out) both;
+        }
+        @keyframes quizReveal {
+          from { opacity: 0; transform: scale(0.96) translateY(8px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* ── Reduced motion: respect user preference ── */
+        @media (prefers-reduced-motion: reduce) {
+          .reveal-wrapper {
+            transition-duration: 0.01ms !important;
+            transform: none !important;
+          }
+          .cta-btn,
+          .pressable,
+          .benefit-card,
+          .testimonial-card,
+          .carousel-track,
+          .carousel-dot,
+          .nav-btn,
+          .faq-body,
+          .faq-chevron {
+            transition-duration: 0.01ms !important;
+          }
+          .cta-btn:active,
+          .pressable:active,
+          .nav-btn:active {
+            transform: none !important;
+          }
+          .quiz-result {
+            animation: none !important;
+          }
+        }
       `}</style>
     </div>
   );
