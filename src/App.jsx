@@ -43,16 +43,16 @@ function Reveal({ children, className = "", delay = 0 }) {
 /* ── CTA Button ── */
 function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }) {
   const sizes = {
-    sm: "px-5 py-2.5 text-sm",
-    md: "px-6 py-3 text-sm",
-    lg: "px-8 py-4 text-base",
+    sm: "px-5 py-3 text-xs",
+    md: "px-8 py-4 text-sm",
+    lg: "px-10 py-5 text-base",
   };
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 ${sizes[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 whitespace-nowrap ${sizes[size]} ${className}`}
       style={{ backgroundColor: "#046bd2" }}
     >
       {children}
@@ -253,7 +253,7 @@ function QuizWidget() {
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 font-semibold rounded-full px-6 py-3 text-sm transition-all duration-300 hover:shadow-lg"
+              className="inline-flex items-center justify-center gap-2 font-semibold rounded-full px-8 py-4 text-sm transition-all duration-300 hover:shadow-lg whitespace-nowrap"
               style={{ backgroundColor: "#ffffff", color: "#cf2e2e" }}
             >
               <span>Agendar la Primera Visita Sin Miedo</span>
@@ -762,9 +762,9 @@ function FinalCTA() {
           <p className="text-base text-white/60 mb-4">
             Agenda hoy su Primera Visita Sin Miedo y deja de postergar su salud dental.
           </p>
-          <p className="text-sm font-semibold mb-10 inline-flex items-center gap-2 justify-center rounded-full px-5 py-2" style={{ backgroundColor: "rgba(252,185,0,0.15)", color: "#fcb900" }}>
-            <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#fcb900" }} />
-            Cupos limitados por semana — Agendamos pocas evaluaciones para dedicar el tiempo que cada niño necesita
+          <p className="text-sm font-semibold mb-10 flex items-center gap-2 justify-center rounded-2xl px-5 py-3 max-w-lg mx-auto" style={{ backgroundColor: "rgba(252,185,0,0.15)", color: "#fcb900" }}>
+            <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: "#fcb900" }} />
+            <span>Cupos limitados por semana — Agendamos pocas evaluaciones para dedicar el tiempo que cada niño necesita</span>
           </p>
           <CTAButton size="lg">
             <span>Agendar la Primera Visita Sin Miedo</span>
@@ -916,7 +916,7 @@ function StickyBottomBar() {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3 text-sm transition-all shadow-lg hover:shadow-xl"
+            className="flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3.5 px-6 text-sm transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
             style={{ backgroundColor: "#046bd2" }}
           >
             <span>Agendar Primera Visita Sin Miedo</span>
