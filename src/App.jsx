@@ -44,9 +44,9 @@ function Reveal({ children, className = "", delay = 0 }) {
 /* ── CTA Button ── */
 function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }) {
   const sizes = {
-    sm: "px-6 py-3.5 text-xs",
-    md: "px-10 py-4.5 text-xs",
-    lg: "px-12 py-5 text-sm",
+    sm: "px-8 py-4 text-sm",
+    md: "px-12 py-5 text-sm",
+    lg: "px-14 py-6 text-base",
   };
   return (
     <a
@@ -312,42 +312,56 @@ function StepsSection() {
         </Reveal>
 
         <Reveal>
-          {/* MOBILE: Vertical timeline */}
-          <div className="md:hidden relative pl-16">
-            <div className="absolute left-6 top-3 bottom-0 w-0.5" style={{ backgroundColor: "#fce7f3" }} />
+          {/* MOBILE: Vertical timeline — flexbox, no absolute positioning */}
+          <div className="md:hidden">
             {steps.map((step, i) => (
-              <div key={i} className={`relative ${i < steps.length - 1 ? "pb-14" : ""}`}>
-                <div
-                  className="absolute -left-10 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm step-num"
-                  style={{ backgroundColor: step.color, color: "#1e293b", "--i": i }}
-                >
-                  {step.num}
+              <div key={i} className="flex gap-5">
+                {/* Left column: circle + connecting line */}
+                <div className="flex flex-col items-center flex-shrink-0" style={{ width: "3rem" }}>
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold step-num flex-shrink-0"
+                    style={{ backgroundColor: step.color, color: "#1e293b", "--i": i }}
+                  >
+                    {step.num}
+                  </div>
+                  {i < steps.length - 1 && (
+                    <div className="w-0.5 flex-1 mt-2" style={{ backgroundColor: "#e2e8f0", minHeight: "2.5rem" }} />
+                  )}
                 </div>
-                <h3 className="text-base font-bold mb-2 pt-2" style={{ color: "#1e293b" }}>{step.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{step.desc}</p>
+                {/* Right column: content */}
+                <div className={`flex-1 min-w-0 ${i < steps.length - 1 ? "pb-10" : ""} pt-2`}>
+                  <h3 className="text-base font-bold mb-2 leading-snug" style={{ color: "#1e293b" }}>{step.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{step.desc}</p>
+                </div>
               </div>
             ))}
           </div>
 
           {/* DESKTOP: Horizontal timeline */}
           <div className="hidden md:block">
-            <div className="flex items-start">
+            {/* Circles + connecting lines */}
+            <div className="flex items-center mb-10">
               {steps.map((step, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center text-center relative">
-                  {/* Connecting line to next step */}
-                  {i < steps.length - 1 && (
-                    <div className="absolute top-7 left-1/2 w-full h-0.5" style={{ backgroundColor: "#e2e8f0" }} />
-                  )}
+                <>
                   <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center text-sm font-bold z-10 border-4 border-white shadow-sm step-num"
+                    key={`circle-${i}`}
+                    className="flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center text-base font-bold step-num"
                     style={{ backgroundColor: step.color, color: "#1e293b", "--i": i }}
                   >
                     {step.num}
                   </div>
-                  <div className="mt-6 px-4">
-                    <h3 className="text-base font-bold mb-3" style={{ color: "#1e293b" }}>{step.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{step.desc}</p>
-                  </div>
+                  {i < steps.length - 1 && (
+                    <div key={`line-${i}`} className="flex-1 h-0.5" style={{ backgroundColor: "#e2e8f0" }} />
+                  )}
+                </>
+              ))}
+            </div>
+            {/* Text content below circles */}
+            <div className="grid grid-cols-4 gap-8">
+              {steps.map((step, i) => (
+                <div key={i} className="text-center">
+                  <h3 className="text-base font-bold mb-3 leading-snug" style={{ color: "#1e293b" }}>{step.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{step.desc}</p>
                 </div>
               ))}
             </div>
@@ -633,7 +647,7 @@ function TestimonialsSection() {
         <Reveal>
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 stagger-grid">
             {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card bg-white rounded-3xl p-8 md:p-10 border flex flex-col h-full stagger-item" style={{ borderColor: "#fbcfe8", "--i": i }}>
+              <div key={i} className="testimonial-card bg-white rounded-3xl p-10 md:p-12 border flex flex-col h-full stagger-item overflow-hidden" style={{ borderColor: "#fbcfe8", "--i": i }}>
                 <Stars size="lg" />
                 <div className="flex-1 my-7">
                   <span className="block text-5xl leading-none font-serif mb-2" style={{ color: "#fbcfe8" }}>"</span>
@@ -755,8 +769,8 @@ function FAQSection() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-28 md:py-40 px-6 md:px-12 bg-white">
-      <div className="max-w-2xl mx-auto">
+    <section className="py-28 md:py-40 bg-white">
+      <div className="max-w-2xl mx-auto px-6 md:px-8">
         <Reveal>
           <div className="text-center mb-14">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
@@ -769,15 +783,15 @@ function FAQSection() {
         </Reveal>
 
         <Reveal>
-          <div className="rounded-3xl border-2 overflow-hidden" style={{ borderColor: "#fde68a" }}>
+          <div className="rounded-3xl border-2 overflow-hidden p-2" style={{ borderColor: "#fde68a" }}>
             {faqs.map((faq, i) => (
-              <div key={i} className={i > 0 ? "border-t" : ""} style={{ borderColor: "#fef3c7" }}>
+              <div key={i} className={`rounded-2xl ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#fef3c7" }}>
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between px-8 py-7 md:py-8 text-left faq-trigger"
+                  className="w-full flex items-center justify-between px-10 py-8 md:py-9 text-left faq-trigger"
                   style={{ backgroundColor: open === i ? "#fffbeb" : "transparent" }}
                 >
-                  <span className="font-semibold text-base md:text-lg pr-6 leading-snug" style={{ color: "#1e293b" }}>{faq.q}</span>
+                  <span className="font-semibold text-base md:text-lg pr-8 leading-snug" style={{ color: "#1e293b" }}>{faq.q}</span>
                   <svg
                     className="w-5 h-5 flex-shrink-0 faq-chevron"
                     style={{ color: "#b45309", transform: open === i ? "rotate(180deg)" : "rotate(0)" }}
@@ -788,7 +802,7 @@ function FAQSection() {
                 </button>
                 <div className={`faq-body ${open === i ? "faq-open" : "faq-closed"}`} style={{ gridTemplateRows: open === i ? "1fr" : "0fr", backgroundColor: "#fffbeb" }}>
                   <div className="overflow-hidden">
-                    <p className="px-8 pb-7 pt-1 text-base leading-relaxed" style={{ color: "#78716c" }}>{faq.a}</p>
+                    <p className="px-10 pb-8 pt-1 text-base leading-relaxed" style={{ color: "#78716c" }}>{faq.a}</p>
                   </div>
                 </div>
               </div>
@@ -811,14 +825,14 @@ function FinalCTA() {
     >
       <Reveal>
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-4xl font-extrabold mb-5 leading-tight tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-6 leading-snug tracking-tight">
             Tu hijo merece un dentista que lo entienda
           </h2>
-          <p className="text-base text-white/60 mb-4">
+          <p className="text-base md:text-lg text-white/70 mb-6 leading-relaxed">
             Agenda hoy su Primera Visita Sin Miedo y deja de postergar su salud dental.
           </p>
-          <p className="text-sm font-semibold mb-10 flex items-center gap-2 justify-center rounded-2xl px-5 py-3 max-w-lg mx-auto" style={{ backgroundColor: "rgba(252,185,0,0.15)", color: "#fcb900" }}>
-            <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: "#fcb900" }} />
+          <p className="text-sm font-semibold mb-12 flex items-start gap-3 justify-center rounded-2xl px-6 py-4 max-w-lg mx-auto leading-relaxed" style={{ backgroundColor: "rgba(252,185,0,0.15)", color: "#fcb900" }}>
+            <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0 mt-1.5" style={{ backgroundColor: "#fcb900" }} />
             <span>Cupos limitados por semana — Agendamos pocas evaluaciones para dedicar el tiempo que cada niño necesita</span>
           </p>
           <CTAButton size="lg">
