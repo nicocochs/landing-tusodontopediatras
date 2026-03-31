@@ -44,9 +44,9 @@ function Reveal({ children, className = "", delay = 0 }) {
 /* ── CTA Button ── */
 function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }) {
   const sizes = {
-    sm: "px-5 py-3 text-xs",
-    md: "px-8 py-4 text-sm",
-    lg: "px-10 py-5 text-base",
+    sm: "px-6 py-3.5 text-xs",
+    md: "px-10 py-4.5 text-xs",
+    lg: "px-12 py-5 text-sm",
   };
   return (
     <a
@@ -128,7 +128,7 @@ function Hero() {
       {/* Parallax glow */}
       <div ref={glowRef} className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full will-change-transform" style={{ background: "radial-gradient(circle, rgba(4,107,210,0.25) 0%, transparent 70%)" }} />
 
-      <div className="relative z-10 max-w-3xl mx-auto px-6 py-28 text-center">
+      <div className="relative z-10 max-w-3xl mx-auto px-8 md:px-12 py-32 text-center">
         {/* Badge — stagger 0 */}
         <div className="hero-stagger inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(252,185,0,0.1)", borderColor: "rgba(252,185,0,0.25)", "--stagger": 0 }}>
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#fcb900" }} />
@@ -150,7 +150,7 @@ function Hero() {
         </p>
 
         {/* CTA — stagger 3 */}
-        <div className="hero-stagger flex flex-col items-center gap-4" style={{ "--stagger": 3 }}>
+        <div className="hero-stagger flex flex-col items-center gap-6" style={{ "--stagger": 3 }}>
           <CTAButton size="lg">
             <span>Agendar Primera Visita Sin Miedo</span>
             <ArrowRight />
@@ -209,7 +209,7 @@ function QuizWidget() {
       : { title: "¡Bien! Un control preventivo mantiene esa sonrisa sana", desc: "Una evaluación con especialistas previene complicaciones a futuro." };
 
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fef9ee" }}>
+    <section className="py-24 md:py-36 px-8 md:px-12" style={{ backgroundColor: "#fef9ee" }}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
@@ -226,11 +226,11 @@ function QuizWidget() {
         </Reveal>
 
         <Reveal>
-          <div className="space-y-3 stagger-grid">
+          <div className="space-y-4 stagger-grid">
             {quizQuestions.map((item, i) => (
               <button
                 onClick={() => toggle(i)}
-                className="w-full flex items-center gap-4 p-4 md:p-5 rounded-2xl border-2 text-left pressable stagger-item"
+                className="w-full flex items-center gap-6 p-4 md:p-5 rounded-2xl border-2 text-left pressable stagger-item"
                 style={{
                   "--i": i,
                   backgroundColor: answers[i] ? "#e8f1fd" : "#ffffff",
@@ -269,7 +269,7 @@ function QuizWidget() {
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-btn inline-flex items-center justify-center gap-2 font-semibold rounded-full px-8 py-4 text-sm shadow-md whitespace-nowrap"
+              className="cta-btn inline-flex items-center justify-center gap-2 font-semibold rounded-full px-10 py-4.5 text-xs shadow-md whitespace-nowrap"
               style={{ backgroundColor: "#ffffff", color: "#cf2e2e" }}
             >
               <span>Agendar la Primera Visita Sin Miedo</span>
@@ -294,10 +294,10 @@ const steps = [
 
 function StepsSection() {
   return (
-    <section className="py-20 md:py-28 px-6 bg-white">
+    <section className="py-24 md:py-36 px-8 md:px-12 bg-white">
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-14">
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
               style={{ backgroundColor: "#fce7f3", color: "#be185d" }}
@@ -311,7 +311,7 @@ function StepsSection() {
         </Reveal>
 
         <Reveal>
-          <div className="grid md:grid-cols-4 gap-6 stagger-grid">
+          <div className="grid md:grid-cols-4 gap-8 stagger-grid">
             {steps.map((step, i) => (
               <div key={i} className="text-center stagger-item" style={{ "--i": i }}>
                 <div
@@ -357,10 +357,10 @@ const benefits = [
 
 function BenefitsSection() {
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#F0F5FA" }}>
+    <section className="py-24 md:py-36 px-8 md:px-12" style={{ backgroundColor: "#F0F5FA" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div className="text-center mb-14">
+          <div className="text-center mb-16">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
               ¿Por qué elegirnos?
             </h2>
@@ -371,9 +371,9 @@ function BenefitsSection() {
         </Reveal>
 
         <Reveal>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-grid">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-grid">
             {benefits.map((b, i) => (
-              <div key={i} className="benefit-card bg-white rounded-2xl p-6 border border-slate-100 group stagger-item" style={{ "--i": i }}>
+              <div key={i} className="benefit-card bg-white rounded-2xl p-7 border border-slate-100 group stagger-item" style={{ "--i": i }}>
                 <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4 icon-float" style={{ backgroundColor: b.accent }}>
                   {b.icon}
                 </div>
@@ -398,7 +398,7 @@ function CounterSection() {
   ];
 
   return (
-    <section className="py-16 md:py-20 px-6" style={{ background: "linear-gradient(135deg, #046bd2 0%, #7c3aed 50%, #be185d 100%)" }}>
+    <section className="py-20 md:py-28 px-8 md:px-12" style={{ background: "linear-gradient(135deg, #046bd2 0%, #7c3aed 50%, #be185d 100%)" }}>
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
         {items.map((c, i) => (
           <div key={i}>
@@ -475,7 +475,7 @@ function TeamCarousel() {
   );
 
   return (
-    <section className="py-20 md:py-28 px-6 bg-white">
+    <section className="py-24 md:py-36 px-8 md:px-12 bg-white">
       <div className="max-w-4xl mx-auto">
         <Reveal>
           <div className="text-center mb-12">
@@ -584,7 +584,7 @@ const testimonials = [
 
 function TestimonialsSection() {
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fdf2f8" }}>
+    <section className="py-24 md:py-36 px-8 md:px-12" style={{ backgroundColor: "#fdf2f8" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="text-center mb-14">
@@ -601,9 +601,9 @@ function TestimonialsSection() {
         </Reveal>
 
         <Reveal>
-          <div className="grid md:grid-cols-3 gap-4 stagger-grid">
+          <div className="grid md:grid-cols-3 gap-6 stagger-grid">
             {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card bg-white rounded-2xl p-6 border flex flex-col h-full stagger-item" style={{ borderColor: "#fbcfe8", "--i": i }}>
+              <div key={i} className="testimonial-card bg-white rounded-2xl p-7 border flex flex-col h-full stagger-item" style={{ borderColor: "#fbcfe8", "--i": i }}>
                 <Stars />
                 <p className="text-sm leading-relaxed flex-1 my-5" style={{ color: "#334155" }}>
                   "{t.text}"
@@ -644,7 +644,7 @@ function AgeSelector() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <section className="py-20 md:py-28 px-6 bg-white">
+    <section className="py-24 md:py-36 px-8 md:px-12 bg-white">
       <div className="max-w-4xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
@@ -658,7 +658,7 @@ function AgeSelector() {
         </Reveal>
 
         <Reveal>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             {ageGroups.map((ag, i) => (
               <button
                 key={i}
@@ -682,7 +682,7 @@ function AgeSelector() {
             className="rounded-2xl border-2 p-7 text-left"
             style={{ borderColor: ageGroups[selected].accent === "#fce7f3" ? "#ec4899" : ageGroups[selected].accent === "#fef3c7" ? "#f59e0b" : "#046bd2", backgroundColor: ageGroups[selected].accent }}
           >
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-6">
               <span className="text-3xl flex-shrink-0 mt-1">{ageGroups[selected].emoji}</span>
               <div>
                 <h3 className="font-bold text-base mb-2" style={{ color: "#1e293b" }}>
@@ -722,7 +722,7 @@ function FAQSection() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="py-20 md:py-28 px-6" style={{ backgroundColor: "#fffbeb" }}>
+    <section className="py-24 md:py-36 px-8 md:px-12" style={{ backgroundColor: "#fffbeb" }}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-center mb-12">
@@ -736,7 +736,7 @@ function FAQSection() {
         </Reveal>
 
         <Reveal>
-          <div className="space-y-2 stagger-grid">
+          <div className="space-y-3 stagger-grid">
             {faqs.map((faq, i) => (
               <div key={i} className="bg-white rounded-xl border border-slate-100 overflow-hidden stagger-item" style={{ "--i": i }}>
                 <button
@@ -772,7 +772,7 @@ function FAQSection() {
 function FinalCTA() {
   return (
     <section
-      className="py-20 md:py-28 px-6 text-center text-white"
+      className="py-24 md:py-36 px-8 md:px-12 text-center text-white"
       style={{ background: "linear-gradient(170deg, #0a1628 0%, #045cb4 100%)" }}
     >
       <Reveal>
@@ -819,7 +819,7 @@ function MapSection() {
   ];
 
   return (
-    <section className="py-20 md:py-28 px-6 bg-white">
+    <section className="py-24 md:py-36 px-8 md:px-12 bg-white">
       <div className="max-w-5xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
@@ -848,7 +848,7 @@ function MapSection() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 items-stretch">
+          <div className="grid md:grid-cols-2 gap-8 items-stretch">
             <div className="rounded-2xl overflow-hidden shadow-sm border border-slate-200 min-h-[320px] bg-slate-100">
               <iframe
                 src={sedes[activeSede].mapSrc}
@@ -897,12 +897,12 @@ function MapSection() {
    ──────────────────────────────────────── */
 function Footer() {
   return (
-    <footer className="py-10 px-6 text-center" style={{ backgroundColor: "#0a1628" }}>
+    <footer className="py-14 px-8 md:px-12 text-center" style={{ backgroundColor: "#0a1628" }}>
       <div className="max-w-4xl mx-auto">
         <p className="text-white text-base font-semibold mb-2">Tus Odontopediatras</p>
         <p className="text-white/40 text-sm mb-1">tusodontopediatras@gmail.com</p>
         <p className="text-white/40 text-sm mb-6">San Fernando: +56 9 5853 7784 · San Vicente: +56 9 7270 8423</p>
-        <div className="flex justify-center gap-4 text-xs text-white/25">
+        <div className="flex justify-center gap-6 text-xs text-white/25">
           <a href="#" className="hover:text-white/50 transition">Política de privacidad</a>
           <span>·</span>
           <a href="#" className="hover:text-white/50 transition">Términos y condiciones</a>
@@ -931,7 +931,7 @@ function StickyBottomBar() {
         isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}
     >
-      <div className="bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-xl px-4 py-3">
+      <div className="bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-xl px-6 py-4">
         <div className="max-w-lg mx-auto">
           <a
             href={BOOKING_URL}
