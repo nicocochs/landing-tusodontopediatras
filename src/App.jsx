@@ -53,10 +53,11 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`cta-btn inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center shadow-md whitespace-nowrap ${sizes[size]} ${className}`}
+      className={`cta-btn relative overflow-hidden inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center shadow-md whitespace-nowrap ${sizes[size]} ${className}`}
       style={{ backgroundColor: "#046bd2" }}
     >
-      {children}
+      <span className="cta-shine absolute inset-0 rounded-full" />
+      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
     </a>
   );
 }
@@ -106,37 +107,50 @@ function Stars({ count = 5 }) {
    HERO
    ──────────────────────────────────────── */
 function Hero() {
+  const glowRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (glowRef.current) {
+        const y = window.scrollY * 0.08;
+        glowRef.current.style.transform = `translate(-50%, ${y}px)`;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ background: "linear-gradient(170deg, #0a1628 0%, #0d2847 35%, #046bd2 100%)" }}
     >
-      {/* Subtle glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(4,107,210,0.2) 0%, transparent 70%)" }} />
+      {/* Parallax glow */}
+      <div ref={glowRef} className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full will-change-transform" style={{ background: "radial-gradient(circle, rgba(4,107,210,0.25) 0%, transparent 70%)" }} />
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-28 text-center">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(252,185,0,0.1)", borderColor: "rgba(252,185,0,0.25)" }}>
+        {/* Badge — stagger 0 */}
+        <div className="hero-stagger inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(252,185,0,0.1)", borderColor: "rgba(252,185,0,0.25)", "--stagger": 0 }}>
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#fcb900" }} />
           <span className="text-xs font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.7)" }}>
             Especialistas en niños · San Fernando y San Vicente
           </span>
         </div>
 
-        {/* H1 */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight">
+        {/* H1 — stagger 1 */}
+        <h1 className="hero-stagger text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight" style={{ "--stagger": 1 }}>
           Tu hijo no necesita{" "}
           <span className="italic font-light" style={{ color: "#fcb900" }}>"aguantar"</span>
           <br />al dentista
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-lg text-white/50 max-w-lg mx-auto mb-10 leading-relaxed font-light">
+        {/* Subtitle — stagger 2 */}
+        <p className="hero-stagger text-lg text-white/50 max-w-lg mx-auto mb-10 leading-relaxed font-light" style={{ "--stagger": 2 }}>
           Necesita una Primera Visita Sin Miedo. Primero ganamos su confianza, después tratamos.
         </p>
 
-        {/* CTA */}
-        <div className="flex flex-col items-center gap-4">
+        {/* CTA — stagger 3 */}
+        <div className="hero-stagger flex flex-col items-center gap-4" style={{ "--stagger": 3 }}>
           <CTAButton size="lg">
             <span>Agendar Primera Visita Sin Miedo</span>
             <ArrowRight />
@@ -144,8 +158,8 @@ function Hero() {
           <span className="text-white/25 text-xs font-light">Sin compromiso · Cancelación gratuita</span>
         </div>
 
-        {/* Trust bar */}
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-16 pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+        {/* Trust bar — stagger 4 */}
+        <div className="hero-stagger flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-16 pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.08)", "--stagger": 4 }}>
           <div className="flex items-center gap-2">
             <Stars />
             <span className="text-white/40 text-sm">4.9 en Google</span>
@@ -211,13 +225,14 @@ function QuizWidget() {
           </div>
         </Reveal>
 
-        <div className="space-y-3">
-          {quizQuestions.map((item, i) => (
-            <Reveal key={i} delay={i * 60}>
+        <Reveal>
+          <div className="space-y-3 stagger-grid">
+            {quizQuestions.map((item, i) => (
               <button
                 onClick={() => toggle(i)}
-                className="w-full flex items-center gap-4 p-4 md:p-5 rounded-2xl border-2 text-left pressable"
+                className="w-full flex items-center gap-4 p-4 md:p-5 rounded-2xl border-2 text-left pressable stagger-item"
                 style={{
+                  "--i": i,
                   backgroundColor: answers[i] ? "#e8f1fd" : "#ffffff",
                   borderColor: answers[i] ? "#046bd2" : answers[i] === false ? "#e2e8f0" : "#e2e8f0",
                   opacity: answers[i] === false ? 0.5 : 1,
@@ -236,9 +251,9 @@ function QuizWidget() {
                   {answers[i] ? "✓" : answers[i] === false ? "✗" : ""}
                 </span>
               </button>
-            </Reveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Reveal>
 
         {!allAnswered && (
           <p className="text-center text-xs mt-4" style={{ color: "#94a3b8" }}>
@@ -295,12 +310,12 @@ function StepsSection() {
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-4 gap-6">
-          {steps.map((step, i) => (
-            <Reveal key={i} delay={i * 100}>
-              <div className="text-center">
+        <Reveal>
+          <div className="grid md:grid-cols-4 gap-6 stagger-grid">
+            {steps.map((step, i) => (
+              <div key={i} className="text-center stagger-item" style={{ "--i": i }}>
                 <div
-                  className="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center text-sm font-bold"
+                  className="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center text-sm font-bold step-num"
                   style={{ backgroundColor: step.color, color: "#1e293b" }}
                 >
                   {step.num}
@@ -308,9 +323,9 @@ function StepsSection() {
                 <h3 className="text-sm font-bold mb-2" style={{ color: "#1e293b" }}>{step.title}</h3>
                 <p className="text-sm leading-relaxed font-light" style={{ color: "#64748b" }}>{step.desc}</p>
               </div>
-            </Reveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Reveal>
 
         <Reveal delay={450}>
           <div className="text-center mt-14">
@@ -355,19 +370,19 @@ function BenefitsSection() {
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {benefits.map((b, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <div className="benefit-card bg-white rounded-2xl p-6 border border-slate-100 group">
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4" style={{ backgroundColor: b.accent }}>
+        <Reveal>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-grid">
+            {benefits.map((b, i) => (
+              <div key={i} className="benefit-card bg-white rounded-2xl p-6 border border-slate-100 group stagger-item" style={{ "--i": i }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4 icon-float" style={{ backgroundColor: b.accent }}>
                   {b.icon}
                 </div>
                 <h3 className="text-sm font-bold mb-2" style={{ color: "#1e293b" }}>{b.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{b.desc}</p>
               </div>
-            </Reveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -387,7 +402,7 @@ function CounterSection() {
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
         {items.map((c, i) => (
           <div key={i}>
-            <div className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight">
+            <div className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight counter-num">
               <AnimatedCounter end={c.end} suffix={c.suffix} />
             </div>
             <p className="text-white/60 text-sm">{c.label}</p>
@@ -439,9 +454,15 @@ const professionals = [
 
 function TeamCarousel() {
   const [current, setCurrent] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const total = professionals.length;
-  const next = () => setCurrent((p) => (p + 1) % total);
-  const prev = () => setCurrent((p) => (p - 1 + total) % total);
+  const slide = (fn) => {
+    setIsTransitioning(true);
+    fn();
+    setTimeout(() => setIsTransitioning(false), 200);
+  };
+  const next = () => slide(() => setCurrent((p) => (p + 1) % total));
+  const prev = () => slide(() => setCurrent((p) => (p - 1 + total) % total));
 
   const NavBtn = ({ onClick, children }) => (
     <button
@@ -471,7 +492,7 @@ function TeamCarousel() {
           <div className="relative px-6 md:px-12">
             <div className="overflow-hidden rounded-3xl">
               <div
-                className="flex carousel-track"
+                className={`flex carousel-track ${isTransitioning ? "carousel-blur" : ""}`}
                 style={{ transform: `translateX(-${current * 100}%)` }}
               >
                 {professionals.map((doc, i) => (
@@ -579,10 +600,10 @@ function TestimonialsSection() {
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-4">
-          {testimonials.map((t, i) => (
-            <Reveal key={i} delay={i * 100}>
-              <div className="testimonial-card bg-white rounded-2xl p-6 border flex flex-col h-full" style={{ borderColor: "#fbcfe8" }}>
+        <Reveal>
+          <div className="grid md:grid-cols-3 gap-4 stagger-grid">
+            {testimonials.map((t, i) => (
+              <div key={i} className="testimonial-card bg-white rounded-2xl p-6 border flex flex-col h-full stagger-item" style={{ borderColor: "#fbcfe8", "--i": i }}>
                 <Stars />
                 <p className="text-sm leading-relaxed flex-1 my-5" style={{ color: "#334155" }}>
                   "{t.text}"
@@ -592,9 +613,9 @@ function TestimonialsSection() {
                   <p className="text-xs" style={{ color: "#94a3b8" }}>{t.detail}</p>
                 </div>
               </div>
-            </Reveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Reveal>
 
         <Reveal delay={350}>
           <div className="text-center mt-12">
@@ -714,10 +735,10 @@ function FAQSection() {
           </div>
         </Reveal>
 
-        <div className="space-y-2">
-          {faqs.map((faq, i) => (
-            <Reveal key={i} delay={i * 40}>
-              <div className="bg-white rounded-xl border border-slate-100 overflow-hidden">
+        <Reveal>
+          <div className="space-y-2 stagger-grid">
+            {faqs.map((faq, i) => (
+              <div key={i} className="bg-white rounded-xl border border-slate-100 overflow-hidden stagger-item" style={{ "--i": i }}>
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
                   className="w-full flex items-center justify-between p-5 text-left faq-trigger"
@@ -731,15 +752,15 @@ function FAQSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div className="faq-body" style={{ gridTemplateRows: open === i ? "1fr" : "0fr" }}>
+                <div className={`faq-body ${open === i ? "faq-open" : "faq-closed"}`} style={{ gridTemplateRows: open === i ? "1fr" : "0fr" }}>
                   <div className="overflow-hidden">
                     <p className="px-5 pb-5 text-sm leading-relaxed" style={{ color: "#64748b" }}>{faq.a}</p>
                   </div>
                 </div>
               </div>
-            </Reveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -949,23 +970,48 @@ export default function LandingOdontopediatria() {
       <StickyBottomBar />
 
       <style>{`
-        /* ── Custom easing tokens ── */
+        /* ═══════════════════════════════════════
+           DESIGN SYSTEM — Emil Kowalski philosophy
+           Every detail compounds into something
+           that feels right.
+           ═══════════════════════════════════════ */
+
         :root {
           --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
           --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+          --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
         }
 
-        /* ── CTA Buttons: specific transitions + active feedback ── */
+        /* ── Hero stagger entrance ── */
+        .hero-stagger {
+          opacity: 0;
+          transform: translateY(12px);
+          animation: heroIn 0.6s var(--ease-out) forwards;
+          animation-delay: calc(var(--stagger, 0) * 80ms + 200ms);
+        }
+        @keyframes heroIn {
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── CTA Buttons: shine overlay + active feedback ── */
         .cta-btn {
           transition: transform 200ms var(--ease-out), box-shadow 200ms ease;
         }
         .cta-btn:active {
           transform: scale(0.97);
         }
+        .cta-shine {
+          background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+          opacity: 0;
+          transition: opacity 300ms ease;
+        }
         @media (hover: hover) and (pointer: fine) {
           .cta-btn:hover {
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px -5px rgba(4,107,210,0.3);
             transform: translateY(-2px);
+          }
+          .cta-btn:hover .cta-shine {
+            opacity: 1;
           }
           .cta-btn:hover:active {
             transform: scale(0.97);
@@ -981,34 +1027,60 @@ export default function LandingOdontopediatria() {
         }
         @media (hover: hover) and (pointer: fine) {
           .pressable:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
           }
         }
 
-        /* ── Benefit cards: gated hover lift ── */
+        /* ── CSS Stagger System ── */
+        .stagger-grid .stagger-item {
+          opacity: 0;
+          transform: translateY(10px);
+          animation: staggerIn 0.4s var(--ease-out) forwards;
+          animation-delay: calc(var(--i, 0) * 60ms);
+          animation-play-state: paused;
+        }
+        .reveal-wrapper[style*="opacity: 1"] .stagger-grid .stagger-item {
+          animation-play-state: running;
+        }
+        @keyframes staggerIn {
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Benefit cards: lift + subtle 3D tilt ── */
         .benefit-card {
-          transition: transform 200ms var(--ease-out), box-shadow 200ms ease;
+          transition: transform 250ms var(--ease-out), box-shadow 250ms ease;
+          will-change: transform;
         }
         @media (hover: hover) and (pointer: fine) {
           .benefit-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1);
+            transform: translateY(-6px) rotateX(2deg);
+            box-shadow: 0 16px 32px -8px rgba(0,0,0,0.1);
           }
+          .benefit-card:hover .icon-float {
+            transform: translateY(-2px) scale(1.05);
+          }
+        }
+        .icon-float {
+          transition: transform 250ms var(--ease-out);
         }
 
         /* ── Testimonial cards ── */
         .testimonial-card {
-          transition: box-shadow 200ms ease;
+          transition: transform 200ms var(--ease-out), box-shadow 200ms ease;
         }
         @media (hover: hover) and (pointer: fine) {
           .testimonial-card:hover {
-            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.08);
           }
         }
 
-        /* ── Carousel ── */
+        /* ── Carousel: blur crossfade ── */
         .carousel-track {
-          transition: transform 300ms var(--ease-out);
+          transition: transform 300ms var(--ease-out), filter 150ms ease;
+        }
+        .carousel-blur {
+          filter: blur(3px);
         }
         .carousel-dot {
           transition: transform 200ms var(--ease-out), background-color 200ms ease;
@@ -1017,15 +1089,19 @@ export default function LandingOdontopediatria() {
           transition: transform 160ms var(--ease-out), box-shadow 200ms ease;
         }
         .nav-btn:active {
-          transform: scale(0.9);
+          transform: scale(0.88);
         }
         @media (hover: hover) and (pointer: fine) {
           .nav-btn:hover {
             box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            transform: scale(1.05);
+          }
+          .nav-btn:hover:active {
+            transform: scale(0.88);
           }
         }
 
-        /* ── FAQ accordion: grid-row animation ── */
+        /* ── FAQ: asymmetric open/close timing ── */
         .faq-trigger {
           transition: background-color 150ms ease;
         }
@@ -1034,7 +1110,7 @@ export default function LandingOdontopediatria() {
         }
         @media (hover: hover) and (pointer: fine) {
           .faq-trigger:hover {
-            background-color: rgba(241,245,249,0.5);
+            background-color: rgba(241,245,249,0.4);
           }
         }
         .faq-chevron {
@@ -1042,10 +1118,31 @@ export default function LandingOdontopediatria() {
         }
         .faq-body {
           display: grid;
+        }
+        /* Slow open (300ms) — user is deciding */
+        .faq-open {
           transition: grid-template-rows 300ms var(--ease-out);
         }
+        /* Fast close (150ms) — system is responding */
+        .faq-closed {
+          transition: grid-template-rows 150ms var(--ease-out);
+        }
 
-        /* ── Quiz result: transition-based enter ── */
+        /* ── Step numbers: subtle scale on parent Reveal ── */
+        .step-num {
+          transition: transform 300ms var(--ease-out);
+        }
+        .reveal-wrapper[style*="opacity: 1"] .step-num {
+          animation: stepPop 0.35s var(--ease-out) both;
+          animation-delay: calc(var(--i, 0) * 60ms + 100ms);
+        }
+        @keyframes stepPop {
+          0% { transform: scale(0.85); opacity: 0.5; }
+          60% { transform: scale(1.08); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* ── Quiz result: enters from scale(0.96), not 0 ── */
         .quiz-result {
           animation: quizReveal 0.4s var(--ease-out) both;
         }
@@ -1054,30 +1151,47 @@ export default function LandingOdontopediatria() {
           to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* ── Reduced motion: respect user preference ── */
+        /* ── Scroll-based section reveals via clip-path ── */
+        .reveal-wrapper {
+          will-change: opacity, transform;
+        }
+
+        /* ── Counter numbers: scale entrance ── */
+        .counter-num {
+          animation: counterPop 0.5s var(--ease-out) both;
+        }
+        @keyframes counterPop {
+          from { transform: scale(0.9); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+
+        /* ═══ ACCESSIBILITY: Reduced motion ═══ */
         @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
           .reveal-wrapper {
-            transition-duration: 0.01ms !important;
+            opacity: 1 !important;
             transform: none !important;
           }
-          .cta-btn,
-          .pressable,
-          .benefit-card,
-          .testimonial-card,
-          .carousel-track,
-          .carousel-dot,
-          .nav-btn,
-          .faq-body,
-          .faq-chevron {
-            transition-duration: 0.01ms !important;
-          }
-          .cta-btn:active,
-          .pressable:active,
-          .nav-btn:active {
+          .hero-stagger {
+            opacity: 1 !important;
             transform: none !important;
+            animation: none !important;
+          }
+          .stagger-grid .stagger-item {
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
+          }
+          .carousel-blur {
+            filter: none !important;
           }
           .quiz-result {
             animation: none !important;
+            opacity: 1 !important;
           }
         }
       `}</style>
