@@ -210,7 +210,7 @@ function QuizWidget() {
       : { title: "¡Bien! Un control preventivo mantiene esa sonrisa sana", desc: "Una evaluación con especialistas previene complicaciones a futuro." };
 
   return (
-    <section className="py-24 md:py-36 px-8 md:px-12" style={{ backgroundColor: "#fef9ee" }}>
+    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#fef9ee" }}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
@@ -295,41 +295,67 @@ const steps = [
 
 function StepsSection() {
   return (
-    <section className="py-24 md:py-36 px-8 md:px-12 bg-white">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-32 md:py-48 px-6 md:px-12 bg-white">
+      <div className="max-w-4xl mx-auto">
         <Reveal>
-          <div className="text-center mb-14">
+          <div className="text-center mb-16 md:mb-24">
             <span
-              className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
+              className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"
               style={{ backgroundColor: "#fce7f3", color: "#be185d" }}
             >
               Nuestro método
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
               Así funciona la Primera Visita Sin Miedo
             </h2>
           </div>
         </Reveal>
 
         <Reveal>
-          <div className="grid md:grid-cols-4 gap-8 stagger-grid">
+          {/* MOBILE: Vertical timeline */}
+          <div className="md:hidden relative pl-16">
+            <div className="absolute left-6 top-3 bottom-0 w-0.5" style={{ backgroundColor: "#fce7f3" }} />
             {steps.map((step, i) => (
-              <div key={i} className="text-center stagger-item" style={{ "--i": i }}>
+              <div key={i} className={`relative ${i < steps.length - 1 ? "pb-14" : ""}`}>
                 <div
-                  className="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center text-sm font-bold step-num"
-                  style={{ backgroundColor: step.color, color: "#1e293b" }}
+                  className="absolute -left-10 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold border-4 border-white shadow-sm step-num"
+                  style={{ backgroundColor: step.color, color: "#1e293b", "--i": i }}
                 >
                   {step.num}
                 </div>
-                <h3 className="text-sm font-bold mb-2" style={{ color: "#1e293b" }}>{step.title}</h3>
-                <p className="text-sm leading-relaxed font-light" style={{ color: "#64748b" }}>{step.desc}</p>
+                <h3 className="text-base font-bold mb-2 pt-2" style={{ color: "#1e293b" }}>{step.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{step.desc}</p>
               </div>
             ))}
           </div>
+
+          {/* DESKTOP: Horizontal timeline */}
+          <div className="hidden md:block">
+            <div className="flex items-start">
+              {steps.map((step, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center text-center relative">
+                  {/* Connecting line to next step */}
+                  {i < steps.length - 1 && (
+                    <div className="absolute top-7 left-1/2 w-full h-0.5" style={{ backgroundColor: "#e2e8f0" }} />
+                  )}
+                  <div
+                    className="w-14 h-14 rounded-full flex items-center justify-center text-sm font-bold z-10 border-4 border-white shadow-sm step-num"
+                    style={{ backgroundColor: step.color, color: "#1e293b", "--i": i }}
+                  >
+                    {step.num}
+                  </div>
+                  <div className="mt-6 px-4">
+                    <h3 className="text-base font-bold mb-3" style={{ color: "#1e293b" }}>{step.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </Reveal>
 
-        <Reveal delay={450}>
-          <div className="text-center mt-14">
+        <Reveal delay={350}>
+          <div className="text-center mt-16 md:mt-20">
             <p className="text-sm mb-6" style={{ color: "#94a3b8" }}>
               Todo esto en una sola visita. Con seguimiento posterior.
             </p>
@@ -358,27 +384,30 @@ const benefits = [
 
 function BenefitsSection() {
   return (
-    <section className="py-24 md:py-36 px-8 md:px-12" style={{ backgroundColor: "#F0F5FA" }}>
+    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#F0F5FA" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
-              ¿Por qué elegirnos?
+          <div className="text-center mb-16 md:mb-20">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#e8f1fd", color: "#046bd2" }}>
+              Por qué elegirnos
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
+              No somos un dentista más
             </h2>
-            <p className="mt-3 text-sm" style={{ color: "#64748b" }}>
-              No somos un dentista más. Somos el dentista que tu hijo necesita.
+            <p className="mt-4 text-base" style={{ color: "#64748b" }}>
+              Somos el dentista que tu hijo necesita.
             </p>
           </div>
         </Reveal>
 
         <Reveal>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-grid">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 stagger-grid">
             {benefits.map((b, i) => (
-              <div key={i} className="benefit-card bg-white rounded-2xl p-7 border border-slate-100 group stagger-item" style={{ "--i": i }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4 icon-float" style={{ backgroundColor: b.accent }}>
+              <div key={i} className="benefit-card bg-white rounded-3xl p-8 md:p-10 border border-slate-100 group stagger-item text-center" style={{ "--i": i }}>
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto icon-float" style={{ backgroundColor: b.accent }}>
                   {b.icon}
                 </div>
-                <h3 className="text-sm font-bold mb-2" style={{ color: "#1e293b" }}>{b.title}</h3>
+                <h3 className="text-base font-bold mb-3" style={{ color: "#1e293b" }}>{b.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>{b.desc}</p>
               </div>
             ))}
@@ -399,7 +428,7 @@ function CounterSection() {
   ];
 
   return (
-    <section className="py-20 md:py-28 px-8 md:px-12" style={{ background: "linear-gradient(135deg, #046bd2 0%, #7c3aed 50%, #be185d 100%)" }}>
+    <section className="py-28 md:py-36 px-6 md:px-12" style={{ background: "linear-gradient(135deg, #046bd2 0%, #7c3aed 50%, #be185d 100%)" }}>
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
         {items.map((c, i) => (
           <div key={i}>
@@ -476,7 +505,7 @@ function TeamCarousel() {
   );
 
   return (
-    <section className="py-24 md:py-36 px-8 md:px-12 bg-white">
+    <section className="py-32 md:py-48 px-6 md:px-12 bg-white">
       <div className="max-w-4xl mx-auto">
         <Reveal>
           <div className="text-center mb-12">
@@ -648,7 +677,7 @@ function AgeSelector() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <section className="py-24 md:py-36 px-8 md:px-12 bg-white">
+    <section className="py-32 md:py-48 px-6 md:px-12 bg-white">
       <div className="max-w-4xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
@@ -745,7 +774,7 @@ function FAQSection() {
               <div key={i} className={i > 0 ? "border-t" : ""} style={{ borderColor: "#fef3c7" }}>
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between px-8 py-6 text-left faq-trigger"
+                  className="w-full flex items-center justify-between px-8 py-7 md:py-8 text-left faq-trigger"
                   style={{ backgroundColor: open === i ? "#fffbeb" : "transparent" }}
                 >
                   <span className="font-semibold text-base md:text-lg pr-6 leading-snug" style={{ color: "#1e293b" }}>{faq.q}</span>
@@ -777,7 +806,7 @@ function FAQSection() {
 function FinalCTA() {
   return (
     <section
-      className="py-24 md:py-36 px-8 md:px-12 text-center text-white"
+      className="py-32 md:py-48 px-6 md:px-12 text-center text-white"
       style={{ background: "linear-gradient(170deg, #0a1628 0%, #045cb4 100%)" }}
     >
       <Reveal>
@@ -824,7 +853,7 @@ function MapSection() {
   ];
 
   return (
-    <section className="py-24 md:py-36 px-8 md:px-12 bg-white">
+    <section className="py-32 md:py-48 px-6 md:px-12 bg-white">
       <div className="max-w-5xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
