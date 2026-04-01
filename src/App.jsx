@@ -189,6 +189,7 @@ function QuizWidget() {
   const [showResult, setShowResult] = useState(false);
   const yesCount = Object.values(answers).filter(Boolean).length;
   const allAnswered = Object.keys(answers).length === quizQuestions.length;
+  const shouldShowResult = yesCount >= 2;
 
   const toggle = (i) => {
     if (showResult) return;
@@ -196,11 +197,11 @@ function QuizWidget() {
   };
 
   useEffect(() => {
-    if (allAnswered) {
+    if (shouldShowResult) {
       const t = setTimeout(() => setShowResult(true), 400);
       return () => clearTimeout(t);
     }
-  }, [allAnswered]);
+  }, [shouldShowResult]);
 
   const resultMsg =
     yesCount >= 3
@@ -256,7 +257,7 @@ function QuizWidget() {
           </div>
         </Reveal>
 
-        {!allAnswered && (
+        {!showResult && (
           <p className="text-center text-xs mt-4" style={{ color: "#94a3b8" }}>
             Clic para marcar Sí, y de nuevo para No
           </p>
@@ -391,8 +392,7 @@ const benefits = [
   { title: "Especialistas en niños", desc: "Odontopediatras tituladas. Formación 100% enfocada en atención infantil.", icon: "👩‍⚕️", accent: "#fce7f3" },
   { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#fef3c7" },
   { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#e8f1fd" },
-  { title: "Necesidades especiales", desc: "Más de 100 niños con TEA, síndrome de Down y otras condiciones confían en nosotras.", icon: "💜", accent: "#fce7f3" },
-  { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#e8f1fd" },
+{ title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#e8f1fd" },
   { title: "Óxido nitroso", desc: "Gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊", accent: "#fef3c7" },
 ];
 
