@@ -54,7 +54,7 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }
       target="_blank"
       rel="noopener noreferrer"
       className={`cta-btn relative overflow-hidden inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center shadow-md whitespace-nowrap ${sizes[size]} ${className}`}
-      style={{ backgroundColor: "#046bd2" }}
+      style={{ backgroundColor: "#E5007A" }}
     >
       <span className="cta-shine absolute inset-0 rounded-full" />
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
@@ -124,16 +124,16 @@ function Hero() {
   return (
     <section
       className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ background: "linear-gradient(170deg, #0a1628 0%, #0d2847 35%, #046bd2 100%)" }}
+      style={{ background: "#E5007A" }}
     >
       {/* Parallax glow */}
-      <div ref={glowRef} className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full will-change-transform" style={{ background: "radial-gradient(circle, rgba(4,107,210,0.25) 0%, transparent 70%)" }} />
+      <div ref={glowRef} className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full will-change-transform" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)" }} />
 
       <div className="relative z-10 max-w-3xl mx-auto px-8 md:px-12 py-32 text-center">
         {/* Badge — stagger 0 */}
-        <div className="hero-stagger inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(252,185,0,0.1)", borderColor: "rgba(252,185,0,0.25)", "--stagger": 0 }}>
-          <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#fcb900" }} />
-          <span className="text-xs font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.7)" }}>
+        <div className="hero-stagger inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.35)", "--stagger": 0 }}>
+          <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#ffffff" }} />
+          <span className="text-xs font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.9)" }}>
             Especialistas en niños · San Fernando y San Vicente
           </span>
         </div>
@@ -141,7 +141,7 @@ function Hero() {
         {/* H1 — stagger 1 */}
         <h1 className="hero-stagger text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight" style={{ "--stagger": 1 }}>
           Tu hijo no necesita{" "}
-          <span className="italic font-light" style={{ color: "#fcb900" }}>"aguantar"</span>
+          <span className="italic font-light" style={{ color: "#CADC00" }}>"aguantar"</span>
           <br />al dentista
         </h1>
 
@@ -160,13 +160,13 @@ function Hero() {
         </div>
 
         {/* Trust bar — stagger 4 */}
-        <div className="hero-stagger flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-16 pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.08)", "--stagger": 4 }}>
+        <div className="hero-stagger flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-16 pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.25)", "--stagger": 4 }}>
           <div className="flex items-center gap-2">
             <Stars />
-            <span className="text-white/40 text-sm">4.9 en Google</span>
+            <span className="text-white/80 text-sm">4.9 en Google</span>
           </div>
-          <span className="text-white/40 text-sm">+100 niños con necesidades especiales</span>
-          <span className="text-white/40 text-sm">2 sedes en O'Higgins</span>
+          <span className="text-white/80 text-sm">+100 niños con necesidades especiales</span>
+          <span className="text-white/80 text-sm">2 sedes en O'Higgins</span>
         </div>
       </div>
     </section>
@@ -211,11 +211,11 @@ function QuizWidget() {
       : { title: "¡Bien! Un control preventivo mantiene esa sonrisa sana", desc: "Una evaluación con especialistas previene complicaciones a futuro." };
 
   return (
-    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#fef9ee" }}>
+    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#E0F5F5" }}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#00B4B4", color: "#ffffff" }}>
               Mini diagnóstico
             </span>
             <h2 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight" style={{ color: "#1e293b" }}>
@@ -235,8 +235,8 @@ function QuizWidget() {
                 className="w-full flex items-center gap-6 p-4 md:p-5 rounded-2xl border-2 text-left pressable stagger-item"
                 style={{
                   "--i": i,
-                  backgroundColor: answers[i] ? "#e8f1fd" : "#ffffff",
-                  borderColor: answers[i] ? "#046bd2" : answers[i] === false ? "#e2e8f0" : "#e2e8f0",
+                  backgroundColor: answers[i] ? "#FFE5F3" : "#ffffff",
+                  borderColor: answers[i] ? "#E5007A" : answers[i] === false ? "#e2e8f0" : "#e2e8f0",
                   opacity: answers[i] === false ? 0.5 : 1,
                 }}
               >
@@ -245,8 +245,8 @@ function QuizWidget() {
                 <span
                   className="flex-shrink-0 w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all text-xs font-bold"
                   style={{
-                    backgroundColor: answers[i] ? "#046bd2" : answers[i] === false ? "#f1f5f9" : "#ffffff",
-                    borderColor: answers[i] ? "#046bd2" : "#cbd5e1",
+                    backgroundColor: answers[i] ? "#E5007A" : answers[i] === false ? "#f1f5f9" : "#ffffff",
+                    borderColor: answers[i] ? "#E5007A" : "#cbd5e1",
                     color: answers[i] ? "#ffffff" : "#94a3b8",
                   }}
                 >
@@ -264,7 +264,7 @@ function QuizWidget() {
         )}
 
         {showResult && (
-          <div className="mt-8 p-8 rounded-3xl text-white quiz-result" style={{ background: "linear-gradient(135deg, #cf2e2e 0%, #e85d75 100%)" }}>
+          <div className="mt-8 p-8 rounded-3xl text-white quiz-result" style={{ background: "#E5007A" }}>
             <h3 className="text-xl font-bold mb-2">{resultMsg.title}</h3>
             <p className="text-white/80 text-sm mb-6 leading-relaxed">{resultMsg.desc}</p>
             <a
@@ -272,7 +272,7 @@ function QuizWidget() {
               target="_blank"
               rel="noopener noreferrer"
               className="cta-btn inline-flex items-center justify-center gap-2 font-semibold rounded-full px-10 py-4.5 text-xs shadow-md whitespace-nowrap"
-              style={{ backgroundColor: "#ffffff", color: "#cf2e2e" }}
+              style={{ backgroundColor: "#ffffff", color: "#E5007A" }}
             >
               <span>Agendar la Primera Visita Sin Miedo</span>
               <ArrowRight />
@@ -288,10 +288,10 @@ function QuizWidget() {
    STEPS
    ──────────────────────────────────────── */
 const steps = [
-  { num: "01", title: "Conocemos a tu hijo", desc: "La doctora te entrevista para saber todo sobre tu hijo: sus miedos, experiencias anteriores y cómo se siente. Sin apuro.", color: "#fce7f3" },
-  { num: "02", title: "Ganamos su confianza", desc: "Le mostramos los instrumentos, le explicamos todo con calma, y solo avanzamos cuando está listo.", color: "#fef3c7" },
-  { num: "03", title: "Evaluación completa", desc: "Diagnóstico dental integral para conocer su salud bucal y detectar cualquier problema a tiempo.", color: "#e8f1fd" },
-  { num: "04", title: "Tu plan claro", desc: "Te explicamos el diagnóstico en palabras simples y te entregamos un plan por etapas.", color: "#e8f1fd" },
+  { num: "01", title: "Conocemos a tu hijo", desc: "La doctora te entrevista para saber todo sobre tu hijo: sus miedos, experiencias anteriores y cómo se siente. Sin apuro.", color: "#FFB3D9" },
+  { num: "02", title: "Ganamos su confianza", desc: "Le mostramos los instrumentos, le explicamos todo con calma, y solo avanzamos cuando está listo.", color: "#CADC00" },
+  { num: "03", title: "Evaluación completa", desc: "Diagnóstico dental integral para conocer su salud bucal y detectar cualquier problema a tiempo.", color: "#00B4B4" },
+  { num: "04", title: "Tu plan claro", desc: "Te explicamos el diagnóstico en palabras simples y te entregamos un plan por etapas.", color: "#E5007A" },
 ];
 
 function StepsSection() {
@@ -302,7 +302,7 @@ function StepsSection() {
           <div className="text-center mb-16 md:mb-24">
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"
-              style={{ backgroundColor: "#fce7f3", color: "#be185d" }}
+              style={{ backgroundColor: "#E5007A", color: "#ffffff" }}
             >
               Nuestro método
             </span>
@@ -321,7 +321,7 @@ function StepsSection() {
                 <div className="flex flex-col items-center flex-shrink-0" style={{ width: "3rem" }}>
                   <div
                     className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold step-num flex-shrink-0"
-                    style={{ backgroundColor: step.color, color: "#1e293b", "--i": i }}
+                    style={{ backgroundColor: step.color, color: step.color === "#E5007A" || step.color === "#00B4B4" ? "#ffffff" : "#1e293b", "--i": i }}
                   >
                     {step.num}
                   </div>
@@ -347,7 +347,7 @@ function StepsSection() {
                   <div
                     key={`circle-${i}`}
                     className="flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center text-base font-bold step-num"
-                    style={{ backgroundColor: step.color, color: "#1e293b", "--i": i }}
+                    style={{ backgroundColor: step.color, color: step.color === "#E5007A" || step.color === "#00B4B4" ? "#ffffff" : "#1e293b", "--i": i }}
                   >
                     {step.num}
                   </div>
@@ -389,20 +389,20 @@ function StepsSection() {
    BENEFICIOS
    ──────────────────────────────────────── */
 const benefits = [
-  { title: "Especialistas en niños", desc: "Odontopediatras tituladas. Formación 100% enfocada en atención infantil.", icon: "👩‍⚕️", accent: "#fce7f3" },
-  { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#fef3c7" },
-  { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#e8f1fd" },
-{ title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#e8f1fd" },
-  { title: "Óxido nitroso", desc: "Gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊", accent: "#fef3c7" },
+  { title: "Especialistas en niños", desc: "Odontopediatras tituladas. Formación 100% enfocada en atención infantil.", icon: "👩‍⚕️", accent: "#FFB3D9" },
+  { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#CADC00" },
+  { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#B2E8E8" },
+  { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#B2E8E8" },
+  { title: "Óxido nitroso", desc: "Gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊", accent: "#FFB3D9" },
 ];
 
 function BenefitsSection() {
   return (
-    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#F0F5FA" }}>
+    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#CADC00" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="text-center mb-16 md:mb-20">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#e8f1fd", color: "#046bd2" }}>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#00B4B4", color: "#ffffff" }}>
               Por qué elegirnos
             </span>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
@@ -442,7 +442,7 @@ function CounterSection() {
   ];
 
   return (
-    <section className="py-28 md:py-36 px-6 md:px-12" style={{ background: "linear-gradient(135deg, #046bd2 0%, #7c3aed 50%, #be185d 100%)" }}>
+    <section className="py-28 md:py-36 px-6 md:px-12" style={{ background: "#E5007A" }}>
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
         {items.map((c, i) => (
           <div key={i}>
@@ -541,7 +541,7 @@ function TeamCarousel() {
               >
                 {professionals.map((doc, i) => (
                   <div key={i} className="w-full flex-shrink-0">
-                    <div className="rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8" style={{ backgroundColor: "#F0F5FA" }}>
+                    <div className="rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8" style={{ backgroundColor: "#FFF0F7" }}>
                       {/* Photo placeholder */}
                       <div className="w-36 h-36 rounded-2xl flex-shrink-0 flex items-center justify-center text-xs text-center border-2 border-white shadow-sm overflow-hidden" style={{ backgroundColor: "#d0e3f8", color: "#64748b" }}>
                         <div className="p-3">
@@ -554,13 +554,13 @@ function TeamCarousel() {
 
                       <div className="flex-1 text-center md:text-left">
                         <h3 className="text-xl font-bold mb-1" style={{ color: "#1e293b" }}>{doc.name}</h3>
-                        <p className="text-sm font-medium mb-4" style={{ color: "#046bd2" }}>{doc.role}</p>
+                        <p className="text-sm font-medium mb-4" style={{ color: "#E5007A" }}>{doc.role}</p>
                         <p className="text-sm leading-relaxed mb-5 italic" style={{ color: "#334155" }}>
                           "{doc.quote}"
                         </p>
                         <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                           {doc.badges.map((badge, j) => (
-                            <span key={j} className="text-xs font-medium px-3 py-1 rounded-full" style={{ backgroundColor: "#e8f1fd", color: "#046bd2" }}>
+                            <span key={j} className="text-xs font-medium px-3 py-1 rounded-full" style={{ backgroundColor: "#FFB3D9", color: "#9A0045" }}>
                               {badge}
                             </span>
                           ))}
@@ -592,7 +592,7 @@ function TeamCarousel() {
                   onClick={() => setCurrent(i)}
                   className="w-2 h-2 rounded-full carousel-dot"
                   style={{
-                    backgroundColor: i === current ? "#046bd2" : "#d1d5db",
+                    backgroundColor: i === current ? "#E5007A" : "#d1d5db",
                     transform: i === current ? "scale(1.5)" : "scale(1)",
                   }}
                 />
@@ -628,11 +628,11 @@ const testimonials = [
 
 function TestimonialsSection() {
   return (
-    <section className="py-28 md:py-40 px-6 md:px-12" style={{ backgroundColor: "#fdf2f8" }}>
+    <section className="py-28 md:py-40 px-6 md:px-12" style={{ backgroundColor: "#FFF0F7" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="text-center mb-16 md:mb-20">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#fce7f3", color: "#be185d" }}>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#E5007A", color: "#ffffff" }}>
               Testimonios
             </span>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
@@ -647,15 +647,15 @@ function TestimonialsSection() {
         <Reveal>
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 stagger-grid">
             {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card bg-white rounded-3xl p-10 md:p-12 border flex flex-col h-full stagger-item overflow-hidden" style={{ borderColor: "#fbcfe8", "--i": i }}>
+              <div key={i} className="testimonial-card bg-white rounded-3xl p-10 md:p-12 border flex flex-col h-full stagger-item overflow-hidden" style={{ borderColor: "#FFB3D9", "--i": i }}>
                 <Stars size="lg" />
                 <div className="flex-1 my-7">
-                  <span className="block text-5xl leading-none font-serif mb-2" style={{ color: "#fbcfe8" }}>"</span>
+                  <span className="block text-5xl leading-none font-serif mb-2" style={{ color: "#FFB3D9" }}>"</span>
                   <p className="text-base md:text-lg leading-relaxed" style={{ color: "#334155" }}>
                     {t.text}
                   </p>
                 </div>
-                <div className="pt-5 border-t" style={{ borderColor: "#fce7f3" }}>
+                <div className="pt-5 border-t" style={{ borderColor: "#FFB3D9" }}>
                   <p className="font-bold text-base" style={{ color: "#1e293b" }}>{t.name}</p>
                   <p className="text-sm mt-0.5" style={{ color: "#94a3b8" }}>{t.detail}</p>
                 </div>
@@ -681,10 +681,10 @@ function TestimonialsSection() {
    AGE SELECTOR
    ──────────────────────────────────────── */
 const ageGroups = [
-  { range: "0–2 años", label: "Bebé", emoji: "👶", accent: "#fce7f3", text: "¿Le salió su primer diente? Es momento del primer control. Evaluamos hábitos, detectamos problemas tempranos y te enseñamos cómo cuidar su boquita desde casa." },
-  { range: "3–5 años", label: "Preescolar", emoji: "🧒", accent: "#e8f1fd", text: "Es la edad donde se forman los hábitos. Si tiene miedo o ya tuvo una mala experiencia, nuestra Primera Visita Sin Miedo es ideal." },
-  { range: "6–9 años", label: "Escolar", emoji: "👦", accent: "#fef3c7", text: "Cambio de dientes, posibles caries, hábitos que corregir. Evaluamos todo y te damos un plan claro." },
-  { range: "10–17 años", label: "Adolescente", emoji: "🧑", accent: "#e8f1fd", text: "Autoestima, muelas del juicio, cuidado integral. Atendemos hasta los 18 años con un enfoque respetuoso." },
+  { range: "0–2 años", label: "Bebé", emoji: "👶", accent: "#FFB3D9", text: "¿Le salió su primer diente? Es momento del primer control. Evaluamos hábitos, detectamos problemas tempranos y te enseñamos cómo cuidar su boquita desde casa." },
+  { range: "3–5 años", label: "Preescolar", emoji: "🧒", accent: "#B2E8E8", text: "Es la edad donde se forman los hábitos. Si tiene miedo o ya tuvo una mala experiencia, nuestra Primera Visita Sin Miedo es ideal." },
+  { range: "6–9 años", label: "Escolar", emoji: "👦", accent: "#E5F59D", text: "Cambio de dientes, posibles caries, hábitos que corregir. Evaluamos todo y te damos un plan claro." },
+  { range: "10–17 años", label: "Adolescente", emoji: "🧑", accent: "#B2E8E8", text: "Autoestima, muelas del juicio, cuidado integral. Atendemos hasta los 18 años con un enfoque respetuoso." },
 ];
 
 function AgeSelector() {
@@ -713,11 +713,11 @@ function AgeSelector() {
                 className="p-5 rounded-2xl border-2 pressable"
                 style={{
                   backgroundColor: selected === i ? ag.accent : "#ffffff",
-                  borderColor: selected === i ? "#046bd2" : "#e2e8f0",
+                  borderColor: selected === i ? "#E5007A" : "#e2e8f0",
                 }}
               >
                 <span className="text-3xl block mb-2">{ag.emoji}</span>
-                <span className="text-[11px] font-semibold uppercase tracking-wider block" style={{ color: "#046bd2" }}>{ag.range}</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider block" style={{ color: "#E5007A" }}>{ag.range}</span>
                 <span className="text-xs font-medium block mt-1" style={{ color: "#1e293b" }}>{ag.label}</span>
               </button>
             ))}
@@ -727,7 +727,7 @@ function AgeSelector() {
         {selected !== null && (
           <div
             className="rounded-2xl border-2 p-7 text-left"
-            style={{ borderColor: ageGroups[selected].accent === "#fce7f3" ? "#ec4899" : ageGroups[selected].accent === "#fef3c7" ? "#f59e0b" : "#046bd2", backgroundColor: ageGroups[selected].accent }}
+            style={{ borderColor: "#E5007A", backgroundColor: ageGroups[selected].accent }}
           >
             <div className="flex items-start gap-6">
               <span className="text-3xl flex-shrink-0 mt-1">{ageGroups[selected].emoji}</span>
@@ -773,7 +773,7 @@ function FAQSection() {
       <div className="max-w-2xl mx-auto px-6 md:px-8">
         <Reveal>
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#fef3c7", color: "#b45309" }}>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#CADC00", color: "#3a4000" }}>
               Preguntas frecuentes
             </span>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
@@ -783,24 +783,24 @@ function FAQSection() {
         </Reveal>
 
         <Reveal>
-          <div className="rounded-3xl border-2 overflow-hidden p-2" style={{ borderColor: "#fde68a" }}>
+          <div className="rounded-3xl border-2 overflow-hidden p-2" style={{ borderColor: "#CADC00" }}>
             {faqs.map((faq, i) => (
-              <div key={i} className={`rounded-2xl ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#fef3c7" }}>
+              <div key={i} className={`rounded-2xl ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#E5F59D" }}>
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
                   className="w-full flex items-center justify-between px-10 py-8 md:py-9 text-left faq-trigger"
-                  style={{ backgroundColor: open === i ? "#fffbeb" : "transparent" }}
+                  style={{ backgroundColor: open === i ? "#F5FBB2" : "transparent" }}
                 >
                   <span className="font-semibold text-base md:text-lg pr-8 leading-snug" style={{ color: "#1e293b" }}>{faq.q}</span>
                   <svg
                     className="w-5 h-5 flex-shrink-0 faq-chevron"
-                    style={{ color: "#b45309", transform: open === i ? "rotate(180deg)" : "rotate(0)" }}
+                    style={{ color: "#E5007A", transform: open === i ? "rotate(180deg)" : "rotate(0)" }}
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div className={`faq-body ${open === i ? "faq-open" : "faq-closed"}`} style={{ gridTemplateRows: open === i ? "1fr" : "0fr", backgroundColor: "#fffbeb" }}>
+                <div className={`faq-body ${open === i ? "faq-open" : "faq-closed"}`} style={{ gridTemplateRows: open === i ? "1fr" : "0fr", backgroundColor: "#F5FBB2" }}>
                   <div className="overflow-hidden">
                     <p className="px-10 pb-8 pt-1 text-base leading-relaxed" style={{ color: "#78716c" }}>{faq.a}</p>
                   </div>
@@ -821,7 +821,7 @@ function FinalCTA() {
   return (
     <section
       className="py-32 md:py-48 px-6 md:px-12 text-center text-white"
-      style={{ background: "linear-gradient(170deg, #0a1628 0%, #045cb4 100%)" }}
+      style={{ background: "#E5007A" }}
     >
       <Reveal>
         <div className="max-w-2xl mx-auto">
@@ -831,8 +831,8 @@ function FinalCTA() {
           <p className="text-base md:text-lg text-white/70 mb-6 leading-relaxed">
             Agenda hoy su Primera Visita Sin Miedo y deja de postergar su salud dental.
           </p>
-          <p className="text-sm font-semibold mb-12 flex items-start gap-3 justify-center rounded-2xl px-6 py-4 max-w-lg mx-auto leading-relaxed" style={{ backgroundColor: "rgba(252,185,0,0.15)", color: "#fcb900" }}>
-            <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0 mt-1.5" style={{ backgroundColor: "#fcb900" }} />
+          <p className="text-sm font-semibold mb-12 flex items-start gap-3 justify-center rounded-2xl px-6 py-4 max-w-lg mx-auto leading-relaxed" style={{ backgroundColor: "rgba(202,220,0,0.2)", color: "#CADC00" }}>
+            <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0 mt-1.5" style={{ backgroundColor: "#CADC00" }} />
             <span>Cupos limitados por semana — Agendamos pocas evaluaciones para dedicar el tiempo que cada niño necesita</span>
           </p>
           <CTAButton size="lg">
@@ -887,7 +887,7 @@ function MapSection() {
                 onClick={() => setActiveSede(i)}
                 className="px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300"
                 style={{
-                  backgroundColor: activeSede === i ? "#046bd2" : "#f1f5f9",
+                  backgroundColor: activeSede === i ? "#E5007A" : "#f1f5f9",
                   color: activeSede === i ? "#ffffff" : "#334155",
                 }}
               >
@@ -910,21 +910,21 @@ function MapSection() {
               />
             </div>
 
-            <div className="flex flex-col justify-center p-7 rounded-2xl" style={{ backgroundColor: "#F0F5FA" }}>
+            <div className="flex flex-col justify-center p-7 rounded-2xl" style={{ backgroundColor: "#FFF0F7" }}>
               <h3 className="text-lg font-bold mb-6" style={{ color: "#1e293b" }}>
                 Sede {sedes[activeSede].name}
               </h3>
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="#046bd2" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z" /></svg>
+                  <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="#E5007A" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z" /></svg>
                   <p className="text-sm" style={{ color: "#334155" }}>{sedes[activeSede].address}</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="#046bd2" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                  <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="#E5007A" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
                   <p className="text-sm" style={{ color: "#334155" }}>{sedes[activeSede].phone}</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="#046bd2" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="#E5007A" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   <p className="text-sm" style={{ color: "#334155" }}>Lunes a Viernes: 9:00 – 13:00 / 15:00 – 19:00</p>
                 </div>
               </div>
@@ -945,7 +945,7 @@ function MapSection() {
    ──────────────────────────────────────── */
 function Footer() {
   return (
-    <footer className="py-14 px-8 md:px-12 text-center" style={{ backgroundColor: "#0a1628" }}>
+    <footer className="py-14 px-8 md:px-12 text-center" style={{ backgroundColor: "#9A0045" }}>
       <div className="max-w-4xl mx-auto">
         <p className="text-white text-base font-semibold mb-2">Tus Odontopediatras</p>
         <p className="text-white/40 text-sm mb-1">tusodontopediatras@gmail.com</p>
@@ -986,7 +986,7 @@ function StickyBottomBar() {
             target="_blank"
             rel="noopener noreferrer"
             className="cta-btn flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3.5 px-6 text-sm shadow-md whitespace-nowrap"
-            style={{ backgroundColor: "#046bd2" }}
+            style={{ backgroundColor: "#E5007A" }}
           >
             <span>Agendar Primera Visita Sin Miedo</span>
             <ArrowRight />
