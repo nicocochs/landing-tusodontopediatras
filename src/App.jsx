@@ -45,19 +45,23 @@ function Reveal({ children, className = "", delay = 0 }) {
 }
 
 /* ── CTA Button ── */
-function CTAButton({ children, href = BOOKING_URL, size = "md", className = "" }) {
+function CTAButton({ children, href = BOOKING_URL, size = "md", variant = "primary", className = "" }) {
   const sizes = {
     sm: "px-8 py-4 text-sm",
     md: "px-12 py-5 text-sm",
     lg: "px-14 py-6 text-base",
+  };
+  const variants = {
+    primary: { backgroundColor: "#E5007A", color: "#ffffff" },
+    light:   { backgroundColor: "#ffffff", color: "#E5007A" },
   };
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`cta-btn relative overflow-hidden inline-flex items-center justify-center gap-2 font-semibold rounded-full text-white text-center shadow-md whitespace-nowrap ${sizes[size]} ${className}`}
-      style={{ backgroundColor: "#E5007A" }}
+      className={`cta-btn relative overflow-hidden inline-flex items-center justify-center gap-2 font-semibold rounded-full text-center shadow-md whitespace-nowrap ${sizes[size]} ${className}`}
+      style={variants[variant]}
     >
       <span className="cta-shine absolute inset-0 rounded-full" />
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
@@ -199,7 +203,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.65, duration: 0.5 }}
         >
-          <CTAButton size="lg">
+          <CTAButton size="lg" variant="light">
             <span>Agendar Primera Visita Sin Miedo</span>
             <ArrowRight />
           </CTAButton>
@@ -218,7 +222,7 @@ function Hero() {
             <Stars />
             <span className="text-white/80 text-sm">4.9 en Google</span>
           </div>
-          <span className="text-white/80 text-sm">+100 niños con necesidades especiales</span>
+          <span className="text-white/80 text-sm">+500 niños atendidos</span>
           <span className="text-white/80 text-sm">2 sedes en O'Higgins</span>
         </motion.div>
       </div>
@@ -491,7 +495,7 @@ function BenefitsSection() {
    ──────────────────────────────────────── */
 function CounterSection() {
   const items = [
-    { end: 100, suffix: "+", label: "Niños con necesidades especiales atendidos" },
+    { end: 500, suffix: "+", label: "Niños atendidos" },
     { end: 2, suffix: "", label: "Sedes en la Región de O'Higgins" },
   ];
 
@@ -811,7 +815,7 @@ function AgeSelector() {
 const faqs = [
   { q: "¿Qué pasa si mi hijo llora o no coopera?", a: "Es exactamente para eso que existimos. Usamos adaptación progresiva: primero ganamos su confianza, le mostramos todo con calma, y solo avanzamos cuando está listo." },
   { q: "¿A partir de qué edad puedo llevar a mi hijo?", a: "Desde que sale su primer diente. Atendemos bebés, niños y adolescentes hasta los 18 años." },
-  { q: "¿Atienden niños con necesidades especiales?", a: "Sí. Hemos atendido a más de 100 niños con TEA, síndrome de Down y otras condiciones. Contamos con pabellón dental y anestesia general." },
+  { q: "¿Atienden niños con mucho miedo o ansiedad?", a: "Es exactamente para eso que existimos. Usamos técnicas de adaptación progresiva y contamos con óxido nitroso y pabellón con anestesia general para los casos que lo requieren." },
   { q: "¿Qué es el óxido nitroso?", a: "También conocido como gas de la risa. Es un gas seguro que se inhala para relajar al paciente durante el procedimiento." },
   { q: "¿Puedo cancelar o reprogramar?", a: "Sí. Cancelación gratuita. Puedes reprogramar sin costo a través del mismo sistema de agendamiento." },
   { q: "¿En cuánto tiempo podemos empezar?", a: "En la primera visita ya te entregamos el diagnóstico y el plan. Si decides avanzar, podemos planificar de inmediato." },
@@ -889,7 +893,7 @@ function FinalCTA() {
             <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0 mt-1.5" style={{ backgroundColor: "#EAED00" }} />
             <span>Cupos limitados por semana — Agendamos pocas evaluaciones para dedicar el tiempo que cada niño necesita</span>
           </p>
-          <CTAButton size="lg">
+          <CTAButton size="lg" variant="light">
             <span>Agendar la Primera Visita Sin Miedo</span>
             <ArrowRight />
           </CTAButton>
