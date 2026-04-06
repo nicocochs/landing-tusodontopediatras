@@ -1,4 +1,7 @@
 import { useState, useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import Floating, { FloatingElement } from "./components/Floating";
+import { TextRotate } from "./components/TextRotate";
 
 /* ─────────────────────────────────────────
    LANDING PAGE — TUS ODONTOPEDIATRAS
@@ -107,67 +110,117 @@ function Stars({ count = 5, size = "sm" }) {
 /* ────────────────────────────────────────
    HERO
    ──────────────────────────────────────── */
+const heroEmojis = [
+  { emoji: "🦷", depth: 0.5, className: "top-[12%] left-[3%] md:top-[20%] md:left-[5%]", size: "text-4xl md:text-5xl", rotate: "-rotate-12", delay: 0.4 },
+  { emoji: "😄", depth: 1.5, className: "top-[5%] left-[10%] md:top-[8%] md:left-[12%]", size: "text-5xl md:text-7xl", rotate: "rotate-6", delay: 0.6 },
+  { emoji: "👶", depth: 3, className: "top-[72%] left-[5%] md:top-[65%] md:left-[7%]", size: "text-6xl md:text-8xl", rotate: "-rotate-6", delay: 0.8 },
+  { emoji: "🎈", depth: 0.8, className: "top-[40%] left-[1%] md:top-[45%] md:left-[3%]", size: "text-3xl md:text-4xl", rotate: "rotate-3", delay: 0.5 },
+  { emoji: "⭐", depth: 2, className: "top-[3%] right-[10%] md:top-[5%] md:right-[14%]", size: "text-5xl md:text-6xl", rotate: "rotate-12", delay: 1.0 },
+  { emoji: "🌈", depth: 1, className: "top-[15%] right-[3%] md:top-[22%] md:right-[5%]", size: "text-4xl md:text-5xl", rotate: "-rotate-3", delay: 0.7 },
+  { emoji: "😁", depth: 3.5, className: "top-[70%] right-[4%] md:top-[62%] md:right-[6%]", size: "text-6xl md:text-8xl", rotate: "rotate-12", delay: 1.2 },
+  { emoji: "🪥", depth: 0.6, className: "top-[48%] right-[2%] md:top-[42%] md:right-[4%]", size: "text-3xl md:text-4xl", rotate: "-rotate-12", delay: 0.9 },
+];
+
 function Hero() {
-  const glowRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (glowRef.current) {
-        const y = window.scrollY * 0.08;
-        glowRef.current.style.transform = `translate(-50%, ${y}px)`;
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <section
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ background: "#E5007A" }}
     >
-      {/* Parallax glow */}
-      <div ref={glowRef} className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full will-change-transform" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)" }} />
+      {/* Floating emojis */}
+      <Floating sensitivity={-0.5}>
+        {heroEmojis.map((item, i) => (
+          <FloatingElement key={i} depth={item.depth} className={item.className}>
+            <motion.span
+              className={`${item.size} ${item.rotate} select-none inline-block`}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: item.delay, type: "spring", damping: 20, stiffness: 200 }}
+              style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))" }}
+            >
+              {item.emoji}
+            </motion.span>
+          </FloatingElement>
+        ))}
+      </Floating>
 
-      <div className="relative z-10 max-w-3xl mx-auto px-8 md:px-12 py-32 text-center">
-        {/* Badge — stagger 0 */}
-        <div className="hero-stagger inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border" style={{ backgroundColor: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.35)", "--stagger": 0 }}>
+      <div className="relative z-10 max-w-2xl mx-auto px-8 md:px-12 py-32 text-center">
+        {/* Badge */}
+        <motion.div
+          className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border"
+          style={{ backgroundColor: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.35)" }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#ffffff" }} />
           <span className="text-xs font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.9)" }}>
             Especialistas en niños · San Fernando y San Vicente
           </span>
-        </div>
+        </motion.div>
 
-        {/* H1 — stagger 1 */}
-        <h1 className="hero-stagger text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight" style={{ "--stagger": 1 }}>
+        {/* H1 con texto rotante */}
+        <motion.h1
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35, duration: 0.5 }}
+        >
           Tu hijo no necesita{" "}
-          <span className="italic font-light" style={{ color: "#CADC00" }}>"aguantar"</span>
+          <span style={{ color: "#EAED00" }}>
+            <TextRotate
+              texts={["aguantar", "temerle", "llorarle", "huirle", "resistir", "sufrirle"]}
+              mainClassName="italic font-light"
+              elementLevelClassName=""
+              rotationInterval={2800}
+              staggerDuration={0.035}
+              staggerFrom="first"
+              transition={{ type: "spring", damping: 28, stiffness: 350 }}
+            />
+          </span>
           <br />al dentista
-        </h1>
+        </motion.h1>
 
-        {/* Subtitle — stagger 2 */}
-        <p className="hero-stagger text-lg text-white/50 max-w-lg mx-auto mb-10 leading-relaxed font-light" style={{ "--stagger": 2 }}>
+        {/* Subtitle */}
+        <motion.p
+          className="text-lg max-w-lg mx-auto mb-10 leading-relaxed font-light"
+          style={{ color: "rgba(255,255,255,0.75)" }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
           Necesita una Primera Visita Sin Miedo. Primero ganamos su confianza, después tratamos.
-        </p>
+        </motion.p>
 
-        {/* CTA — stagger 3 */}
-        <div className="hero-stagger flex flex-col items-center gap-6" style={{ "--stagger": 3 }}>
+        {/* CTA */}
+        <motion.div
+          className="flex flex-col items-center gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.65, duration: 0.5 }}
+        >
           <CTAButton size="lg">
             <span>Agendar Primera Visita Sin Miedo</span>
             <ArrowRight />
           </CTAButton>
-          <span className="text-white/25 text-xs font-light">Sin compromiso · Cancelación gratuita</span>
-        </div>
+          <span className="text-white/30 text-xs font-light">Sin compromiso · Cancelación gratuita</span>
+        </motion.div>
 
-        {/* Trust bar — stagger 4 */}
-        <div className="hero-stagger flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-16 pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.25)", "--stagger": 4 }}>
+        {/* Trust bar */}
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-16 pt-8 border-t"
+          style={{ borderColor: "rgba(255,255,255,0.25)" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+        >
           <div className="flex items-center gap-2">
             <Stars />
             <span className="text-white/80 text-sm">4.9 en Google</span>
           </div>
           <span className="text-white/80 text-sm">+100 niños con necesidades especiales</span>
           <span className="text-white/80 text-sm">2 sedes en O'Higgins</span>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -211,17 +264,17 @@ function QuizWidget() {
       : { title: "¡Bien! Un control preventivo mantiene esa sonrisa sana", desc: "Una evaluación con especialistas previene complicaciones a futuro." };
 
   return (
-    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#E0F5F5" }}>
+    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#00B4B4" }}>
       <div className="max-w-3xl mx-auto">
         <Reveal>
           <div className="text-center mb-10">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "#00B4B4", color: "#ffffff" }}>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5" style={{ backgroundColor: "rgba(255,255,255,0.25)", color: "#ffffff" }}>
               Mini diagnóstico
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight" style={{ color: "#1e293b" }}>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight" style={{ color: "#ffffff" }}>
               ¿Tu hijo necesita un odontopediatra?
             </h2>
-            <p className="text-sm" style={{ color: "#64748b" }}>
+            <p className="text-sm" style={{ color: "rgba(255,255,255,0.8)" }}>
               Responde estas preguntas y descúbrelo en segundos.
             </p>
           </div>
@@ -242,6 +295,7 @@ function QuizWidget() {
               >
                 <span className="text-xl flex-shrink-0">{item.icon}</span>
                 <span className="flex-1 text-sm font-medium" style={{ color: "#1e293b" }}>{item.q}</span>
+
                 <span
                   className="flex-shrink-0 w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all text-xs font-bold"
                   style={{
@@ -258,7 +312,7 @@ function QuizWidget() {
         </Reveal>
 
         {!showResult && (
-          <p className="text-center text-xs mt-4" style={{ color: "#94a3b8" }}>
+          <p className="text-center text-xs mt-4" style={{ color: "rgba(255,255,255,0.7)" }}>
             Clic para marcar Sí, y de nuevo para No
           </p>
         )}
@@ -289,7 +343,7 @@ function QuizWidget() {
    ──────────────────────────────────────── */
 const steps = [
   { num: "01", title: "Conocemos a tu hijo", desc: "La doctora te entrevista para saber todo sobre tu hijo: sus miedos, experiencias anteriores y cómo se siente. Sin apuro.", color: "#FFB3D9" },
-  { num: "02", title: "Ganamos su confianza", desc: "Le mostramos los instrumentos, le explicamos todo con calma, y solo avanzamos cuando está listo.", color: "#CADC00" },
+  { num: "02", title: "Ganamos su confianza", desc: "Le mostramos los instrumentos, le explicamos todo con calma, y solo avanzamos cuando está listo.", color: "#EAED00" },
   { num: "03", title: "Evaluación completa", desc: "Diagnóstico dental integral para conocer su salud bucal y detectar cualquier problema a tiempo.", color: "#00B4B4" },
   { num: "04", title: "Tu plan claro", desc: "Te explicamos el diagnóstico en palabras simples y te entregamos un plan por etapas.", color: "#E5007A" },
 ];
@@ -390,7 +444,7 @@ function StepsSection() {
    ──────────────────────────────────────── */
 const benefits = [
   { title: "Especialistas en niños", desc: "Odontopediatras tituladas. Formación 100% enfocada en atención infantil.", icon: "👩‍⚕️", accent: "#FFB3D9" },
-  { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#CADC00" },
+  { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#EAED00" },
   { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#B2E8E8" },
   { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#B2E8E8" },
   { title: "Óxido nitroso", desc: "Gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊", accent: "#FFB3D9" },
@@ -398,7 +452,7 @@ const benefits = [
 
 function BenefitsSection() {
   return (
-    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#CADC00" }}>
+    <section className="py-32 md:py-48 px-6 md:px-12" style={{ backgroundColor: "#EAED00" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="text-center mb-16 md:mb-20">
@@ -773,7 +827,7 @@ function FAQSection() {
       <div className="max-w-2xl mx-auto px-6 md:px-8">
         <Reveal>
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#CADC00", color: "#3a4000" }}>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" style={{ backgroundColor: "#EAED00", color: "#3a4000" }}>
               Preguntas frecuentes
             </span>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: "#1e293b" }}>
@@ -783,7 +837,7 @@ function FAQSection() {
         </Reveal>
 
         <Reveal>
-          <div className="rounded-3xl border-2 overflow-hidden p-2" style={{ borderColor: "#CADC00" }}>
+          <div className="rounded-3xl border-2 overflow-hidden p-2" style={{ borderColor: "#EAED00" }}>
             {faqs.map((faq, i) => (
               <div key={i} className={`rounded-2xl ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#E5F59D" }}>
                 <button
@@ -831,8 +885,8 @@ function FinalCTA() {
           <p className="text-base md:text-lg text-white/70 mb-6 leading-relaxed">
             Agenda hoy su Primera Visita Sin Miedo y deja de postergar su salud dental.
           </p>
-          <p className="text-sm font-semibold mb-12 flex items-start gap-3 justify-center rounded-2xl px-6 py-4 max-w-lg mx-auto leading-relaxed" style={{ backgroundColor: "rgba(202,220,0,0.2)", color: "#CADC00" }}>
-            <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0 mt-1.5" style={{ backgroundColor: "#CADC00" }} />
+          <p className="text-sm font-semibold mb-12 flex items-start gap-3 justify-center rounded-2xl px-6 py-4 max-w-lg mx-auto leading-relaxed" style={{ backgroundColor: "rgba(234,237,0,0.2)", color: "#EAED00" }}>
+            <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0 mt-1.5" style={{ backgroundColor: "#EAED00" }} />
             <span>Cupos limitados por semana — Agendamos pocas evaluaciones para dedicar el tiempo que cada niño necesita</span>
           </p>
           <CTAButton size="lg">
@@ -945,7 +999,7 @@ function MapSection() {
    ──────────────────────────────────────── */
 function Footer() {
   return (
-    <footer className="py-14 px-8 md:px-12 text-center" style={{ backgroundColor: "#9A0045" }}>
+    <footer className="py-14 px-8 md:px-12 text-center" style={{ backgroundColor: "#1a1a2e" }}>
       <div className="max-w-4xl mx-auto">
         <p className="text-white text-base font-semibold mb-2">Tus Odontopediatras</p>
         <p className="text-white/40 text-sm mb-1">tusodontopediatras@gmail.com</p>
