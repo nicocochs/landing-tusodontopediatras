@@ -149,6 +149,16 @@ function Hero() {
       </Floating>
 
       <div className="relative z-10 max-w-2xl mx-auto px-8 md:px-12 py-32 text-center">
+        {/* Logo */}
+        <motion.div
+          className="flex justify-center mb-6"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1, duration: 0.5, type: "spring", damping: 20 }}
+        >
+          <img src="/logo.webp" alt="Tus Odontopediatras" className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-lg" />
+        </motion.div>
+
         {/* Badge */}
         <motion.div
           className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-10 border"
@@ -528,30 +538,13 @@ function CounterSection() {
    EQUIPO
    ──────────────────────────────────────── */
 const professionals = [
-  {
-    name: "Dra. Daniela Paredes",
-    role: "Odontopediatra",
-    quote: "Creo que ningún niño debería tener miedo al dentista. Por eso creamos un sistema donde primero ganamos su confianza.",
-    badges: ["Especialista en Odontopediatría", "Directora Clínica"],
-  },
-  {
-    name: "Profesional 2",
-    role: "Odontopediatra",
-    quote: "INSERTAR FRASE — Placeholder para segunda profesional del equipo.",
-    badges: ["Especialista en Odontopediatría"],
-  },
-  {
-    name: "Profesional 3",
-    role: "Odontopediatra",
-    quote: "INSERTAR FRASE — Placeholder para tercera profesional del equipo.",
-    badges: ["Especialista en Odontopediatría"],
-  },
-  {
-    name: "Profesional 4",
-    role: "Odontopediatra",
-    quote: "INSERTAR FRASE — Placeholder para cuarta profesional del equipo.",
-    badges: ["Especialista en Odontopediatría"],
-  },
+  { name: "Dra. M° Jose Monsalva",  photo: "/team/jose-monsalva.jpeg" },
+  { name: "Dra. Daniela Paredes",   photo: "/team/daniela-paredes.jpeg" },
+  { name: "Dra. Gemita Gómez",      photo: "/team/gemita-gomez.jpeg" },
+  { name: "Dra. Javiera Farías",    photo: "/team/javiera-farias.jpeg" },
+  { name: "Dra. Javiera Donoso",    photo: "/team/javiera-donoso.jpeg" },
+  { name: "Dra. Romina Surot",      photo: "/team/romina-surot.jpeg" },
+  { name: "Dra. Paula Quezada",     photo: "/team/paula-quezada.jpeg" },
 ];
 
 function TeamCarousel() {
@@ -585,7 +578,7 @@ function TeamCarousel() {
               Conoce a nuestro equipo
             </h2>
             <p className="mt-2 text-sm" style={{ color: "#64748b" }}>
-              {total} profesionales dedicadas al cuidado dental infantil
+              {total} odontopediatras dedicadas al cuidado dental infantil
             </p>
           </div>
         </Reveal>
@@ -600,29 +593,18 @@ function TeamCarousel() {
                 {professionals.map((doc, i) => (
                   <div key={i} className="w-full flex-shrink-0">
                     <div className="rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8" style={{ backgroundColor: "#FFF0F7" }}>
-                      {/* Photo placeholder */}
-                      <div className="w-36 h-36 rounded-2xl flex-shrink-0 flex items-center justify-center text-xs text-center border-2 border-white shadow-sm overflow-hidden" style={{ backgroundColor: "#d0e3f8", color: "#64748b" }}>
-                        <div className="p-3">
-                          <svg className="w-12 h-12 mx-auto mb-2 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                          <span className="text-[10px] font-medium">INSERTAR FOTO</span>
-                        </div>
+                      {/* Foto real con crop CSS para ocultar texto inferior */}
+                      <div className="w-44 h-52 rounded-2xl flex-shrink-0 overflow-hidden shadow-md border-2 border-white">
+                        <img
+                          src={doc.photo}
+                          alt={doc.name}
+                          className="w-full h-full object-cover object-top"
+                        />
                       </div>
 
                       <div className="flex-1 text-center md:text-left">
-                        <h3 className="text-xl font-bold mb-1" style={{ color: "#1e293b" }}>{doc.name}</h3>
-                        <p className="text-sm font-medium mb-4" style={{ color: "#E5007A" }}>{doc.role}</p>
-                        <p className="text-sm leading-relaxed mb-5 italic" style={{ color: "#334155" }}>
-                          "{doc.quote}"
-                        </p>
-                        <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                          {doc.badges.map((badge, j) => (
-                            <span key={j} className="text-xs font-medium px-3 py-1 rounded-full" style={{ backgroundColor: "#FFB3D9", color: "#9A0045" }}>
-                              {badge}
-                            </span>
-                          ))}
-                        </div>
+                        <h3 className="text-xl font-bold" style={{ color: "#1e293b" }}>{doc.name}</h3>
+                        <p className="text-sm font-medium mt-1" style={{ color: "#E5007A" }}>Odontopediatra</p>
                       </div>
                     </div>
                   </div>
