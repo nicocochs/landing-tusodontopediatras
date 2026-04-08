@@ -55,11 +55,17 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", variant = "prima
     primary: { backgroundColor: "#E5007A", color: "#ffffff" },
     light:   { backgroundColor: "#ffffff", color: "#E5007A" },
   };
+  const handleClick = () => {
+    if (typeof window.fbq === "function") {
+      window.fbq("track", "InitiateCheckout");
+    }
+  };
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleClick}
       className={`cta-btn relative overflow-hidden inline-flex items-center justify-center gap-2 font-semibold rounded-full text-center shadow-md whitespace-nowrap ${sizes[size]} ${className}`}
       style={variants[variant]}
     >
