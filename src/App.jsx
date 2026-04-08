@@ -460,7 +460,7 @@ const benefits = [
   { title: "Especialistas en niños", desc: "Odontopediatras tituladas. Formación 100% enfocada en atención infantil.", icon: "👩‍⚕️", accent: "#FFB3D9" },
   { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#EAED00" },
   { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#B2E8E8" },
-  { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, pabellón propio y anestesistas certificados.", icon: "🏥", accent: "#B2E8E8" },
+  { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, contamos con este servicio con anestesistas certificados.", icon: "🏥", accent: "#B2E8E8" },
   { title: "Óxido nitroso", desc: "Gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊", accent: "#FFB3D9" },
 ];
 
@@ -966,7 +966,7 @@ function MapSection() {
                 </div>
                 <div className="flex items-center gap-3">
                   <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="#E5007A" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <p className="text-sm" style={{ color: "#334155" }}>Lunes a Viernes: 9:00 – 13:00 / 15:00 – 19:00</p>
+                  <p className="text-sm" style={{ color: "#334155" }}>Lunes a Viernes: 9:30 – 13:00 / 14:30 – 18:30</p>
                 </div>
               </div>
               <CTAButton size="sm">
