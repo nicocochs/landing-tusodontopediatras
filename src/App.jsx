@@ -1069,12 +1069,20 @@ function useCountdown(target) {
 
 function PromoPopup() {
   const [open, setOpen] = useState(false);
+  const [cupos, setCupos] = useState(13);
   const { days, hours, minutes } = useCountdown(PROMO_END);
 
   useEffect(() => {
     const id = setTimeout(() => setOpen(true), 3000);
     return () => clearTimeout(id);
   }, []);
+
+  // Baja el contador de cupos 2s después de que aparece el popup
+  useEffect(() => {
+    if (!open) return;
+    const id = setTimeout(() => setCupos(c => Math.max(c - 1, 0)), 2000);
+    return () => clearTimeout(id);
+  }, [open]);
 
   const handleCTA = () => {
     if (typeof window.fbq === "function") window.fbq("track", "InitiateCheckout");
@@ -1114,10 +1122,13 @@ function PromoPopup() {
           <h2 className="text-2xl font-extrabold text-white leading-tight mb-1">
             Diagnóstico + Flúor
           </h2>
-          <div className="flex items-baseline justify-center gap-3 mt-3 mb-1">
+          <div className="flex items-baseline justify-center gap-3 mt-3 mb-2">
             <span className="text-4xl font-extrabold text-white">$49.990</span>
           </div>
-          <p className="text-sm line-through" style={{ color: "rgba(255,255,255,0.5)" }}>Valor referencial $85.000</p>
+          <div className="flex items-center justify-center gap-2">
+            <span className="text-base font-bold line-through" style={{ color: "rgba(255,255,255,0.75)" }}>$85.000</span>
+            <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: "#EAED00", color: "#3a4000" }}>-41%</span>
+          </div>
         </div>
 
         {/* Countdown */}
@@ -1133,9 +1144,26 @@ function PromoPopup() {
           </div>
         </div>
 
+        {/* Cupos */}
+        <div className="mx-6 mb-4 rounded-2xl px-4 py-3" style={{ backgroundColor: "rgba(0,0,0,0.15)" }}>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-semibold" style={{ color: "rgba(255,255,255,0.85)" }}>Cupos disponibles</span>
+            <span className="text-sm font-extrabold text-white">{cupos}/20</span>
+          </div>
+          <div className="w-full rounded-full overflow-hidden" style={{ height: "6px", backgroundColor: "rgba(255,255,255,0.2)" }}>
+            <motion.div
+              className="h-full rounded-full"
+              style={{ backgroundColor: "#EAED00" }}
+              initial={{ width: "70%" }}
+              animate={{ width: `${(cupos / 20) * 100}%` }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            />
+          </div>
+        </div>
+
         {/* Condiciones */}
         <ul className="px-7 mb-5 space-y-1">
-          {["Cupos limitados", "Sujeto a cooperación del paciente"].map(t => (
+          {["Sujeto a cooperación del paciente"].map(t => (
             <li key={t} className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.8)" }}>
               <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#EAED00" }} />
               {t}
