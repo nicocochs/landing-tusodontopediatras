@@ -593,12 +593,13 @@ function TeamCarousel() {
                 {professionals.map((doc, i) => (
                   <div key={i} className="w-full flex-shrink-0">
                     <div className="rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8" style={{ backgroundColor: "#FFF0F7" }}>
-                      {/* Foto real con crop CSS para ocultar texto inferior */}
-                      <div className="w-44 h-52 rounded-2xl flex-shrink-0 overflow-hidden shadow-md border-2 border-white">
+                      {/* Foto real — contenedor 4:3 fuerza crop del texto inferior */}
+                      <div className="flex-shrink-0 rounded-2xl overflow-hidden shadow-md border-2 border-white" style={{ width: "192px", height: "144px" }}>
                         <img
                           src={doc.photo}
                           alt={doc.name}
-                          className="w-full h-full object-cover object-top"
+                          className="w-full h-full object-cover"
+                          style={{ objectPosition: "center 5%" }}
                         />
                       </div>
 
