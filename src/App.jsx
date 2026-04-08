@@ -1045,11 +1045,129 @@ function StickyBottomBar() {
 }
 
 /* ────────────────────────────────────────
+   PROMO POPUP — Abril 2026
+   ──────────────────────────────────────── */
+const PROMO_END = new Date("2026-04-30T23:59:59");
+
+function useCountdown(target) {
+  const calc = () => {
+    const diff = target - new Date();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0 };
+    return {
+      days:    Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours:   Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+    };
+  };
+  const [time, setTime] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 1000 * 30);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+function PromoPopup() {
+  const [open, setOpen] = useState(false);
+  const { days, hours, minutes } = useCountdown(PROMO_END);
+
+  useEffect(() => {
+    const id = setTimeout(() => setOpen(true), 3000);
+    return () => clearTimeout(id);
+  }, []);
+
+  const handleCTA = () => {
+    if (typeof window.fbq === "function") window.fbq("track", "InitiateCheckout");
+    setOpen(false);
+  };
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)" }}
+      onClick={(e) => e.target === e.currentTarget && setOpen(false)}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.88, y: 24 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ type: "spring", damping: 22, stiffness: 280 }}
+        className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl"
+        style={{ backgroundColor: "#E5007A" }}
+      >
+        {/* Cerrar */}
+        <button
+          onClick={() => setOpen(false)}
+          className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center transition"
+          style={{ backgroundColor: "rgba(255,255,255,0.2)", color: "#fff" }}
+          aria-label="Cerrar"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+        </button>
+
+        {/* Header */}
+        <div className="px-7 pt-8 pb-5 text-center">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style={{ backgroundColor: "#EAED00", color: "#3a4000" }}>
+            Promoción Abril
+          </span>
+          <h2 className="text-2xl font-extrabold text-white leading-tight mb-1">
+            Diagnóstico + Flúor
+          </h2>
+          <div className="flex items-baseline justify-center gap-3 mt-3 mb-1">
+            <span className="text-4xl font-extrabold text-white">$49.990</span>
+          </div>
+          <p className="text-sm line-through" style={{ color: "rgba(255,255,255,0.5)" }}>Valor referencial $85.000</p>
+        </div>
+
+        {/* Countdown */}
+        <div className="mx-6 rounded-2xl px-4 py-4 mb-5" style={{ backgroundColor: "rgba(0,0,0,0.18)" }}>
+          <p className="text-xs text-center font-semibold mb-3" style={{ color: "rgba(255,255,255,0.7)" }}>La promo termina en</p>
+          <div className="flex justify-center gap-3">
+            {[{ v: days, l: "días" }, { v: hours, l: "horas" }, { v: minutes, l: "min" }].map(({ v, l }) => (
+              <div key={l} className="flex flex-col items-center">
+                <span className="text-3xl font-extrabold text-white leading-none">{String(v).padStart(2, "0")}</span>
+                <span className="text-xs mt-1 font-medium" style={{ color: "rgba(255,255,255,0.6)" }}>{l}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Condiciones */}
+        <ul className="px-7 mb-5 space-y-1">
+          {["Cupos limitados", "Sujeto a cooperación del paciente"].map(t => (
+            <li key={t} className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.8)" }}>
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#EAED00" }} />
+              {t}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <div className="px-6 pb-7">
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleCTA}
+            className="block w-full text-center font-bold text-sm rounded-full py-4 transition hover:opacity-90"
+            style={{ backgroundColor: "#ffffff", color: "#E5007A" }}
+          >
+            Quiero este precio →
+          </a>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────
    MAIN APP
    ──────────────────────────────────────── */
 export default function LandingOdontopediatria() {
   return (
     <div style={{ color: "#334155" }}>
+      <PromoPopup />
       <Hero />
       <QuizWidget />
       <StepsSection />
