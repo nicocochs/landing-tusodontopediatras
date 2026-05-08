@@ -1032,6 +1032,7 @@ function StickyBottomBar() {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => { if (typeof window.fbq === "function") window.fbq("trackCustom", "button_click"); }}
             className="cta-btn flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3.5 px-6 text-sm shadow-md whitespace-nowrap"
             style={{ backgroundColor: "#E5007A" }}
           >
