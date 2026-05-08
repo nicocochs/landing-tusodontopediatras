@@ -57,7 +57,7 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", variant = "prima
   };
   const handleClick = () => {
     if (typeof window.fbq === "function") {
-      window.fbq("track", "InitiateCheckout");
+      window.fbq("trackCustom", "button_click");
     }
   };
   return (
