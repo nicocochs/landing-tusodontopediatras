@@ -197,24 +197,6 @@ export default function GraciasPage() {
         </div>
       </section>
 
-      {/* ── FOTO EQUIPO ── */}
-      <section className="bg-white flex justify-center py-0">
-        <motion.div
-          className="w-full max-w-2xl overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <img
-            src="/doctoras.jpg"
-            alt="Nuestras odontopediatras celebrando tu decisión"
-            className="w-full object-cover"
-            style={{ display: "block" }}
-          />
-        </motion.div>
-      </section>
-
       {/* ── PRÓXIMOS PASOS ── */}
       <section className="py-28 md:py-40 px-6 md:px-12 bg-white">
         <div className="max-w-4xl mx-auto">
