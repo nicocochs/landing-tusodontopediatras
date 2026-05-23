@@ -6,11 +6,11 @@
    ───────────────────────────────────────────────────────── */
 
 export default async function handler(req, res) {
-  const { event_id, fbp, fbc, order } = req.query;
+  const { event_id, fbp, fbc, order, test_event_code } = req.query;
 
   /* Solo disparar si hay order real */
   if (!order) {
-    return res.status(200).json({ skipped: true, reason: 'no order' });
+    return res.status(400).json({ error: 'order requerido' });
   }
 
   const token   = process.env.META_CAPI_TOKEN_TUSO;
@@ -18,9 +18,10 @@ export default async function handler(req, res) {
 
   if (!token) {
     console.error('[capi-servicio] META_CAPI_TOKEN_TUSO no configurado');
-    return res.status(500).json({ error: 'token missing' });
+    return res.status(200).json({ ok: false, error: 'token missing' });
   }
 
+  /* Payload principal */
   const payload = {
     data: [
       {
@@ -41,7 +42,11 @@ export default async function handler(req, res) {
         },
       },
     ],
+    /* test_event_code va al nivel raíz — solo presente si viene en la query */
+    ...(test_event_code && { test_event_code }),
   };
+
+  console.log('[capi-servicio] enviando payload:', JSON.stringify(payload));
 
   try {
     const resp = await fetch(
@@ -53,9 +58,12 @@ export default async function handler(req, res) {
       }
     );
     const data = await resp.json();
-    return res.status(200).json(data);
+    console.log('[capi-servicio] respuesta Meta:', JSON.stringify(data));
+    /* Siempre 200 al frontend aunque Meta haya devuelto error */
+    return res.status(200).json({ ok: true, meta: data });
   } catch (err) {
-    console.error('[capi-servicio] error:', err.message);
-    return res.status(500).json({ error: err.message });
+    console.error('[capi-servicio] error fetch:', err.message);
+    /* También 200 al frontend para no romper el flujo silencioso */
+    return res.status(200).json({ ok: false, error: err.message });
   }
 }
