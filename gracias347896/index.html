@@ -27,16 +27,42 @@
     src="https://www.facebook.com/tr?id=515349950052299&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
-    <!-- Conversion tracking -->
+    <!-- Conversion tracking con atribución fbp/fbc -->
     <script>
-      fbq('track', 'Purchase', {
-        value: 30000,
-        currency: 'CLP'
-      });
-      fbq('trackCustom', 'servicio_confirmado', {
-        value: 30000,
-        currency: 'CLP'
-      });
+      (function () {
+        var params   = new URLSearchParams(window.location.search);
+        var fbp      = params.get('fbp')   || '';
+        var fbc      = params.get('fbc')   || '';
+        var orderId  = params.get('order') || ('test_' + Date.now());
+
+        /* Re-init con external_id si viene fbp desde la landing */
+        if (fbp) {
+          fbq('init', '515349950052299', { external_id: fbp });
+        }
+
+        var eventId = 'odp_' + orderId;
+
+        fbq('track', 'Purchase', {
+          value:        30000,
+          currency:     'CLP',
+          content_ids:  [orderId],
+          content_type: 'product'
+        }, { eventID: eventId });
+
+        fbq('trackCustom', 'servicio_confirmado', {
+          value:    30000,
+          currency: 'CLP'
+        });
+
+        /* Respaldo server-side vía CAPI */
+        fetch(
+          '/api/meta-capi' +
+          '?event_id=' + encodeURIComponent(eventId) +
+          '&fbp='      + encodeURIComponent(fbp) +
+          '&fbc='      + encodeURIComponent(fbc) +
+          '&order='    + encodeURIComponent(orderId)
+        ).catch(function () {});
+      })();
     </script>
   </head>
   <body>

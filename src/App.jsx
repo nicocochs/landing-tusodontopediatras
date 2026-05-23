@@ -10,6 +10,28 @@ import { TextRotate } from "./components/TextRotate";
 
 const BOOKING_URL = "https://t.dentalsoft.cl/reserva-web/i/e262c202-0ea3-4100-89e9-26b5b2975e25";
 
+/* ── Build booking URL with fbp/fbc attribution ── */
+function buildBookingUrl(baseUrl = BOOKING_URL) {
+  const getFbp = () => {
+    const m = document.cookie.match(/_fbp=([^;]+)/);
+    return m ? m[1] : "";
+  };
+  const getFbc = () => {
+    const fbclid = new URLSearchParams(window.location.search).get("fbclid");
+    return fbclid ? "fb.1." + Date.now() + "." + fbclid : "";
+  };
+  const fbp = getFbp();
+  const fbc = getFbc();
+  const returnUrl = "https://landing.tusodontopediatras.cl/gracias347896";
+  return (
+    baseUrl +
+    "?utm_source=meta" +
+    "&fbp=" + encodeURIComponent(fbp) +
+    "&fbc=" + encodeURIComponent(fbc) +
+    "&return_url=" + encodeURIComponent(returnUrl)
+  );
+}
+
 /* ── Intersection Observer hook ── */
 function useOnScreen(ref, threshold = 0.15) {
   const [visible, setVisible] = useState(false);
@@ -55,16 +77,16 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", variant = "prima
     primary: { backgroundColor: "#E5007A", color: "#ffffff" },
     light:   { backgroundColor: "#ffffff", color: "#E5007A" },
   };
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     if (typeof window.fbq === "function") {
       window.fbq("trackCustom", "button_click");
     }
+    window.location.href = buildBookingUrl(href);
   };
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
       onClick={handleClick}
       className={`cta-btn relative overflow-hidden inline-flex items-center justify-center gap-2 font-semibold rounded-full text-center shadow-md whitespace-nowrap ${sizes[size]} ${className}`}
       style={variants[variant]}
@@ -1030,9 +1052,11 @@ function StickyBottomBar() {
         <div className="max-w-lg mx-auto">
           <a
             href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => { if (typeof window.fbq === "function") window.fbq("trackCustom", "button_click"); }}
+            onClick={(e) => {
+              e.preventDefault();
+              if (typeof window.fbq === "function") window.fbq("trackCustom", "button_click");
+              window.location.href = buildBookingUrl();
+            }}
             className="cta-btn flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3.5 px-6 text-sm shadow-md whitespace-nowrap"
             style={{ backgroundColor: "#E5007A" }}
           >
