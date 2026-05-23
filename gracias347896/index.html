@@ -28,26 +28,26 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
 
-    <!-- Paso 1a: generar event_id único para deduplicación browser+servidor -->
-    <script>
-      window.scEventId = 'sc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/gracias347896.jsx"></script>
 
-    <!-- Paso 1b: disparar evento navegador + enviar al servidor con mismo event_id -->
+    <!-- Conversión servicio_confirmado: browser + CAPI server-side con mismo event_id -->
     <script>
       (function () {
-        var params        = new URLSearchParams(window.location.search);
-        var testEventCode = params.get('test_event_code') || '';
+        function getCookie(n) {
+          var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
+          return m ? m.pop() : '';
+        }
+        function getParam(n) {
+          return new URLSearchParams(location.search).get(n) || '';
+        }
 
-        /* fbp: URL param para testing → cookie _fbp en producción real */
-        var fbp = params.get('fbp') ||
-                  (document.cookie.match(/_fbp=([^;]+)/) || [])[1] || '';
-
-        /* fbc: URL param para testing → cookie _fbc en producción real */
-        var fbc = params.get('fbc') ||
-                  (document.cookie.match(/_fbc=([^;]+)/) || [])[1] || '';
-
-        var eventId = window.scEventId;
+        var eventId       = 'sc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        var fbp           = getCookie('_fbp');
+        var fbc           = getCookie('_fbc') || getParam('fbc');
+        var testEventCode = getParam('test_event_code');
 
         /* 1. Evento navegador */
         fbq('trackCustom', 'servicio_confirmado', {
@@ -55,13 +55,13 @@
           currency: 'CLP'
         }, { eventID: eventId });
 
-        /* 2. Enviar al servidor para deduplicación CAPI */
+        /* 2. Evento servidor (deduplicación CAPI) */
         fetch('/api/meta-capi', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             event_id:         eventId,
-            event_source_url: window.location.href,
+            event_source_url: location.href,
             fbp:              fbp,
             fbc:              fbc,
             test_event_code:  testEventCode
@@ -69,9 +69,5 @@
         }).catch(function () {});
       })();
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/gracias347896.jsx"></script>
   </body>
 </html>
