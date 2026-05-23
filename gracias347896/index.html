@@ -27,40 +27,46 @@
     src="https://www.facebook.com/tr?id=515349950052299&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
-    <!-- Conversion tracking: servicio_confirmado (solo con order real) -->
+
+    <!-- Paso 1a: generar event_id único para deduplicación browser+servidor -->
+    <script>
+      window.scEventId = 'sc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    </script>
+
+    <!-- Paso 1b: disparar evento navegador + enviar al servidor con mismo event_id -->
     <script>
       (function () {
-        var params         = new URLSearchParams(window.location.search);
-        var fbp            = params.get('fbp')             || '';
-        var fbc            = params.get('fbc')             || '';
-        var orderId        = params.get('order');
-        var testEventCode  = params.get('test_event_code') || '';
+        var params        = new URLSearchParams(window.location.search);
+        var testEventCode = params.get('test_event_code') || '';
 
-        /* Solo disparar si Dental Soft devolvió un order real */
-        if (!orderId) { return; }
+        /* fbp: URL param para testing → cookie _fbp en producción real */
+        var fbp = params.get('fbp') ||
+                  (document.cookie.match(/_fbp=([^;]+)/) || [])[1] || '';
 
-        /* Re-init con external_id si viene fbp desde la landing */
-        if (fbp) {
-          fbq('init', '515349950052299', { external_id: fbp });
-        }
+        /* fbc: URL param para testing → cookie _fbc en producción real */
+        var fbc = params.get('fbc') ||
+                  (document.cookie.match(/_fbc=([^;]+)/) || [])[1] || '';
 
-        var eventId = 'sc_' + orderId;
+        var eventId = window.scEventId;
 
+        /* 1. Evento navegador */
         fbq('trackCustom', 'servicio_confirmado', {
           value:    30000,
-          currency: 'CLP',
-          order_id: orderId
+          currency: 'CLP'
         }, { eventID: eventId });
 
-        /* Respaldo server-side vía CAPI */
-        fetch(
-          '/api/capi-servicio' +
-          '?event_id='        + encodeURIComponent(eventId) +
-          '&fbp='             + encodeURIComponent(fbp) +
-          '&fbc='             + encodeURIComponent(fbc) +
-          '&order='           + encodeURIComponent(orderId) +
-          '&test_event_code=' + encodeURIComponent(testEventCode)
-        ).catch(function () {});
+        /* 2. Enviar al servidor para deduplicación CAPI */
+        fetch('/api/meta-capi', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event_id:         eventId,
+            event_source_url: window.location.href,
+            fbp:              fbp,
+            fbc:              fbc,
+            test_event_code:  testEventCode
+          })
+        }).catch(function () {});
       })();
     </script>
   </head>

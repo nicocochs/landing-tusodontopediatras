@@ -1,52 +1,55 @@
 /* ─────────────────────────────────────────────────────────
-   /api/capi-servicio
-   Respaldo server-side — Meta Conversions API
-   Evento: servicio_confirmado (cuenta salud, sin Purchase)
-   Pixel: 515349950052299
+   /api/meta-capi  (POST)
+   Deduplicación server-side — Meta Conversions API
+   Evento: servicio_confirmado | Pixel: 515349950052299
    ───────────────────────────────────────────────────────── */
 
 export default async function handler(req, res) {
-  const { event_id, fbp, fbc, order, test_event_code } = req.query;
-
-  /* Solo disparar si hay order real */
-  if (!order) {
-    return res.status(400).json({ error: 'order requerido' });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  const { event_id, event_source_url, fbp, fbc, test_event_code } = req.body || {};
+
+  /* IP real del visitante (Vercel pone la cadena en x-forwarded-for) */
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim()
+             || req.socket?.remoteAddress
+             || '';
+  const ua = req.headers['user-agent'] || '';
 
   const token   = process.env.META_CAPI_TOKEN_TUSO;
   const pixelId = '515349950052299';
 
   if (!token) {
-    console.error('[capi-servicio] META_CAPI_TOKEN_TUSO no configurado');
+    console.error('[meta-capi] META_CAPI_TOKEN_TUSO no configurado');
     return res.status(200).json({ ok: false, error: 'token missing' });
   }
 
-  /* Payload principal */
   const payload = {
     data: [
       {
         event_name:       'servicio_confirmado',
         event_time:       Math.floor(Date.now() / 1000),
         event_id:         event_id,
-        event_source_url: 'https://landing.tusodontopediatras.cl/gracias347896',
+        event_source_url: event_source_url,
         action_source:    'website',
         user_data: {
+          client_ip_address: ip,
+          client_user_agent: ua,
           ...(fbp && { fbp }),
           ...(fbc && { fbc }),
-          client_user_agent: req.headers['user-agent'] || '',
         },
         custom_data: {
           value:    30000,
           currency: 'CLP',
-          order_id: order,
         },
       },
     ],
-    /* test_event_code va al nivel raíz — solo presente si viene en la query */
+    /* test_event_code va al nivel raíz (solo si viene del frontend) */
     ...(test_event_code && { test_event_code }),
   };
 
-  console.log('[capi-servicio] enviando payload:', JSON.stringify(payload));
+  console.log('[meta-capi] enviando →', JSON.stringify(payload));
 
   try {
     const resp = await fetch(
@@ -58,12 +61,11 @@ export default async function handler(req, res) {
       }
     );
     const data = await resp.json();
-    console.log('[capi-servicio] respuesta Meta:', JSON.stringify(data));
-    /* Siempre 200 al frontend aunque Meta haya devuelto error */
+    console.log('[meta-capi] respuesta Meta ←', JSON.stringify(data));
+    /* Siempre 200 al frontend para no romper el flujo */
     return res.status(200).json({ ok: true, meta: data });
   } catch (err) {
-    console.error('[capi-servicio] error fetch:', err.message);
-    /* También 200 al frontend para no romper el flujo silencioso */
+    console.error('[meta-capi] fetch error:', err.message);
     return res.status(200).json({ ok: false, error: err.message });
   }
 }
