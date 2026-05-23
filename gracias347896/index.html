@@ -27,36 +27,33 @@
     src="https://www.facebook.com/tr?id=515349950052299&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
-    <!-- Conversion tracking con atribución fbp/fbc -->
+    <!-- Conversion tracking: servicio_confirmado (solo con order real) -->
     <script>
       (function () {
-        var params   = new URLSearchParams(window.location.search);
-        var fbp      = params.get('fbp')   || '';
-        var fbc      = params.get('fbc')   || '';
-        var orderId  = params.get('order') || ('test_' + Date.now());
+        var params  = new URLSearchParams(window.location.search);
+        var fbp     = params.get('fbp')   || '';
+        var fbc     = params.get('fbc')   || '';
+        var orderId = params.get('order');
+
+        /* Solo disparar si Dental Soft devolvió un order real */
+        if (!orderId) { return; }
 
         /* Re-init con external_id si viene fbp desde la landing */
         if (fbp) {
           fbq('init', '515349950052299', { external_id: fbp });
         }
 
-        var eventId = 'odp_' + orderId;
-
-        fbq('track', 'Purchase', {
-          value:        30000,
-          currency:     'CLP',
-          content_ids:  [orderId],
-          content_type: 'product'
-        }, { eventID: eventId });
+        var eventId = 'sc_' + orderId;
 
         fbq('trackCustom', 'servicio_confirmado', {
           value:    30000,
-          currency: 'CLP'
-        });
+          currency: 'CLP',
+          order_id: orderId
+        }, { eventID: eventId });
 
         /* Respaldo server-side vía CAPI */
         fetch(
-          '/api/meta-capi' +
+          '/api/capi-servicio' +
           '?event_id=' + encodeURIComponent(eventId) +
           '&fbp='      + encodeURIComponent(fbp) +
           '&fbc='      + encodeURIComponent(fbc) +
