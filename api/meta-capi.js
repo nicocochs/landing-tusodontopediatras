@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { event_id, event_source_url, fbp, fbc, test_event_code } = req.body || {};
+  const { event_id, fbp, fbc, test_event_code } = req.body || {};
 
   /* IP real del visitante (Vercel pone la cadena en x-forwarded-for) */
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim()
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         event_name:       'servicio_confirmado',
         event_time:       Math.floor(Date.now() / 1000),
         event_id:         event_id,
-        event_source_url: event_source_url,
+        event_source_url: 'https://landing.tusodontopediatras.cl/gracias347896',
         action_source:    'website',
         user_data: {
           client_ip_address: ip,
