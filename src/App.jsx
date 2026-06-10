@@ -486,7 +486,7 @@ function StepsSection() {
    ──────────────────────────────────────── */
 const benefits = [
   { title: "Especialistas en niños", desc: "Odontopediatras tituladas. Formación 100% enfocada en atención infantil.", icon: "👩‍⚕️", accent: "#FFB3D9" },
-  { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y recién ahí tratamos.", icon: "🤝", accent: "#EAED00" },
+  { title: "Adaptación progresiva", desc: "Primero vínculo, después confianza, y solo entonces tratamos.", icon: "🤝", accent: "#EAED00" },
   { title: "Diagnóstico claro", desc: "Te vas con un plan por etapas, con prioridades, explicado sin jerga médica.", icon: "📋", accent: "#B2E8E8" },
   { title: "Pabellón con anestesia general", desc: "Para casos que lo requieran, contamos con este servicio con anestesistas certificados.", icon: "🏥", accent: "#B2E8E8" },
   { title: "Óxido nitroso", desc: "Gas seguro que relaja al paciente para procedimientos sin miedo ni dolor.", icon: "😊", accent: "#FFB3D9" },
@@ -679,17 +679,17 @@ function TeamCarousel() {
    ──────────────────────────────────────── */
 const testimonials = [
   {
-    text: "Mi hijo lloraba solo de ver la puerta del dentista. Acá lo recibieron con calma, le mostraron todo, y al final abrió la boca solo. No lo podía creer.",
+    text: "Mi hijo lloraba solo de ver la puerta del dentista. Aquí lo recibieron con calma, le mostraron todo, y al final abrió la boca solo. No lo podía creer.",
     name: "María C.",
     detail: "Mamá de Tomás, 5 años",
   },
   {
-    text: "Sentía culpa terrible por las caries. Acá nadie me juzgó. Me explicaron todo claro y me dieron un plan paso a paso. Fue un alivio enorme.",
+    text: "Sentía culpa terrible por las caries. Aquí nadie me juzgó. Me explicaron todo claro y me dieron un plan paso a paso. Fue un alivio enorme.",
     name: "Carolina P.",
     detail: "Mamá de Sofía, 7 años",
   },
   {
-    text: "Mi hijo tiene TEA y ningún dentista podía atenderlo. Acá se tomaron el tiempo, se adaptaron a él, y por primera vez salimos los dos tranquilos.",
+    text: "Mi hijo tiene TEA y ningún dentista podía atenderlo. Aquí se tomaron el tiempo, se adaptaron a él, y por primera vez salimos los dos tranquilos.",
     name: "Andrea M.",
     detail: "Mamá de Matías, 9 años",
   },
