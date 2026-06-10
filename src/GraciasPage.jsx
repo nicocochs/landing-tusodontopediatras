@@ -100,12 +100,6 @@ const sedes = [
 export default function GraciasPage() {
   const [activeSede, setActiveSede] = useState(0);
 
-  useEffect(() => {
-    if (typeof window.fbq === "function") {
-      window.fbq("track", "Schedule");
-    }
-  }, []);
-
   return (
     <div style={{ color: "#334155", fontFamily: "'Outfit', system-ui, sans-serif" }}>
 
