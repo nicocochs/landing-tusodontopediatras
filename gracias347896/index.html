@@ -55,6 +55,12 @@
           currency: 'CLP'
         }, { eventID: eventId });
 
+        /* 1b. Evento estándar Purchase (navegador) */
+        fbq('track', 'Purchase', {
+          value:    30000,
+          currency: 'CLP'
+        });
+
         /* 2. Evento servidor (deduplicación CAPI) */
         fetch('/api/meta-capi', {
           method:  'POST',
