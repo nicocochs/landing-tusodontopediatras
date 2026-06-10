@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────
    /api/meta-capi  (POST)
    Deduplicación server-side — Meta Conversions API
-   Evento: servicio_confirmado | Pixel: 515349950052299
+   Evento: servicio_confirmado | Pixel: 2063502474604009
    ───────────────────────────────────────────────────────── */
 
 export default async function handler(req, res) {
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   const ua = req.headers['user-agent'] || '';
 
   const token   = process.env.META_CAPI_TOKEN_TUSO;
-  const pixelId = '515349950052299';
+  const pixelId = '2063502474604009';
 
   if (!token) {
     console.error('[meta-capi] META_CAPI_TOKEN_TUSO no configurado');
