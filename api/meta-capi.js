@@ -40,7 +40,7 @@ export default async function handler(req, res) {
           ...(fbc && { fbc }),
         },
         custom_data: {
-          value:    30000,
+          value:    35000,
           currency: 'CLP',
         },
       },
