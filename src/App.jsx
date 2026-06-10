@@ -81,6 +81,7 @@ function CTAButton({ children, href = BOOKING_URL, size = "md", variant = "prima
     e.preventDefault();
     if (typeof window.fbq === "function") {
       window.fbq("trackCustom", "button_click");
+      window.fbq("track", "InitiateCheckout");
     }
     window.location.href = buildBookingUrl(href);
   };
@@ -1054,7 +1055,10 @@ function StickyBottomBar() {
             href={BOOKING_URL}
             onClick={(e) => {
               e.preventDefault();
-              if (typeof window.fbq === "function") window.fbq("trackCustom", "button_click");
+              if (typeof window.fbq === "function") {
+                window.fbq("trackCustom", "button_click");
+                window.fbq("track", "InitiateCheckout");
+              }
               window.location.href = buildBookingUrl();
             }}
             className="cta-btn flex items-center justify-center gap-2 w-full text-center font-semibold text-white rounded-full py-3.5 px-6 text-sm shadow-md whitespace-nowrap"
