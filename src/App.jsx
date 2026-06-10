@@ -22,7 +22,7 @@ function buildBookingUrl(baseUrl = BOOKING_URL) {
   };
   const fbp = getFbp();
   const fbc = getFbc();
-  const returnUrl = "https://landing.tusodontopediatras.cl/gracias347896";
+  const returnUrl = `${window.location.origin}/gracias347896`;
   return (
     baseUrl +
     "?utm_source=meta" +
