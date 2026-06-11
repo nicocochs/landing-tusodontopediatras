@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────
    /api/meta-capi  (POST)
    Deduplicación server-side — Meta Conversions API
-   Evento: servicio_confirmado | Pixel: 2063502474604009
+   Eventos: servicio_confirmado + Purchase | Pixel: 2063502474604009
    ───────────────────────────────────────────────────────── */
 
 export default async function handler(req, res) {
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { event_id, event_source_url, fbp, fbc, test_event_code } = req.body || {};
+  const { event_id, purchase_event_id, event_source_url, fbp, fbc, test_event_code } = req.body || {};
 
   /* IP real del visitante (Vercel pone la cadena en x-forwarded-for) */
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim()
@@ -25,26 +25,45 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: false, error: 'token missing' });
   }
 
+  const eventTime = Math.floor(Date.now() / 1000);
+  const sourceUrl = event_source_url || 'https://landing-tusodontopediatras.vercel.app/gracias347896';
+  const userData  = {
+    client_ip_address: ip,
+    client_user_agent: ua,
+    ...(fbp && { fbp }),
+    ...(fbc && { fbc }),
+  };
+  const customData = { value: 35000, currency: 'CLP' };
+
+  /* Evento 1: servicio_confirmado (custom) — deduplica con eventId del navegador */
+  const data = [
+    {
+      event_name:       'servicio_confirmado',
+      event_time:       eventTime,
+      event_id:         event_id,
+      event_source_url: sourceUrl,
+      action_source:    'website',
+      user_data:        userData,
+      custom_data:      customData,
+    },
+  ];
+
+  /* Evento 2: Purchase (estándar) — deduplica con purchaseEventId del navegador.
+     Solo se agrega si el frontend mandó purchase_event_id (evita Purchase sin par). */
+  if (purchase_event_id) {
+    data.push({
+      event_name:       'Purchase',
+      event_time:       eventTime,
+      event_id:         purchase_event_id,
+      event_source_url: sourceUrl,
+      action_source:    'website',
+      user_data:        userData,
+      custom_data:      customData,
+    });
+  }
+
   const payload = {
-    data: [
-      {
-        event_name:       'servicio_confirmado',
-        event_time:       Math.floor(Date.now() / 1000),
-        event_id:         event_id,
-        event_source_url: event_source_url || 'https://landing-tusodontopediatras.vercel.app/gracias347896',
-        action_source:    'website',
-        user_data: {
-          client_ip_address: ip,
-          client_user_agent: ua,
-          ...(fbp && { fbp }),
-          ...(fbc && { fbc }),
-        },
-        custom_data: {
-          value:    35000,
-          currency: 'CLP',
-        },
-      },
-    ],
+    data,
     /* test_event_code va al nivel raíz (solo si viene del frontend) */
     ...(test_event_code && { test_event_code }),
   };

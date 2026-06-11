@@ -44,33 +44,35 @@
           return new URLSearchParams(location.search).get(n) || '';
         }
 
-        var eventId       = 'sc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        var fbp           = getCookie('_fbp');
-        var fbc           = getCookie('_fbc') || getParam('fbc');
-        var testEventCode = getParam('test_event_code');
+        var eventId         = 'sc_'  + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        var purchaseEventId = 'pur_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        var fbp             = getCookie('_fbp');
+        var fbc             = getCookie('_fbc') || getParam('fbc');
+        var testEventCode   = getParam('test_event_code');
 
-        /* 1. Evento navegador */
+        /* 1. Evento navegador — servicio_confirmado (custom) */
         fbq('trackCustom', 'servicio_confirmado', {
           value:    35000,
           currency: 'CLP'
         }, { eventID: eventId });
 
-        /* 1b. Evento estándar Purchase (navegador) */
+        /* 1b. Evento navegador — Purchase (estándar), con su propio eventID */
         fbq('track', 'Purchase', {
           value:    35000,
           currency: 'CLP'
-        });
+        }, { eventID: purchaseEventId });
 
-        /* 2. Evento servidor (deduplicación CAPI) */
+        /* 2. Eventos servidor (deduplicación CAPI: servicio_confirmado + Purchase) */
         fetch('/api/meta-capi', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            event_id:         eventId,
-            event_source_url: location.href,
-            fbp:              fbp,
-            fbc:              fbc,
-            test_event_code:  testEventCode
+            event_id:          eventId,
+            purchase_event_id: purchaseEventId,
+            event_source_url:  location.href,
+            fbp:               fbp,
+            fbc:               fbc,
+            test_event_code:   testEventCode
           })
         }).catch(function () {});
       })();
