@@ -62,14 +62,10 @@ export default async function handler(req, res) {
     });
   }
 
-  /* ⚠️ TEMPORAL — PRUEBA: código de test forzado. QUITAR DESPUÉS DE TESTEAR.
-     Mientras esté esta línea, TODOS los eventos CAPI van a Test Events y NO
-     cuentan como conversiones reales. Volver a: ...(test_event_code && { test_event_code }) */
-  const test_code_forzado = test_event_code || 'TEST43461';
-
   const payload = {
     data,
-    test_event_code: test_code_forzado,
+    /* test_event_code va al nivel raíz (solo si viene del frontend) */
+    ...(test_event_code && { test_event_code }),
   };
 
   console.log('[meta-capi] enviando →', JSON.stringify(payload));
