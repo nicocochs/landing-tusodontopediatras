@@ -366,8 +366,14 @@ function QuizWidget() {
             <p className="text-white/80 text-sm mb-6 leading-relaxed">{resultMsg.desc}</p>
             <a
               href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                if (typeof window.fbq === "function") {
+                  window.fbq("trackCustom", "button_click");
+                  window.fbq("track", "InitiateCheckout");
+                }
+                window.location.href = buildBookingUrl();
+              }}
               className="cta-btn inline-flex items-center justify-center gap-2 font-semibold rounded-full px-10 py-4.5 text-xs shadow-md whitespace-nowrap"
               style={{ backgroundColor: "#ffffff", color: "#E5007A" }}
             >
