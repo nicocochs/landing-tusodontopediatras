@@ -1080,11 +1080,129 @@ function StickyBottomBar() {
 }
 
 /* ────────────────────────────────────────
+   PROMO POPUP — Vacaciones de Invierno 2026
+   ──────────────────────────────────────── */
+const PROMO_END = new Date("2026-07-15T23:59:59");
+
+function useCountdown(target) {
+  const calc = () => {
+    const diff = target - new Date();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0 };
+    return {
+      days:    Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours:   Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+    };
+  };
+  const [time, setTime] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 1000 * 30);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+function PromoPopup() {
+  const [open, setOpen] = useState(false);
+  const { days, hours, minutes } = useCountdown(PROMO_END);
+
+  useEffect(() => {
+    const id = setTimeout(() => setOpen(true), 7000);
+    return () => clearTimeout(id);
+  }, []);
+
+  const handleCTA = (e) => {
+    e.preventDefault();
+    if (typeof window.fbq === "function") {
+      window.fbq("trackCustom", "button_click");
+      window.fbq("track", "InitiateCheckout");
+    }
+    window.location.href = buildBookingUrl();
+  };
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)" }}
+      onClick={(e) => e.target === e.currentTarget && setOpen(false)}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.88, y: 24 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ type: "spring", damping: 22, stiffness: 280 }}
+        className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl"
+        style={{ backgroundColor: "#E5007A" }}
+      >
+        <button
+          onClick={() => setOpen(false)}
+          className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center transition"
+          style={{ backgroundColor: "rgba(255,255,255,0.2)", color: "#fff" }}
+          aria-label="Cerrar"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+        </button>
+
+        <div className="px-7 pt-8 pb-5 text-center">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style={{ backgroundColor: "#EAED00", color: "#3a4000" }}>
+            ❄ Vacaciones de invierno
+          </span>
+          <h2 className="text-2xl font-extrabold text-white leading-tight mb-3">
+            Cuida su sonrisa<br />estas vacaciones
+          </h2>
+          <p className="text-sm font-semibold mb-3" style={{ color: "rgba(255,255,255,0.92)" }}>
+            Limpieza + flúor
+          </p>
+          <div className="flex items-baseline justify-center gap-3">
+            <span className="text-4xl font-extrabold text-white">$50.000</span>
+            <span className="text-base font-bold line-through" style={{ color: "rgba(255,255,255,0.75)" }}>$95.000</span>
+            <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: "#EAED00", color: "#3a4000" }}>&minus;47%</span>
+          </div>
+        </div>
+
+        <div className="mx-6 rounded-2xl px-4 py-4" style={{ backgroundColor: "rgba(0,0,0,0.18)" }}>
+          <p className="text-xs text-center font-semibold mb-3" style={{ color: "rgba(255,255,255,0.7)" }}>La promoción termina en</p>
+          <div className="flex justify-center gap-4">
+            {[{ v: days, l: "días" }, { v: hours, l: "horas" }, { v: minutes, l: "min" }].map(({ v, l }) => (
+              <div key={l} className="flex flex-col items-center">
+                <span className="text-3xl font-extrabold text-white leading-none">{String(v).padStart(2, "0")}</span>
+                <span className="text-xs mt-1 font-medium" style={{ color: "rgba(255,255,255,0.6)" }}>{l}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="text-xs font-semibold text-center mt-4 px-6" style={{ color: "rgba(255,255,255,0.92)" }}>
+          Pacientes nuevos y antiguos &middot; Hasta el 15 de julio
+        </p>
+
+        <div className="px-6 pt-4 pb-3">
+          <a
+            href={BOOKING_URL}
+            onClick={handleCTA}
+            className="block w-full text-center font-bold text-sm rounded-full py-4 transition hover:opacity-90"
+            style={{ backgroundColor: "#ffffff", color: "#E5007A" }}
+          >
+            Agenda aquí
+          </a>
+        </div>
+
+        <p className="text-center px-7 pb-6" style={{ fontSize: "10.5px", lineHeight: 1.4, color: "rgba(255,255,255,0.62)" }}>
+          Pacientes nuevos: válido tras la cita diagnóstica.
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────
    MAIN APP
    ──────────────────────────────────────── */
 export default function LandingOdontopediatria() {
   return (
     <div style={{ color: "#334155" }}>
+      <PromoPopup />
       <Hero />
       <QuizWidget />
       <StepsSection />
