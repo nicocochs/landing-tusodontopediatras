@@ -2,80 +2,20 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>¡Tu cita está confirmada! · Tus Odontopediatras</title>
-    <meta name="description" content="Hiciste algo muy importante hoy. Tu hijo tendrá su Primera Visita Sin Miedo con especialistas que de verdad entienden a los niños." />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <!-- Meta Pixel Code -->
+    <title>Redirigiendo…</title>
+    <!-- Sin ningún píxel. Página puente: espera 2s y redirige al gracias del
+         dominio nuevo, conservando los query params (fbc / test_event_code / etc.)
+         para no perder la atribución. -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '2063502474604009');
-    fbq('track', 'PageView');
+      setTimeout(function () {
+        var destino = 'https://landingtusodontopediatras.vercel.app/gracias347896';
+        window.location.replace(destino + window.location.search + window.location.hash);
+      }, 2000);
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=2063502474604009&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/gracias347896.jsx"></script>
-
-    <!-- Conversión servicio_confirmado: browser + CAPI server-side con mismo event_id -->
-    <script>
-      (function () {
-        function getCookie(n) {
-          var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
-          return m ? m.pop() : '';
-        }
-        function getParam(n) {
-          return new URLSearchParams(location.search).get(n) || '';
-        }
-
-        var eventId         = 'sc_'  + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        var purchaseEventId = 'pur_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        var fbp             = getCookie('_fbp');
-        var fbc             = getCookie('_fbc') || getParam('fbc');
-        var testEventCode   = getParam('test_event_code');
-
-        /* 1. Evento navegador — servicio_confirmado (custom) */
-        fbq('trackCustom', 'servicio_confirmado', {
-          value:    35000,
-          currency: 'CLP'
-        }, { eventID: eventId });
-
-        /* 1b. Evento navegador — Purchase (estándar), con su propio eventID */
-        fbq('track', 'Purchase', {
-          value:    35000,
-          currency: 'CLP'
-        }, { eventID: purchaseEventId });
-
-        /* 2. Eventos servidor (deduplicación CAPI: servicio_confirmado + Purchase) */
-        fetch('/api/meta-capi', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            event_id:          eventId,
-            purchase_event_id: purchaseEventId,
-            event_source_url:  location.href,
-            fbp:               fbp,
-            fbc:               fbc,
-            test_event_code:   testEventCode
-          })
-        }).catch(function () {});
-      })();
-    </script>
+  <body style="margin:0;padding:24px;font-family:system-ui,-apple-system,sans-serif;font-size:18px;color:#333;background:#fff;">
+    Te estamos redireccionando, espera un segundo…
   </body>
 </html>
