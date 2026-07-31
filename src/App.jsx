@@ -1109,7 +1109,7 @@ function PromoPopup() {
   useEffect(() => {
     // Vencida la promo el popup no aparece nunca más, sin tener que redeployar.
     if (PROMO_END - new Date() <= 0) return;
-    const id = setTimeout(() => setOpen(true), 3000);
+    const id = setTimeout(() => setOpen(true), 5000);
     return () => clearTimeout(id);
   }, []);
 
