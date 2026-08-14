@@ -1208,7 +1208,6 @@ function PromoPopup() {
 export default function LandingOdontopediatria() {
   return (
     <div style={{ color: "#334155" }}>
-      <PromoPopup />
       <Hero />
       <QuizWidget />
       <StepsSection />
